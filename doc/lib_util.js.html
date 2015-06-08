@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Thelonious Source: lib/util.js</title>
+
+	<!--[if lt IE 9]>
+	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link type="text/css" rel="stylesheet" href="styles/sunlight.default.css">
+
+	<link type="text/css" rel="stylesheet" href="styles/site.cerulean.css">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top navbar-inverse">
+<div class="container">
+	<div class="navbar-header">
+		<a class="navbar-brand" href="index.html">Thelonious</a>
+	</div>
+	<div class="navbar-collapse">
+		<ul class="nav navbar-nav">
+			
+			<li class="dropdown">
+				<a href="modules.list.html" class="dropdown-toggle" data-toggle="dropdown">Modules<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="module-accounts.html">accounts</a></li><li><a href="module-blockchain.html">blockchain</a></li><li><a href="module-consensus.html">consensus</a></li><li><a href="module-index.html">index</a></li><li><a href="module-network.html">network</a></li><li><a href="module-rpc_backend.html">rpc/backend</a></li><li><a href="module-rpc_rpc.html">rpc/rpc</a></li><li><a href="module-rpc_websocket.html">rpc/websocket</a></li><li><a href="module-thelonious.html">thelonious</a></li><li><a href="module-transactions.html">transactions</a></li><li><a href="module-util.html">util</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="module-accounts-Accounts.html">accounts~Accounts</a></li><li><a href="module-blockchain-BlockChain.html">blockchain~BlockChain</a></li><li><a href="module-consensus-Consensus.html">consensus~Consensus</a></li><li><a href="module-consensus-Events.html">consensus~Events</a></li><li><a href="module-network-Network.html">network~Network</a></li><li><a href="module-rpc_backend-NetworkingBackEnd.html">rpc/backend~NetworkingBackEnd</a></li><li><a href="module-rpc_websocket-WebSocketBackEnd.html">rpc/websocket~WebSocketBackEnd</a></li><li><a href="module-thelonious-Thelonious.html">thelonious~Thelonious</a></li><li><a href="module-transactions-Transactions.html">transactions~Transactions</a></li><li><a href="module-util-ComponentBase.html">util~ComponentBase</a></li>
+				</ul>
+			</li>
+			
+		</ul>
+	</div>
+</div>
+</div>
+
+
+<div class="container">
+<div class="row">
+
+	
+	<div class="col-md-12">
+	
+		<div id="main">
+    		<h1 class="page-title">Source: lib/util.js</h1>
+			
+
+		<h1 class="page-title">Source: lib/util.js</h1>
+    
+<section>
+	<article>
+		<pre
+			class="sunlight-highlight-javascript linenums">/**
+ * @file util.js
+ * @fileOverview Utility functions and classes for the thelonious library.
+ * @author Andreas Olofsson (andreas@erisindustries.com)
+ * @module util
+ */
+'use strict';
+
+var hex = "0123456789ABCDEF";
+
+/**
+ * Constructor for the ComponentBase class.
+ *
+ * @type {ComponentBase}
+ */
+exports.ComponentBase = ComponentBase;
+
+/**
+ * ComponentBase is used for all Thelonious API components.
+ *
+ * @param {module:rpc/backend~NetworkingBackEnd} backEnd - A networking back-end object.
+ *
+ * @constructor
+ */
+function ComponentBase(backEnd){
+    this._backEnd = backEnd;
+}
+
+/**
+ * Converts an arbitrary-length array of unsigned 8-bit integers to a hex-string.
+ * If any number contains bits higher then 8 they will be lost.
+ *
+ * If the array is of length 0, the returned value is "0x0" (the zero hex-string).
+ *
+ * @param byteArray
+ */
+exports.bytesToHex = bytesToHex;
+
+
+function bytesToHex(byteArray){
+    if(byteArray.length == 0){
+        return "0x0";
+    }
+    var hexString = "", i;
+    for(i = 0; i &lt; byteArray.length; i++){
+        var b = byteArray[i] &amp; 0xFF;
+        hexString += hex[b >> 4];
+        hexString += hex[b &amp; 0x0F];
+    }
+    return "0x" + hexString;
+}
+
+/**
+ * Converts an arbitrary-length hex-string to an array of unsigned 8-bit integers.
+ * If the input is the zero hex-string (defined as "0x0"), the return value is
+ * an empty array.
+ *
+ * @type {hexToBytes}
+ */
+exports.hexToBytes = hexToBytes;
+
+
+function hexToBytes(hexString){
+    if(hexString === "0x0"){
+        return [];
+    }
+    if(hexString.length &lt; 2){
+        throw new Error("Not a valid hex string: '" + hexString + "'");
+    }
+    if(hexString.slice(0, 2) !== "0x"){
+        // TODO exception.
+        return [];
+    }
+    var str;
+    if((hexString.length &amp; 2) !== 0){
+        str = "0" + hexString.slice(2);
+    } else {
+        str = hexString.slice(2);
+    }
+    var len = str.length / 2;
+    var bytes = [], i;
+    for(i = 0; i &lt; len; i++){
+        bytes[i] = parseInt(str.slice(2*i,2*i + 2), 16);
+    }
+    return bytes;
+}</pre>
+	</article>
+</section>
+
+
+
+
+
+		</div>
+	</div>
+
+	<div class="clearfix"></div>
+
+	
+
+</div>
+</div>
+
+
+<footer>
+
+	Eris Industries
+	<br />
+
+
+	<span class="copyright">
+	Eris Industries Copyright © 2014-2015.
+	</span>
+	<br />
+
+<span class="jsdoc-message">
+	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-beta3</a>
+	on Tue May 26th 2015 using the <a
+	href="https://github.com/terryweiss/docstrap">DocStrap template</a>.
+</span>
+</footer>
+
+<!--<script src="scripts/sunlight.js"></script>-->
+<script src="scripts/docstrap.lib.js"></script>
+<script src="scripts/bootstrap-dropdown.js"></script>
+<script src="scripts/toc.js"></script>
+
+<script>
+$( function () {
+	$( "[id*='$']" ).each( function () {
+		var $this = $( this );
+
+		$this.attr( "id", $this.attr( "id" ).replace( "$", "__" ) );
+	} );
+
+	$( "#toc" ).toc( {
+		anchorName  : function ( i, heading, prefix ) {
+			return $( heading ).attr( "id" ) || ( prefix + i );
+		},
+		selectors   : "h1,h2,h3,h4",
+		showAndHide : false,
+		scrollTo    : "100px"
+	} );
+
+	$( "#toc>ul" ).addClass( "nav nav-pills nav-stacked" );
+	$( "#main span[id^='toc']" ).addClass( "toc-shim" );
+	$( '.dropdown-toggle' ).dropdown();
+	//			$( ".tutorial-section pre, .readme-section pre" ).addClass( "sunlight-highlight-javascript" ).addClass( "linenums" );
+
+	$( ".tutorial-section pre, .readme-section pre" ).each( function () {
+		var $this = $( this );
+
+		var example = $this.find( "code" );
+		exampleText = example.html();
+		var lang = /{@lang (.*?)}/.exec( exampleText );
+		if ( lang && lang[1] ) {
+			exampleText = exampleText.replace( lang[0], "" );
+			example.html( exampleText );
+			lang = lang[1];
+		} else {
+			lang = "javascript";
+		}
+
+		if ( lang ) {
+
+			$this
+			.addClass( "sunlight-highlight-" + lang )
+			.addClass( "linenums" )
+			.html( example.html() );
+
+		}
+	} );
+
+	Sunlight.highlightAll( {
+		lineNumbers : true,
+		showMenu : true,
+		enableDoclinks : true
+	} );
+} );
+</script>
+
+
+
+<!--Navigation and Symbol Display-->
+
+
+<!--Google Analytics-->
+
+
+</body>
+</html>

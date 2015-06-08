@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Thelonious Index</title>
+
+	<!--[if lt IE 9]>
+	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link type="text/css" rel="stylesheet" href="styles/sunlight.default.css">
+
+	<link type="text/css" rel="stylesheet" href="styles/site.cerulean.css">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top navbar-inverse">
+<div class="container">
+	<div class="navbar-header">
+		<a class="navbar-brand" href="index.html">Thelonious</a>
+	</div>
+	<div class="navbar-collapse">
+		<ul class="nav navbar-nav">
+			
+			<li class="dropdown">
+				<a href="modules.list.html" class="dropdown-toggle" data-toggle="dropdown">Modules<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="module-accounts.html">accounts</a></li><li><a href="module-blockchain.html">blockchain</a></li><li><a href="module-consensus.html">consensus</a></li><li><a href="module-index.html">index</a></li><li><a href="module-network.html">network</a></li><li><a href="module-rpc_backend.html">rpc/backend</a></li><li><a href="module-rpc_rpc.html">rpc/rpc</a></li><li><a href="module-rpc_websocket.html">rpc/websocket</a></li><li><a href="module-thelonious.html">thelonious</a></li><li><a href="module-transactions.html">transactions</a></li><li><a href="module-util.html">util</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="module-accounts-Accounts.html">accounts~Accounts</a></li><li><a href="module-blockchain-BlockChain.html">blockchain~BlockChain</a></li><li><a href="module-consensus-Consensus.html">consensus~Consensus</a></li><li><a href="module-consensus-Events.html">consensus~Events</a></li><li><a href="module-network-Network.html">network~Network</a></li><li><a href="module-rpc_backend-NetworkingBackEnd.html">rpc/backend~NetworkingBackEnd</a></li><li><a href="module-rpc_websocket-WebSocketBackEnd.html">rpc/websocket~WebSocketBackEnd</a></li><li><a href="module-thelonious-Thelonious.html">thelonious~Thelonious</a></li><li><a href="module-transactions-Transactions.html">transactions~Transactions</a></li><li><a href="module-util-ComponentBase.html">util~ComponentBase</a></li>
+				</ul>
+			</li>
+			
+		</ul>
+	</div>
+</div>
+</div>
+
+
+<div class="container">
+<div class="row">
+
+	
+	<div class="col-md-8">
+	
+		<div id="main">
+    		<h1 class="page-title">Index</h1>
+			
+
+	
+	<span class="page-title">Index</span>
+	
+	
+
+
+
+
+
+
+
+
+
+
+
+	
+	
+
+
+
+
+
+    <section class="readme-section">
+        <article><h2>thelonious-js</h2><p>This library is a node.js wrapper for the <a href="https://github.com/eris-ltd/thelonious">Thelonious</a> blockchain client.</p>
+<p><strong>NOTE: Right now it uses tendermint directly, as it has not yet been fully integrated with Thelonious (ETA May 2015).</strong></p>
+<h3>Installation and usage</h3><p>You can use npm to get the library.</p>
+<p><code>npm install thelonious</code></p>
+<p>The main class is <code>Thelonious</code>. A standard <code>Thelonious</code> instance that calls <code>ws://localhost:8080</code> is created like this:</p>
+<pre class="prettyprint source"><code>var thelModule = require('thelonious');
+
+var thel = thelModule.createThelonious(&quot;ws://localhost:8080&quot;);
+
+thel.start(callback);</code></pre><p>This will create a new websocket back-end, create a new instance of <code>Thelonious</code> passing the back-end into its constructor, then return the new <code>Thelonious</code> instance. The websocket back-end will then have to be started by calling <code>start</code> on thelonious.</p>
+<p>For more advanced usage see the Developing section.</p>
+<h3>API Reference</h3><p>All functions requires a callback. The callbacks always has the signature <code>callback(error, data)</code>.</p>
+<p>TODO</p>
+<h3>Unit tests</h3><p>Unit testing can be done by running <code>mocha</code> or <code>npm test</code> from the root dir. There is a mock server in  <code>root_dir/test/test_server.js</code> for doing websocket tests (as it starts an actual webserver), and a mock back-end for pure API testing. You could replace API components as well by reassigning the components inside of <code>Thelonious</code>. </p>
+<h3>Documentation</h3><p>Running <code>doc.sh</code> will generate standard documentation using <code>jsdoc</code> (currently <code>3.3.0beta</code>).</p>
+<p>Running <code>devDoc.sh</code> will include more info, such as private fields and methods.</p></article>
+    </section>
+
+
+
+
+
+
+
+		</div>
+	</div>
+
+	<div class="clearfix"></div>
+
+	
+		<div class="col-md-3">
+			<div id="toc" class="col-md-3"></div>
+		</div>
+	
+
+</div>
+</div>
+
+
+<footer>
+
+	Eris Industries
+	<br />
+
+
+	<span class="copyright">
+	Eris Industries Copyright © 2014-2015.
+	</span>
+	<br />
+
+<span class="jsdoc-message">
+	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-beta3</a>
+	on Tue May 26th 2015 using the <a
+	href="https://github.com/terryweiss/docstrap">DocStrap template</a>.
+</span>
+</footer>
+
+<!--<script src="scripts/sunlight.js"></script>-->
+<script src="scripts/docstrap.lib.js"></script>
+<script src="scripts/bootstrap-dropdown.js"></script>
+<script src="scripts/toc.js"></script>
+
+<script>
+$( function () {
+	$( "[id*='$']" ).each( function () {
+		var $this = $( this );
+
+		$this.attr( "id", $this.attr( "id" ).replace( "$", "__" ) );
+	} );
+
+	$( "#toc" ).toc( {
+		anchorName  : function ( i, heading, prefix ) {
+			return $( heading ).attr( "id" ) || ( prefix + i );
+		},
+		selectors   : "h1,h2,h3,h4",
+		showAndHide : false,
+		scrollTo    : "100px"
+	} );
+
+	$( "#toc>ul" ).addClass( "nav nav-pills nav-stacked" );
+	$( "#main span[id^='toc']" ).addClass( "toc-shim" );
+	$( '.dropdown-toggle' ).dropdown();
+	//			$( ".tutorial-section pre, .readme-section pre" ).addClass( "sunlight-highlight-javascript" ).addClass( "linenums" );
+
+	$( ".tutorial-section pre, .readme-section pre" ).each( function () {
+		var $this = $( this );
+
+		var example = $this.find( "code" );
+		exampleText = example.html();
+		var lang = /{@lang (.*?)}/.exec( exampleText );
+		if ( lang && lang[1] ) {
+			exampleText = exampleText.replace( lang[0], "" );
+			example.html( exampleText );
+			lang = lang[1];
+		} else {
+			lang = "javascript";
+		}
+
+		if ( lang ) {
+
+			$this
+			.addClass( "sunlight-highlight-" + lang )
+			.addClass( "linenums" )
+			.html( example.html() );
+
+		}
+	} );
+
+	Sunlight.highlightAll( {
+		lineNumbers : true,
+		showMenu : true,
+		enableDoclinks : true
+	} );
+} );
+</script>
+
+
+
+<!--Navigation and Symbol Display-->
+
+
+<!--Google Analytics-->
+
+
+</body>
+</html>

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Thelonious Source: lib/transactions.js</title>
+
+	<!--[if lt IE 9]>
+	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link type="text/css" rel="stylesheet" href="styles/sunlight.default.css">
+
+	<link type="text/css" rel="stylesheet" href="styles/site.cerulean.css">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top navbar-inverse">
+<div class="container">
+	<div class="navbar-header">
+		<a class="navbar-brand" href="index.html">Thelonious</a>
+	</div>
+	<div class="navbar-collapse">
+		<ul class="nav navbar-nav">
+			
+			<li class="dropdown">
+				<a href="modules.list.html" class="dropdown-toggle" data-toggle="dropdown">Modules<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="module-accounts.html">accounts</a></li><li><a href="module-blockchain.html">blockchain</a></li><li><a href="module-consensus.html">consensus</a></li><li><a href="module-index.html">index</a></li><li><a href="module-network.html">network</a></li><li><a href="module-rpc_backend.html">rpc/backend</a></li><li><a href="module-rpc_rpc.html">rpc/rpc</a></li><li><a href="module-rpc_websocket.html">rpc/websocket</a></li><li><a href="module-thelonious.html">thelonious</a></li><li><a href="module-transactions.html">transactions</a></li><li><a href="module-util.html">util</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="module-accounts-Accounts.html">accounts~Accounts</a></li><li><a href="module-blockchain-BlockChain.html">blockchain~BlockChain</a></li><li><a href="module-consensus-Consensus.html">consensus~Consensus</a></li><li><a href="module-consensus-Events.html">consensus~Events</a></li><li><a href="module-network-Network.html">network~Network</a></li><li><a href="module-rpc_backend-NetworkingBackEnd.html">rpc/backend~NetworkingBackEnd</a></li><li><a href="module-rpc_websocket-WebSocketBackEnd.html">rpc/websocket~WebSocketBackEnd</a></li><li><a href="module-thelonious-Thelonious.html">thelonious~Thelonious</a></li><li><a href="module-transactions-Transactions.html">transactions~Transactions</a></li><li><a href="module-util-ComponentBase.html">util~ComponentBase</a></li>
+				</ul>
+			</li>
+			
+		</ul>
+	</div>
+</div>
+</div>
+
+
+<div class="container">
+<div class="row">
+
+	
+	<div class="col-md-12">
+	
+		<div id="main">
+    		<h1 class="page-title">Source: lib/transactions.js</h1>
+			
+
+		<h1 class="page-title">Source: lib/transactions.js</h1>
+    
+<section>
+	<article>
+		<pre
+			class="sunlight-highlight-javascript linenums">/**
+ * @file transactions.js
+ * @fileOverview Factory module for the Transactions class.
+ * @author Andreas Olofsson (andreas@erisindustries.com)
+ * @module transactions
+ */
+
+'use strict';
+
+var util = require('./util');
+var rpc = require('./rpc/rpc');
+
+/**
+ * Create a new instance of the Transactions class.
+ *
+ * @param {module:rpc/backend~NetworkingBackEnd} backEnd - The networking back-end object.
+ * @returns {Transactions} - A new instance of the Transactions class.
+ */
+exports.createInstance = function (backEnd) {
+    return new Transactions(backEnd);
+};
+
+/**
+ * Transactions has methods for sending transactions, viewing currently pending ones etc.
+ *
+ * @param {module:rpc/backend~NetworkingBackEnd} backEnd - The networking back-end.
+ *
+ * @constructor
+ */
+function Transactions(backEnd) {
+    util.ComponentBase.call(this, backEnd);
+}
+
+/**
+ * Get a list of all unconfirmed transactions.
+ *
+ * @param {methodCallback} callback - The callback function.
+ */
+Transactions.prototype.getUnconfirmedTxs = function (callback) {
+    this._backEnd.send(rpc.methodName("getUnconfirmedTxs"), null, callback);
+};
+
+/**
+ * Broadcasting a Transaction will send it to the blockchain client. The transaction needs
+ * to be signed in order for this to work.
+ *
+ * @param {Object} tx - The transaction.
+ * @param {module:rpc/rpc~methodCallback} callback - The callback function.
+ */
+Transactions.prototype.broadcastTx = function (tx, callback) {
+    this._backEnd.send(rpc.methodName("broadcastTx"), tx, callback);
+};
+
+/**
+ * Call the account at the given address. If there is no code in the account, this will do nothing.
+ *
+ * @param address - The address to the account holding the code.
+ * @param data - The input data.
+ * @param {module:rpc/rpc~methodCallback} callback - The callback function.
+ */
+Transactions.prototype.call = function (address, data, callback) {
+    this._backEnd.send(rpc.methodName("call"), rpc.callParam(address, data), callback);
+};
+
+/**
+ * Call the code with the given data as input.
+ *
+ * @param code - The code to be executed.
+ * @param data - The input data.
+ * @param {module:rpc/rpc~methodCallback} callback - The callback function.
+ */
+Transactions.prototype.callCode = function (code, data, callback) {
+    this._backEnd.send(rpc.methodName("callCode"), rpc.callCodeParam(code, data), callback);
+};</pre>
+	</article>
+</section>
+
+
+
+
+
+		</div>
+	</div>
+
+	<div class="clearfix"></div>
+
+	
+
+</div>
+</div>
+
+
+<footer>
+
+	Eris Industries
+	<br />
+
+
+	<span class="copyright">
+	Eris Industries Copyright © 2014-2015.
+	</span>
+	<br />
+
+<span class="jsdoc-message">
+	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-beta3</a>
+	on Tue May 26th 2015 using the <a
+	href="https://github.com/terryweiss/docstrap">DocStrap template</a>.
+</span>
+</footer>
+
+<!--<script src="scripts/sunlight.js"></script>-->
+<script src="scripts/docstrap.lib.js"></script>
+<script src="scripts/bootstrap-dropdown.js"></script>
+<script src="scripts/toc.js"></script>
+
+<script>
+$( function () {
+	$( "[id*='$']" ).each( function () {
+		var $this = $( this );
+
+		$this.attr( "id", $this.attr( "id" ).replace( "$", "__" ) );
+	} );
+
+	$( "#toc" ).toc( {
+		anchorName  : function ( i, heading, prefix ) {
+			return $( heading ).attr( "id" ) || ( prefix + i );
+		},
+		selectors   : "h1,h2,h3,h4",
+		showAndHide : false,
+		scrollTo    : "100px"
+	} );
+
+	$( "#toc>ul" ).addClass( "nav nav-pills nav-stacked" );
+	$( "#main span[id^='toc']" ).addClass( "toc-shim" );
+	$( '.dropdown-toggle' ).dropdown();
+	//			$( ".tutorial-section pre, .readme-section pre" ).addClass( "sunlight-highlight-javascript" ).addClass( "linenums" );
+
+	$( ".tutorial-section pre, .readme-section pre" ).each( function () {
+		var $this = $( this );
+
+		var example = $this.find( "code" );
+		exampleText = example.html();
+		var lang = /{@lang (.*?)}/.exec( exampleText );
+		if ( lang && lang[1] ) {
+			exampleText = exampleText.replace( lang[0], "" );
+			example.html( exampleText );
+			lang = lang[1];
+		} else {
+			lang = "javascript";
+		}
+
+		if ( lang ) {
+
+			$this
+			.addClass( "sunlight-highlight-" + lang )
+			.addClass( "linenums" )
+			.html( example.html() );
+
+		}
+	} );
+
+	Sunlight.highlightAll( {
+		lineNumbers : true,
+		showMenu : true,
+		enableDoclinks : true
+	} );
+} );
+</script>
+
+
+
+<!--Navigation and Symbol Display-->
+
+
+<!--Google Analytics-->
+
+
+</body>
+</html>
