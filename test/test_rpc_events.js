@@ -77,7 +77,6 @@ var params = {
 
 var edb;
 var eventSub;
-var blocks = [];
 
 describe('TheloniousHttp', function () {
 
@@ -86,8 +85,6 @@ describe('TheloniousHttp', function () {
     before(function (done) {
         this.timeout(5000);
         var httpClient = require('../lib/rpc/http').createInstance(serverServerURL);
-        console.log("Created HTTP Client");
-
         var msg = JSON.stringify({
             priv_validator: privValidator,
             genesis: genesis,
@@ -95,7 +92,6 @@ describe('TheloniousHttp', function () {
         });
         httpClient.sendMsg(msg, "POST", function (err, data) {
             if (!err) {
-                console.log("SERVER RETURN DATA: " + data);
                 var URL;
                 try {
                     var ret = JSON.parse(data);
@@ -104,7 +100,7 @@ describe('TheloniousHttp', function () {
                     done();
                 }
                 edb = edbModule.createInstance(URL);
-                setTimeout(done, 3000);
+                done();
             } else {
                 console.log("ERROR FROM SERVER");
                 console.log(err);
@@ -117,7 +113,8 @@ describe('TheloniousHttp', function () {
 
         describe('#subNewBlock', function () {
             it("should subscribe to new block events", function (done) {
-                this.timeout(30000);
+                this.timeout(25000);
+                console.log("This should take about 15 seconds.");
                 edb.events().subNewBlocks(function (err, data) {
                     asrt.ifError(err, "Blaaa, error.");
                     eventSub = data;
@@ -125,11 +122,10 @@ describe('TheloniousHttp', function () {
                         data.stop(function () {
                             throw new Error("No data came in.");
                         })
-                    }, 25000);
+                    }, 20000);
 
                 }, function(err, data){
                     if(data){
-                        console.log(data);
                         eventSub.stop(function(){});
                         done();
                     }

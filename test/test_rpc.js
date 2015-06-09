@@ -280,7 +280,6 @@ describe('TheloniousHttp', function () {
     before(function (done) {
         this.timeout(4000);
         var httpClient = require('../lib/rpc/http').createInstance(serverServerURL);
-        console.log("Created HTTP Client");
 
         var msg = JSON.stringify({
             priv_validator: privValidator,
@@ -289,7 +288,6 @@ describe('TheloniousHttp', function () {
         });
         httpClient.sendMsg(msg, "POST", function (err, data) {
             if (!err) {
-                console.log("SERVER RETURN DATA: " + data);
                 var URL;
                 try {
                     var ret = JSON.parse(data);
