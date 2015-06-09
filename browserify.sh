@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-browserify index.js --standalone thelFactory > ./dist/erisdb.js
+browserify index.js --standalone edbFactory > ./dist/erisdb.js

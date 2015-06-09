@@ -1,13 +1,11 @@
 'use strict';
 
 /**
- * @file test_server.js
- * @fileOverview Module wrapper for TestServer.
+ * @file mock_ws_server.js
+ * @fileOverview Module wrapper for MockServer.
  * @author Andreas Olofsson (andreas@erisindustries.com)
  * @module test/server
  */
-
-var logger = require('winston');
 
 /**
  * Constructor for the MockServer class.
@@ -18,7 +16,7 @@ module.exports = MockServer;
 /**
  * Start a websocket server.
  *
- * @param {number} [port=8080] - The port
+ * @param {number} [port=1337] - The port
  * @constructor
  */
 function MockServer(port){
@@ -35,24 +33,24 @@ function MockServer(port){
 
         var WebSocketServer = require('ws').Server;
 
-        var wss = new WebSocketServer({port: port || 8080});
+        var wss = new WebSocketServer({port: port || 1337});
 
         wss.on('connection', function connection(ws) {
 
             ws.on('message', function incoming(message) {
-                logger.debug('received: ', message);
+                console.log('received: ' + message);
 
                 var req;
 
                 try {
                     req = JSON.parse(message);
                 } catch (error) {
-                    logger.error("Failed to parse message: ", error);
+                    console.error("Failed to parse message: " + error);
                     return;
                 }
 
                 if (!isRequest(req)){
-                    logger.error("Message is not a proper json-rpc 2.0 request: ", message);
+                    console.error("Message is not a proper json-rpc 2.0 request: " + message);
                     return;
                 }
 

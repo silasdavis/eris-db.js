@@ -1,21 +1,21 @@
 /**
  * @file index.js
- * @fileOverview Index file for the Thelonious javascript API. This file contains a factory method
- * for creating a new <tt>Thelonious</tt> instance.
+ * @fileOverview Index file for the eris-db javascript API. This file contains a factory method
+ * for creating a new <tt>ErisDB</tt> instance.
  * @author Andreas Olofsson (andreas@erisindustries.com)
  * @module index
  */
 'use strict';
-var thelonious = require('./lib/thelonious');
+var erisdb = require('./lib/erisdb');
 var wsc = require('./lib/rpc/websocket');
 var httpc = require('./lib/rpc/http');
 
 /**
- * Thelonious allows you to do remote calls to a running thelonious-tendermint client.
+ * ErisDB allows you to do remote calls to a running erisdb-tendermint client.
  *
  * @param {string} URL The RPC endpoint URL.
  * @param {boolean} [websockets] - Whether to use websockets. Will use http if not set.
- * @returns {module:thelonious~Thelonious}
+ * @returns {module:erisdb-ErisDB}
  */
 exports.createInstance = function(URL, websockets){
     var client;
@@ -30,5 +30,5 @@ exports.createInstance = function(URL, websockets){
         }
         client = httpc.createInstance(URL);
     }
-    return thelonious.createInstance(client);
+    return erisdb.createInstance(client);
 };

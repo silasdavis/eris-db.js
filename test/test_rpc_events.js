@@ -1,15 +1,15 @@
 var util = require('../lib/util');
 var asrt;
-var thelModule;
+var edbModule;
 var localServ;
 
 if (typeof(window) === "undefined") {
     asrt = require('assert');
     localServ = require("./server_local/server");
-    thelModule = require("../index");
+    edbModule = require("../index");
 } else {
     asrt = assert;
-    thelModule = thelFact;
+    edbModule = edbFact;
 }
 
 var serverServerURL = "http://localhost:1337/server";
@@ -75,7 +75,7 @@ var params = {
     txFee: 0
 };
 
-var thel;
+var edb;
 var eventSub;
 var blocks = [];
 
@@ -91,7 +91,7 @@ describe('TheloniousHttp', function () {
         var msg = JSON.stringify({
             priv_validator: privValidator,
             genesis: genesis,
-            max_duration: 40
+            max_duration: 30
         });
         httpClient.sendMsg(msg, "POST", function (err, data) {
             if (!err) {
@@ -103,7 +103,7 @@ describe('TheloniousHttp', function () {
                 } catch (err) {
                     done();
                 }
-                thel = thelModule.createInstance(URL);
+                edb = edbModule.createInstance(URL);
                 setTimeout(done, 3000);
             } else {
                 console.log("ERROR FROM SERVER");
@@ -118,7 +118,7 @@ describe('TheloniousHttp', function () {
         describe('#subNewBlock', function () {
             it("should subscribe to new block events", function (done) {
                 this.timeout(30000);
-                thel.events().subNewBlocks(function (err, data) {
+                edb.events().subNewBlocks(function (err, data) {
                     asrt.ifError(err, "Blaaa, error.");
                     eventSub = data;
                     setTimeout(function () {

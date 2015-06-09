@@ -1,5 +1,5 @@
 
-/* This file is for testing RPC methods generally. The tendermint node is dispensed by the "server server",
+/* This file is for testing RPC methods generally. The erisdb-tendermint node is dispensed by the "server server",
  * and is seeded by the validator (privValidator) file and genesis.json, along with generic server and
  * tendermint configuration files.
  *
@@ -22,16 +22,16 @@
 
 var util = require('../lib/util');
 var asrt;
-var thelModule;
+var edbModule;
 var localServ;
 
 if (typeof(window) === "undefined") {
     asrt = require('assert');
     localServ = require("./server_local/server");
-    thelModule = require("../index");
+    edbModule = require("../index");
 } else {
     asrt = assert;
-    thelModule = thelFact;
+    edbModule = edbFact;
 }
 
 var serverServerURL = "http://localhost:1337/server";
@@ -272,11 +272,10 @@ var results = {
     blocks: { min_height: 0, max_height: 0, block_metas: [] }
 };
 
-var thel;
+var edb;
 
 describe('TheloniousHttp', function () {
 
-    // In the node version we can start a tendermint server server automatically.
     // TODO clean this up.
     before(function (done) {
         this.timeout(4000);
@@ -298,7 +297,7 @@ describe('TheloniousHttp', function () {
                 } catch (err) {
                     done();
                 }
-                thel = thelModule.createInstance(URL);
+                edb = edbModule.createInstance(URL);
                 setTimeout(done, 3000);
             } else {
                 console.log("ERROR FROM SERVER");
@@ -308,43 +307,17 @@ describe('TheloniousHttp', function () {
         });
     });
 
-    /*
-     describe('.events', function () {
-
-     describe('#subAccountOutput', function () {
-     it("should subscribe to output from the given account", function (done) {
-     this.timeout(30000);
-     thel.events().subAccountOutput(params.account, function(err, data){
-
-     thel.txs().transact(params.privKey, "", params.txCode,
-     params.txGasLimit, params.txFee, ret(checkTransactCC, function(){}));
-     thel.txs().transact(params.privKey, "", params.txCode,
-     params.txGasLimit, params.txFee, ret(checkTransactCC, function(){}));
-     thel.txs().transact(params.privKey, "", params.txCode,
-     params.txGasLimit, params.txFee, ret(checkTransactCC, function(){}));
-
-     setTimeout(function(){data.stop(function(){
-     done();
-     })}, 25000);
-
-     }, ret(checkAccountOutputEvent, done));
-     });
-     });
-
-     });
-     */
-
     describe('.consensus', function () {
 
         describe('#getState', function () {
             it("should get the consensus state", function (done) {
-                thel.consensus().getState(ret(checkConsensusState, done));
+                edb.consensus().getState(ret(checkConsensusState, done));
             });
         });
 
         describe('#getValidators', function () {
             it("should get the validators", function (done) {
-                thel.consensus().getValidators(ret(checkValidators, done));
+                edb.consensus().getValidators(ret(checkValidators, done));
             });
         });
 
@@ -354,31 +327,31 @@ describe('TheloniousHttp', function () {
 
         describe('#getInfo', function () {
             it("should get the network info", function (done) {
-                thel.network().getInfo(ret(checkNetworkInfo, done));
+                edb.network().getInfo(ret(checkNetworkInfo, done));
             });
         });
 
         describe('#getMoniker', function () {
             it("should get the moniker", function (done) {
-                thel.network().getMoniker(ret(checkMoniker, done));
+                edb.network().getMoniker(ret(checkMoniker, done));
             });
         });
 
         describe('#isListening', function () {
             it("should get the listening value", function (done) {
-                thel.network().isListening(ret(checkListening, done));
+                edb.network().isListening(ret(checkListening, done));
             });
         });
 
         describe('#getListeners', function () {
             it("should get the listeners", function (done) {
-                thel.network().getListeners(ret(checkListeners, done));
+                edb.network().getListeners(ret(checkListeners, done));
             });
         });
 
         describe('#getPeers', function () {
             it("should get the peers", function (done) {
-                thel.network().getPeers(ret(checkPeers, done));
+                edb.network().getPeers(ret(checkPeers, done));
             });
         });
 
@@ -389,7 +362,7 @@ describe('TheloniousHttp', function () {
         /*
          describe('#broadcastTx', function () {
          it("should broadcast a tx", function (done) {
-         thel.txs().broadcastTx(params.tx, ret(checkBroadcastTx, done));
+         edb.txs().broadcastTx(params.tx, ret(checkBroadcastTx, done));
          });
          });
          */
@@ -397,14 +370,14 @@ describe('TheloniousHttp', function () {
 
         describe('#transact contract create', function () {
             it("should send a contract create tx to an address", function (done) {
-                thel.txs().transact(params.privKey, "", params.txCode,
+                edb.txs().transact(params.privKey, "", params.txCode,
                     params.txGasLimit, params.txFee, ret(checkTransactCC, done));
             });
         });
 
         describe('#transact', function () {
             it("should transact with the account at the given address", function (done) {
-                thel.txs().transact(params.privKey, results.new_contract_address,
+                edb.txs().transact(params.privKey, results.new_contract_address,
                     params.txData, params.txGasLimit, params.txFee,
                     ret(checkTransact, done));
             });
@@ -412,21 +385,21 @@ describe('TheloniousHttp', function () {
 
         describe('#getUnconfirmedTxs', function () {
             it("should get the unconfirmed txs", function (done) {
-                thel.txs().getUnconfirmedTxs(ret(checkUnconfirmedTxs, done));
+                edb.txs().getUnconfirmedTxs(ret(checkUnconfirmedTxs, done));
             });
         });
 
         /*
          describe('#call', function () {
          it("should call the given address using the given data", function (done) {
-         thel.txs().call(results.new_contract_address, params.txData, ret(checkCall, done));
+         edb.txs().call(results.new_contract_address, params.txData, ret(checkCall, done));
          });
          });
          */
 
         describe('#callCode', function () {
             it("should callCode with the given code and data", function (done) {
-                thel.txs().callCode(params.txCode, params.txData, ret(checkCallCode, done));
+                edb.txs().callCode(params.txCode, params.txData, ret(checkCallCode, done));
             });
         });
 
@@ -436,25 +409,25 @@ describe('TheloniousHttp', function () {
 
         describe('#getAccounts', function () {
             it("should get all accounts", function (done) {
-                thel.accounts().getAccounts(ret(checkAccounts, done));
+                edb.accounts().getAccounts(ret(checkAccounts, done));
             });
         });
 
         describe('#getAccount', function () {
             it("should get the account", function (done) {
-                thel.accounts().getAccount(results.new_contract_address, ret(checkAccount, done));
+                edb.accounts().getAccount(results.new_contract_address, ret(checkAccount, done));
             });
         });
 
         describe('#getStorage', function () {
             it("should get the storage", function (done) {
-                thel.accounts().getStorage(results.new_contract_address, ret(checkStorage, done));
+                edb.accounts().getStorage(results.new_contract_address, ret(checkStorage, done));
             });
         });
 
         describe('#getStorageAt', function () {
             it("should get the storage at the given key", function (done) {
-                thel.accounts().getStorageAt(results.new_contract_address, params.storageKey, ret(checkStorageAt, done));
+                edb.accounts().getStorageAt(results.new_contract_address, params.storageKey, ret(checkStorageAt, done));
             });
         });
 
@@ -464,31 +437,31 @@ describe('TheloniousHttp', function () {
 
         describe('#getInfo', function () {
             it("should get the blockchain info", function (done) {
-                thel.blockchain().getInfo(ret(checkBlockchainInfo, done));
+                edb.blockchain().getInfo(ret(checkBlockchainInfo, done));
             });
         });
 
         describe('#getChainId', function () {
             it("should get the chain id", function (done) {
-                thel.blockchain().getChainId(ret(checkChainId, done));
+                edb.blockchain().getChainId(ret(checkChainId, done));
             });
         });
 
         describe('#getGenesisHash', function () {
             it("should get the genesis hash", function (done) {
-                thel.blockchain().getGenesisHash(ret(checkGenesisHash, done));
+                edb.blockchain().getGenesisHash(ret(checkGenesisHash, done));
             });
         });
 
         describe('#getLatestBlockHeight', function () {
             it("should get the latest block height", function (done) {
-                thel.blockchain().getLatestBlockHeight(ret(checkLatestBlockHeight, done));
+                edb.blockchain().getLatestBlockHeight(ret(checkLatestBlockHeight, done));
             });
         });
 
         describe('#getBlocks', function () {
             it("should get the blocks between min, and max height", function (done) {
-                thel.blockchain().getBlocks(params.minHeight, params.maxHeight, ret(checkBlocks, done));
+                edb.blockchain().getBlocks(params.minHeight, params.maxHeight, ret(checkBlocks, done));
             });
         });
 
@@ -496,7 +469,7 @@ describe('TheloniousHttp', function () {
         /*
          describe('#getBlock', function () {
          it("should get the block at the given height", function (done) {
-         thel.blockchain().getBlock(params.height, ret(checkBlock, done));
+         edb.blockchain().getBlock(params.height, ret(checkBlock, done));
          });
          });
          */
