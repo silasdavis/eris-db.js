@@ -123,7 +123,6 @@ describe('TheloniousHttp', function () {
                     eventSub = data;
                     setTimeout(function () {
                         data.stop(function () {
-                            // TODO Weak assertion for now.
                             throw new Error("No data came in.");
                         })
                     }, 25000);
