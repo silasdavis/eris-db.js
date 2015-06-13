@@ -99,7 +99,7 @@ describe('TheloniousHttp', function () {
                 } catch (err) {
                     done();
                 }
-                edb = edbModule.createInstance(URL);
+                edb = edbModule.createInstance(URL + '/rpc');
                 done();
             } else {
                 console.log("ERROR FROM SERVER");

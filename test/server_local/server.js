@@ -33,20 +33,8 @@ exports.startLocalServer = function (executableName, callback) {
  */
 exports.stopLocalServer = function (callback) {
     // TODO Fix this...
-    console.log("STOPLOCAL");
-    console.log(typeof(child));
     if (child) {
-        /*
-        child.on('close', function (code) {
-            console.log('server shut down. code: ' + code);
-            callback();
-        });
-         */
         child.kill();
-        child = null;
-        callback();
-    } else {
-        callback();
     }
 };
 
@@ -56,5 +44,5 @@ function killProc(child){
         child.kill();
         child = null;
     }
-    console.log("Close-event fired.")
+    console.log("Closing down local server.")
 }
