@@ -1,11 +1,9 @@
-
 /* This file is for testing RPC methods.
  */
 
 var util = require('../lib/util');
 var asrt;
 var edbModule;
-var localServ;
 
 if (typeof(window) === "undefined") {
     asrt = require('assert');
@@ -18,53 +16,53 @@ if (typeof(window) === "undefined") {
 
 var serverServerURL = "http://localhost:1337/server";
 
-var testData = require('./testdata/testdata.json');
+var test_data = require('./testdata/testdata.json');
+
+var requestData = {
+    priv_validator: test_data.chain_data.priv_validator,
+    genesis: test_data.chain_data.genesis,
+    max_duration: 10
+};
 
 var edb;
 
 describe('TheloniousHttp', function () {
 
-    // TODO clean this up.
     before(function (done) {
         this.timeout(4000);
-        var httpClient = require('../lib/rpc/http').createInstance(serverServerURL);
-        var privValidator = testData.chain_config.priv_validator;
-        var genesis = testData.chain_config.genesis;
-        var msg = JSON.stringify({
-            priv_validator: privValidator,
-            genesis: genesis,
-            max_duration: 10
-        });
-        httpClient.sendMsg(msg, "POST", function (err, data) {
-            if (!err) {
-                var URL;
-                try {
-                    var ret = JSON.parse(data);
-                    URL = ret.URL;
-                } catch (err) {
-                    done();
-                }
-                edb = edbModule.createInstance(URL + '/rpc');
-                setTimeout(done, 3000);
-            } else {
-                console.log("ERROR FROM SERVER");
-                console.log(err);
-                done();
+        
+        util.getNewErisServer(serverServerURL, requestData, function(err, URL){
+            if(err){
+                throw new Error(err);
             }
-        });
+            edb = edbModule.createInstance(URL + '/rpc');
+            done();
+        })
     });
 
     describe('.consensus', function () {
 
         describe('#getState', function () {
             it("should get the consensus state", function (done) {
-                var exp = testData.output.consensus_state;
-                edb.consensus().getState(check(exp, done));
+                var exp = test_data.output.consensus_state;
+                // We must use custom validation here since we need to
+                // modify a timestamp.
+                edb.consensus().getState(function(err, data){
+                    if (err) {
+                        console.log(err);
+                    }
+                    asrt.ifError(err, "Failed to call rpc method.");
+                    data.start_time = "";
+                    var expected = test_data.output.consensus_state;
+                    asrt.deepEqual(data, expected);
+                    done();
+                });
             });
         });
 
         describe('#getValidators', function () {
             it("should get the validators", function (done) {
+                var exp = test_data.output.validators;
                 edb.consensus().getValidators(check(exp, done));
             });
         });
@@ -74,12 +72,14 @@ describe('TheloniousHttp', function () {
     describe('.network', function () {
 
         describe('#getInfo', function () {
+            var exp = test_data.output.network_info;
             it("should get the network info", function (done) {
                 edb.network().getInfo(check(exp, done));
             });
         });
 
         describe('#getMoniker', function () {
+            var exp = test_data.output.moniker;
             it("should get the moniker", function (done) {
                 edb.network().getMoniker(check(exp, done));
             });
@@ -87,18 +87,21 @@ describe('TheloniousHttp', function () {
 
         describe('#isListening', function () {
             it("should get the listening value", function (done) {
+                var exp = test_data.output.listening;
                 edb.network().isListening(check(exp, done));
             });
         });
 
         describe('#getListeners', function () {
             it("should get the listeners", function (done) {
+                var exp = test_data.output.listeners;
                 edb.network().getListeners(check(exp, done));
             });
         });
 
         describe('#getPeers', function () {
             it("should get the peers", function (done) {
+                var exp = test_data.output.peers;
                 edb.network().getPeers(check(exp, done));
             });
         });
@@ -118,7 +121,8 @@ describe('TheloniousHttp', function () {
 
         describe('#transact contract create', function () {
             it("should send a contract create tx to an address", function (done) {
-                var tx_create = testData.input.tx_create;
+                var tx_create = test_data.input.tx_create;
+                var exp = test_data.output.tx_create_receipt;
                 edb.txs().transact(tx_create.priv_key, tx_create.target_address, tx_create.data,
                     tx_create.gas_limit, tx_create.fee, check(exp, done));
             });
@@ -126,7 +130,8 @@ describe('TheloniousHttp', function () {
 
         describe('#transact', function () {
             it("should transact with the account at the given address", function (done) {
-                var tx = testData.input.tx;
+                var tx = test_data.input.tx;
+                var exp = test_data.output.tx_receipt;
                 edb.txs().transact(tx.priv_key, tx.target_address, tx.data, tx.gas_limit, tx.fee,
                     check(exp, done));
             });
@@ -134,6 +139,7 @@ describe('TheloniousHttp', function () {
 
         describe('#getUnconfirmedTxs', function () {
             it("should get the unconfirmed txs", function (done) {
+                var exp = test_data.output.unconfirmed_txs;
                 edb.txs().getUnconfirmedTxs(check(exp, done));
             });
         });
@@ -148,7 +154,8 @@ describe('TheloniousHttp', function () {
 
         describe('#callCode', function () {
             it("should callCode with the given code and data", function (done) {
-                var call_code = testData.input.call_code;
+                var call_code = test_data.input.call_code;
+                var exp = test_data.output.call_code;
                 edb.txs().callCode(call_code.code, call_code.data, check(exp, done));
             });
         });
@@ -159,25 +166,33 @@ describe('TheloniousHttp', function () {
 
         describe('#getAccounts', function () {
             it("should get all accounts", function (done) {
+                var exp = test_data.output.accounts;
                 edb.accounts().getAccounts(check(exp, done));
             });
         });
 
         describe('#getAccount', function () {
             it("should get the account", function (done) {
-                edb.accounts().getAccount(check(exp, done));
+                var addr = test_data.input.account_address;
+                var exp = test_data.output.account;
+                edb.accounts().getAccount(addr, check(exp, done));
             });
         });
 
         describe('#getStorage', function () {
             it("should get the storage", function (done) {
-                edb.accounts().getStorage(results.new_contract_address, check(exp, done));
+                var addr = test_data.input.account_address;
+                var exp = test_data.output.storage;
+                edb.accounts().getStorage(addr, check(exp, done));
             });
         });
 
         describe('#getStorageAt', function () {
             it("should get the storage at the given key", function (done) {
-                edb.accounts().getStorageAt(results.new_contract_address, params.storageKey, check(exp, done));
+                var addr = test_data.input.account_address;
+                var sa = test_data.input.storage_address;
+                var exp = test_data.output.storage_at;
+                edb.accounts().getStorageAt(addr, sa, check(exp, done));
             });
         });
 
@@ -187,17 +202,20 @@ describe('TheloniousHttp', function () {
 
         describe('#getInfo', function () {
             it("should get the blockchain info", function (done) {
+                var exp = test_data.output.blockchain_info;
                 edb.blockchain().getInfo(check(exp, done));
             });
         });
 
         describe('#getChainId', function () {
             it("should get the chain id", function (done) {
+                var exp = test_data.output.chain_id;
                 edb.blockchain().getChainId(check(exp, done));
             });
         });
 
         describe('#getGenesisHash', function () {
+            var exp = test_data.output.genesis_hash;
             it("should get the genesis hash", function (done) {
                 edb.blockchain().getGenesisHash(check(exp, done));
             });
@@ -205,16 +223,18 @@ describe('TheloniousHttp', function () {
 
         describe('#getLatestBlockHeight', function () {
             it("should get the latest block height", function (done) {
+                var exp = test_data.output.latest_block_height;
                 edb.blockchain().getLatestBlockHeight(check(exp, done));
             });
         });
 
         describe('#getBlocks', function () {
             it("should get the blocks between min, and max height", function (done) {
-                edb.blockchain().getBlocks(params.minHeight, params.maxHeight, check(exp, done));
+                var range = test_data.input.block_range;
+                var exp = test_data.output.blocks;
+                edb.blockchain().getBlocks(range.min, range.max, check(exp, done));
             });
         });
-
 
         /*
          describe('#getBlock', function () {
@@ -233,8 +253,8 @@ function check(expected, done) {
         if (error) {
             console.log(error);
         }
-        asrt.ok(error === null, "Error");
-        asrt.Equal(data, expected);
+        asrt.ifError(error, "Failed to call rpc method.");
+        asrt.deepEqual(data, expected);
         done();
     };
 }
