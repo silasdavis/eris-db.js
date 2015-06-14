@@ -21,7 +21,9 @@ var httpc = require('./lib/rpc/http');
  */
 exports.createInstance = function(URL, websockets){
     var client;
+    var ws = false;
     if (typeof(websockets) === "boolean" && websockets ){
+        ws = true;
         if(typeof(URL) !== "string"){
             URL = 'ws://localhost:1337/socketrpc';
         }
@@ -33,5 +35,5 @@ exports.createInstance = function(URL, websockets){
         client = httpc.createInstance(URL);
     }
     var validator = new validation.SinglePolicyValidator(true);
-    return erisdb.createInstance(client, validator);
+    return erisdb.createInstance(client, validator, ws);
 };
