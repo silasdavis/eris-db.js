@@ -26,7 +26,7 @@ var requestData = {
 
 var edb;
 
-describe('TheloniousHttp', function () {
+describe('TheloniousWebsocket', function () {
 
     before(function (done) {
         this.timeout(4000);
@@ -35,18 +35,23 @@ describe('TheloniousHttp', function () {
             if(err){
                 throw new Error(err);
             }
-            edb = edbModule.createInstance(URL + '/rpc');
-            console.time("http");
-            done();
+            edb = edbModule.createInstance(URL + '/socketrpc', true);
+            edb.start(function(err){
+                if (err){
+                    throw new Error(err);
+                }
+                console.time("ws");
+                done();
+            });
+
         })
     });
 
     after(function(){
-        console.timeEnd("http");
+        console.timeEnd("ws");
     });
 
     describe('.consensus', function () {
-
         describe('#getState', function () {
             it("should get the consensus state", function (done) {
                 var exp = test_data.output.consensus_state;

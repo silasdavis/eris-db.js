@@ -6,7 +6,9 @@
  * @module index
  */
 'use strict';
+
 var erisdb = require('./lib/erisdb');
+var validation = require('./lib/validation');
 var wsc = require('./lib/rpc/websocket');
 var httpc = require('./lib/rpc/http');
 
@@ -30,5 +32,6 @@ exports.createInstance = function(URL, websockets){
         }
         client = httpc.createInstance(URL);
     }
-    return erisdb.createInstance(client);
+    var validator = new validation.SinglePolicyValidator(true);
+    return erisdb.createInstance(client, validator);
 };

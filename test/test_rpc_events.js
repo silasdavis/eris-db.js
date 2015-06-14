@@ -1,4 +1,4 @@
-/* This file is for testing RPC methods.
+/* This file is for testing an event.
  */
 
 var util = require('../lib/util');
