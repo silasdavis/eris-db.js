@@ -77,6 +77,13 @@ describe('TheloniousWebsocket', function () {
             });
         });
 
+        describe('#getClientVersion', function () {
+            var exp = test_data.output.client_version;
+            it("should get the network info", function (done) {
+                edb.network().getClientVersion(check(exp, done));
+            });
+        });
+
         describe('#getMoniker', function () {
             var exp = test_data.output.moniker;
             it("should get the moniker", function (done) {

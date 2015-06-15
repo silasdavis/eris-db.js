@@ -7,7 +7,6 @@ var edbModule;
 
 if (typeof(window) === "undefined") {
     asrt = require('assert');
-    localServ = require("./server_local/server");
     edbModule = require("../index");
 } else {
     asrt = assert;
@@ -69,6 +68,13 @@ describe('TheloniousHttp', function () {
             var exp = test_data.output.network_info;
             it("should get the network info", function (done) {
                 edb.network().getInfo(check(exp, done));
+            });
+        });
+
+        describe('#getClientVersion', function () {
+            var exp = test_data.output.client_version;
+            it("should get the network info", function (done) {
+                edb.network().getClientVersion(check(exp, done));
             });
         });
 
