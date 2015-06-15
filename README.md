@@ -21,6 +21,8 @@ edb.start(callback);
 
 The parameters for `createInstance` is the server endpoint as a string, and whether or not to use websockets (false or no value means it will use the default, which is http).
 
+Once ErisDB is started, it is possible to call its methods as per the docs. 
+
 ### API Reference
 
 There are bindings for all the RPC methods.

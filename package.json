@@ -8,7 +8,8 @@
     "toml-js" : "~0.0.8"
   },
   "devDependencies" : {
-    "fs-extra": "~0.18.4"
+    "fs-extra": "~0.18.4",
+    "ink-docstrap": "~0.5.2"
   },
   "scripts": {
     "test": "mocha"

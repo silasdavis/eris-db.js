@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
 rm -rf ./doc
-jsdoc ./index.js ./lib/*.js ./lib/rpc/*.js ./test/mock/*.js README.md -d ./doc/ --access all
+jsdoc -t ./node_modules/ink-docstrap/template -c ./jsdoc_cfg/jsdoc.conf.json ./index.js ./lib/*.js ./lib/rpc/*.js README.md -d ./doc/ --access all
