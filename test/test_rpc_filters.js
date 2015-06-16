@@ -7,7 +7,6 @@ var edbModule;
 
 if (typeof(window) === "undefined") {
     asrt = require('assert');
-    localServ = require("./server_local/server");
     edbModule = require("../index");
 } else {
     asrt = assert;

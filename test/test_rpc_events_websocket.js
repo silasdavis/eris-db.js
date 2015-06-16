@@ -7,7 +7,6 @@ var edbModule;
 
 if (typeof(window) === "undefined") {
     asrt = require('assert');
-    localServ = require("./server_local/server");
     edbModule = require("../index");
 } else {
     asrt = assert;
@@ -27,7 +26,7 @@ var requestData = {
 var edb;
 var eventSub;
 
-describe('TheloniousHttp', function () {
+describe('TheloniousWebSocketEvents', function () {
 
     before(function (done) {
         this.timeout(4000);

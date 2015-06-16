@@ -2,88 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="eaafc21d-57c2-4562-b6e3-89cd7077c804" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/classes.list.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/img/glyphicons-halflings-white.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/img/glyphicons-halflings.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/index.js.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/lib_accounts.js.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/lib_blockchain.js.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/lib_consensus.js.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/lib_erisdb.js.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/lib_events.js.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/lib_network.js.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/lib_rpc_client.js.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/lib_rpc_http.js.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/lib_rpc_rpc.js.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/lib_rpc_websocket.js.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/lib_transactions.js.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/lib_unsafe.js.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/lib_util.js.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/lib_validation.js.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/module-accounts-Accounts.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/module-accounts.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/module-blockchain-BlockChain.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/module-blockchain.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/module-consensus-Consensus.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/module-consensus-EventSub.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/module-consensus-Events.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/module-consensus-HttpEventSub.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/module-consensus-WsEventSub.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/module-consensus.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/module-erisdb-ErisDB.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/module-erisdb.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/module-index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/module-network-Network.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/module-network.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/module-rpc_client-Client.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/module-rpc_client.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/module-rpc_http-HTTPClient.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/module-rpc_http.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/module-rpc_rpc.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/module-rpc_websocket-WebSocketClient.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/module-rpc_websocket.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/module-transactions-Transactions.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/module-transactions.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/module-unsafe-Unsafe.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/module-unsafe.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/module-util-ComponentBase.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/module-util.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/module-validation-CallValidator.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/module-validation-SinglePolicyValidator.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/module-validation.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/modules.list.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/scripts/URI.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/scripts/bootstrap-dropdown.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/scripts/bootstrap-tab.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/scripts/docstrap.lib.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/scripts/prettify/Apache-License-2.0.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/scripts/prettify/jquery.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/scripts/prettify/lang-css.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/scripts/prettify/prettify.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/scripts/sunlight.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/scripts/toc.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/styles/darkstrap.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/styles/prettify-tomorrow.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/styles/site.cerulean.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/styles/site.cosmo.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/styles/site.cyborg.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/styles/site.darkly.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/styles/site.darkstrap.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/styles/site.flatly.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/styles/site.journal.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/styles/site.lumen.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/styles/site.paper.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/styles/site.readable.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/styles/site.sandstone.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/styles/site.simplex.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/styles/site.slate.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/styles/site.spacelab.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/styles/site.superhero.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/styles/site.united.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/styles/site.yeti.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/styles/sunlight.dark.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/styles/sunlight.default.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/post.md" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -106,61 +25,27 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="network.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/network.js">
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider editor-type-id="MarkdownPreviewEditor">
+            <state />
+          </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="47" column="54" selection-start-line="47" selection-start-column="54" selection-end-line="47" selection-end-column="54" />
+            <state vertical-scroll-proportion="-17.419355">
+              <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
               <folding />
             </state>
           </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="unsafe.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/unsafe.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="44" column="19" selection-start-line="44" selection-start-column="19" selection-end-line="44" selection-end-column="19" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="validation.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/validation.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="45" column="17" selection-start-line="45" selection-start-column="17" selection-end-line="45" selection-end-column="17" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="doc.sh" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/doc.sh">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="3" column="98" selection-start-line="3" selection-start-column="98" selection-end-line="3" selection-end-column="98" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="devDoc.sh" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/devDoc.sh">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="3" column="146" selection-start-line="3" selection-start-column="146" selection-end-line="3" selection-end-column="146" />
-              <folding />
-            </state>
+          <provider editor-type-id="Gfm">
+            <state />
           </provider>
         </entry>
       </file>
       <file leaf-file-name="package.json" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/package.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.10250569">
-              <caret line="5" column="19" selection-start-line="5" selection-start-column="19" selection-end-line="5" selection-end-column="19" />
+            <state vertical-scroll-proportion="0.041002277">
+              <caret line="2" column="19" selection-start-line="2" selection-start-column="19" selection-end-line="2" selection-end-column="19" />
               <folding />
             </state>
           </provider>
@@ -169,8 +54,8 @@
       <file leaf-file-name="testdata.json" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test/testdata/testdata.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.0">
-              <caret line="48" column="4" selection-start-line="48" selection-start-column="4" selection-end-line="48" selection-end-column="4" />
+            <state vertical-scroll-proportion="72.81481">
+              <caret line="111" column="6" selection-start-line="111" selection-start-column="6" selection-end-line="111" selection-end-column="6" />
               <folding />
             </state>
           </provider>
@@ -191,9 +76,7 @@
         <option value="$PROJECT_DIR$/lib/transactions.js" />
         <option value="$PROJECT_DIR$/test/testdata/testdata_filters.json" />
         <option value="$PROJECT_DIR$/test/testdata/test_rpc_filters.js" />
-        <option value="$PROJECT_DIR$/test/test_rpc_events.js" />
         <option value="$PROJECT_DIR$/index.js" />
-        <option value="$PROJECT_DIR$/test/test_rpc_events_websocket.js" />
         <option value="$PROJECT_DIR$/lib/events.js" />
         <option value="$PROJECT_DIR$/lib/rpc/websocket.js" />
         <option value="$PROJECT_DIR$/examples/tx_and_check.js" />
@@ -210,13 +93,21 @@
         <option value="$PROJECT_DIR$/lib/accounts.js" />
         <option value="$PROJECT_DIR$/lib/network.js" />
         <option value="$PROJECT_DIR$/test/test_rpc.js" />
-        <option value="$PROJECT_DIR$/test/test_rpc_websocket.js" />
-        <option value="$PROJECT_DIR$/test/testdata/testdata.json" />
-        <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/doc.sh" />
         <option value="$PROJECT_DIR$/lib/unsafe.js" />
         <option value="$PROJECT_DIR$/lib/validation.js" />
         <option value="$PROJECT_DIR$/devDoc.sh" />
+        <option value="$PROJECT_DIR$/test/mock/mock_ws_server.js" />
+        <option value="$PROJECT_DIR$/test/test_rpc_filters.js" />
+        <option value="$PROJECT_DIR$/test/test_rpc_websocket.js" />
+        <option value="$PROJECT_DIR$/test/test_rpc_mock_ws.js" />
+        <option value="$PROJECT_DIR$/test/test_rpc_events_websocket.js" />
+        <option value="$PROJECT_DIR$/test/test_rpc_events.js" />
+        <option value="$PROJECT_DIR$/post.md" />
+        <option value="$PROJECT_DIR$/test/erisdb.md" />
+        <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/test/testdata/ba.md" />
+        <option value="$PROJECT_DIR$/test/testdata/testdata.json" />
         <option value="$PROJECT_DIR$/package.json" />
       </list>
     </option>
@@ -229,9 +120,9 @@
     <order />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="595" />
-    <option name="y" value="100" />
-    <option name="width" value="1325" />
+    <option name="x" value="303" />
+    <option name="y" value="72" />
+    <option name="width" value="1540" />
     <option name="height" value="1008" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
@@ -299,6 +190,24 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="testdata" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="erisdb-js" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="erisdb-js" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="lib" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -314,38 +223,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="jsdoc_cfg" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="erisdb-js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="erisdb-js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="examples" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="erisdb-js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="erisdb-js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="examples" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tx" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -368,10 +245,10 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/test" />
       <recent name="$PROJECT_DIR$/jsdoc_cfg" />
       <recent name="$PROJECT_DIR$/examples/tx" />
       <recent name="$PROJECT_DIR$/node_modules" />
-      <recent name="$PROJECT_DIR$/test" />
       <recent name="$PROJECT_DIR$/test/testdata" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -445,10 +322,10 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="595" y="100" width="1325" height="1008" extended-state="0" />
+    <frame x="303" y="72" width="1540" height="1008" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22415094" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19285715" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
@@ -495,6 +372,22 @@
     </PATH>
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/lib/events.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="247" column="9" selection-start-line="247" selection-start-column="9" selection-end-line="247" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="14" column="3" selection-start-line="14" selection-start-column="3" selection-end-line="14" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/test/test_rpc_events_websocket.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -530,44 +423,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="14" column="3" selection-start-line="14" selection-start-column="3" selection-end-line="14" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/test_rpc_events_websocket.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="65" column="29" selection-start-line="65" selection-start-column="29" selection-end-line="65" selection-end-column="29" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/test_rpc.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="12" column="18" selection-start-line="12" selection-start-column="18" selection-end-line="12" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/rpc/websocket.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/events.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="247" column="9" selection-start-line="247" selection-start-column="9" selection-end-line="247" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="14" column="3" selection-start-line="14" selection-start-column="3" selection-end-line="14" selection-end-column="3" />
         </state>
       </provider>
     </entry>
@@ -621,20 +477,6 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/browserify.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/rpc/http.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -649,32 +491,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/test_rpc_filters.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="24" column="2" selection-start-line="24" selection-start-column="2" selection-end-line="24" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/test/testdata/testdata_filters.json">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.3029613">
           <caret line="159" column="7" selection-start-line="159" selection-start-column="7" selection-end-line="159" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/test_rpc_events.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="37" selection-start-line="0" selection-start-column="37" selection-end-line="0" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/events.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="247" column="9" selection-start-line="247" selection-start-column="9" selection-end-line="247" selection-end-column="9" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -690,20 +510,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.8768529">
           <caret line="183" column="2" selection-start-line="183" selection-start-column="2" selection-end-line="183" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="14" column="3" selection-start-line="14" selection-start-column="3" selection-end-line="14" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/server_local/server.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.85632837">
-          <caret line="46" column="42" selection-start-line="46" selection-start-column="42" selection-end-line="46" selection-end-column="42" />
         </state>
       </provider>
     </entry>
@@ -784,64 +590,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/test_rpc_events_websocket.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.960221">
-          <caret line="62" column="30" selection-start-line="62" selection-start-column="30" selection-end-line="62" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/test_rpc_websocket.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="51" column="7" selection-start-line="51" selection-start-column="7" selection-end-line="51" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/node_modules/ink-docstrap/package.json">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.041002277">
           <caret line="2" column="20" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/jsdoc_cfg/jsdoc.conf.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-18.0">
-          <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider editor-type-id="MarkdownPreviewEditor">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.47368422">
-          <caret line="23" column="75" selection-start-line="23" selection-start-column="75" selection-end-line="23" selection-end-column="75" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="Gfm">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/testdata/testdata.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="48" column="4" selection-start-line="48" selection-start-column="4" selection-end-line="48" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/network.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="47" column="54" selection-start-line="47" selection-start-column="54" selection-end-line="47" selection-end-column="54" />
           <folding />
         </state>
       </provider>
@@ -854,10 +606,42 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/unsafe.js">
+    <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="44" column="19" selection-start-line="44" selection-start-column="19" selection-end-line="44" selection-end-column="19" />
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/browserify.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/devDoc.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.07955801">
+          <caret line="3" column="146" selection-start-line="3" selection-start-column="146" selection-end-line="3" selection-end-column="146" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/doc.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.059668507">
+          <caret line="3" column="98" selection-start-line="3" selection-start-column="98" selection-end-line="3" selection-end-column="98" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.27845305">
+          <caret line="14" column="3" selection-start-line="14" selection-start-column="3" selection-end-line="14" selection-end-column="3" />
           <folding />
         </state>
       </provider>
@@ -865,31 +649,117 @@
     <entry file="file://$PROJECT_DIR$/lib/validation.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="45" column="17" selection-start-line="45" selection-start-column="17" selection-end-line="45" selection-end-column="17" />
+          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/doc.sh">
+    <entry file="file://$PROJECT_DIR$/lib/unsafe.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="3" column="98" selection-start-line="3" selection-start-column="98" selection-end-line="3" selection-end-column="98" />
+        <state vertical-scroll-proportion="0.23867403">
+          <caret line="12" column="3" selection-start-line="12" selection-start-column="3" selection-end-line="12" selection-end-column="3" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/devDoc.sh">
+    <entry file="file://$PROJECT_DIR$/lib/network.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="3" column="146" selection-start-line="3" selection-start-column="146" selection-end-line="3" selection-end-column="146" />
+        <state vertical-scroll-proportion="0.5624309">
+          <caret line="47" column="54" selection-start-line="47" selection-start-column="54" selection-end-line="47" selection-end-column="54" />
           <folding />
         </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/server_local/server.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.62209946">
+          <caret line="34" column="23" selection-start-line="34" selection-start-column="23" selection-end-line="34" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/test_rpc_websocket.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5569061">
+          <caret line="28" column="24" selection-start-line="28" selection-start-column="24" selection-end-line="28" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/test_rpc_events.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5569061">
+          <caret line="28" column="30" selection-start-line="28" selection-start-column="30" selection-end-line="28" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/test_rpc_events_websocket.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5569061">
+          <caret line="28" column="35" selection-start-line="28" selection-start-column="35" selection-end-line="28" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/test_rpc_filters.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.13922653">
+          <caret line="7" column="37" selection-start-line="7" selection-start-column="37" selection-end-line="7" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/mock/mock_ws_server.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.21878453">
+          <caret line="11" column="21" selection-start-line="11" selection-start-column="21" selection-end-line="11" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/events.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="415" column="0" selection-start-line="415" selection-start-column="0" selection-end-line="415" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/jsdoc_cfg/jsdoc.conf.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.55353075">
+          <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/testdata/testdata.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="72.81481">
+          <caret line="111" column="6" selection-start-line="111" selection-start-column="6" selection-end-line="111" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider editor-type-id="MarkdownPreviewEditor">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-17.419355">
+          <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="Gfm">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.10250569">
-          <caret line="5" column="19" selection-start-line="5" selection-start-column="19" selection-end-line="5" selection-end-column="19" />
+        <state vertical-scroll-proportion="0.041002277">
+          <caret line="2" column="19" selection-start-line="2" selection-start-column="19" selection-end-line="2" selection-end-column="19" />
           <folding />
         </state>
       </provider>
