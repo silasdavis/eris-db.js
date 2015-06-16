@@ -26,7 +26,7 @@ var requestData = {
 
 var edb;
 
-describe('TheloniousWebsocket', function () {
+describe('TheloniousWebSocket', function () {
 
     before(function (done) {
         this.timeout(4000);
