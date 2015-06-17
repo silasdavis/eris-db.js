@@ -8,16 +8,23 @@ Runnable examples are on the following format: `name.[ss.]conn.[node.]js`.
  
 * `name` is the name of the example.
 * `ss` means the example uses the server-server.
-* `conn` can be either http or ws (websocket), which is just the way it talk to the server.
+* `conn` can be either http or ws (websocket), which is just the way it talks to the server.
 * `node` is for examples that will run only in node.js
 
-They may have a base example used regardless of setup, which is on the form: `name.js`
+There is also a base example used regardless of setup, which is on the form: `name.js`
+
+### Executors and runnables
+
+Each test is a runnable, which means they have a run function that takes an erisdb instance and the required data as parameters. To run the tests, the runnable will prepare data for the test and then pass the base test to the executor for the given type. As an example, if we are doing the `get_blocks` example using a http connection and the node is deployed using a server-server, we will run the file: `get_blocks/network_info.http.node.js`, which will take the `network_info.js` singleton and pass it to the `http_executor.ss.node.js`, which will then run it.
+
+The node.js examples might accept arguments later, so as to avoid making so many files.
 
 ### List of examples
 
 TODO add more.
 
 * `tx/tx_and_check` - Creates a new contract by transacting, waits for a block to be committed and then reads the storage of the contract account to conclude that data was written.
+* `tx/tx_and_check` - Gets a bunch of blocks and prints them.
 
 
 ### Advice

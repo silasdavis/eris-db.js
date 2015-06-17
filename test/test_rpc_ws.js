@@ -247,7 +247,7 @@ describe('TheloniousWebSocket', function () {
             it("should get the blocks between min, and max height", function (done) {
                 var range = test_data.input.block_range;
                 var exp = test_data.output.blocks;
-                edb.blockchain().getBlocks(range.min, range.max, check(exp, done));
+                edb.blockchain().getBlocks(check(exp, done));
             });
         });
 
