@@ -2,90 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="eaafc21d-57c2-4562-b6e3-89cd7077c804" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/classes.list.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/img/glyphicons-halflings-white.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/img/glyphicons-halflings.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/index.js.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/lib_accounts.js.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/lib_blockchain.js.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/lib_consensus.js.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/lib_erisdb.js.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/lib_events.js.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/lib_network.js.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/lib_rpc_client.js.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/lib_rpc_http.js.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/lib_rpc_rpc.js.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/lib_rpc_websocket.js.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/lib_transactions.js.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/lib_unsafe.js.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/lib_util.js.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/lib_validation.js.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/module-accounts-Accounts.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/module-accounts.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/module-blockchain-BlockChain.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/module-blockchain.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/module-consensus-Consensus.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/module-consensus-EventSub.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/module-consensus-Events.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/module-consensus-HttpEventSub.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/module-consensus-WsEventSub.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/module-consensus.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/module-erisdb-ErisDB.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/module-erisdb.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/module-index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/module-network-Network.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/module-network.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/module-rpc_client-Client.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/module-rpc_client.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/module-rpc_http-HTTPClient.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/module-rpc_http.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/module-rpc_rpc.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/module-rpc_websocket-WebSocketClient.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/module-rpc_websocket.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/module-transactions-Transactions.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/module-transactions.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/module-unsafe-Unsafe.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/module-unsafe.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/module-util-ComponentBase.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/module-util.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/module-validation-CallValidator.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/module-validation-SinglePolicyValidator.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/module-validation.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/modules.list.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/scripts/URI.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/scripts/bootstrap-dropdown.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/scripts/bootstrap-tab.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/scripts/docstrap.lib.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/scripts/prettify/Apache-License-2.0.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/scripts/prettify/jquery.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/scripts/prettify/lang-css.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/scripts/prettify/prettify.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/scripts/sunlight.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/scripts/toc.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/styles/darkstrap.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/styles/prettify-tomorrow.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/styles/site.cerulean.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/styles/site.cosmo.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/styles/site.cyborg.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/styles/site.darkly.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/styles/site.darkstrap.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/styles/site.flatly.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/styles/site.journal.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/styles/site.lumen.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/styles/site.paper.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/styles/site.readable.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/styles/site.sandstone.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/styles/site.simplex.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/styles/site.slate.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/styles/site.spacelab.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/styles/site.superhero.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/styles/site.united.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/styles/site.yeti.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/styles/sunlight.dark.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/styles/sunlight.default.css" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
     </list>
     <ignored path="erisdb-js.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -166,20 +83,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="package.json" pinned="false" current-in-tab="false">
+      <file leaf-file-name="package.json" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/package.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-1.3333334">
-              <caret line="2" column="19" selection-start-line="2" selection-start-column="19" selection-end-line="2" selection-end-column="19" />
+            <state vertical-scroll-proportion="0.31764707">
+              <caret line="15" column="4" selection-start-line="15" selection-start-column="4" selection-end-line="15" selection-end-column="4" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.59574467">
+            <state vertical-scroll-proportion="-16.258064">
               <caret line="151" column="106" selection-start-line="151" selection-start-column="106" selection-end-line="151" selection-end-column="106" />
               <folding />
             </state>
@@ -259,8 +176,8 @@
         <option value="$PROJECT_DIR$/examples/network_info/network_info.js" />
         <option value="$PROJECT_DIR$/test/test_rpc.js" />
         <option value="$PROJECT_DIR$/test/test_rpc_ws.js" />
-        <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/package.json" />
       </list>
     </option>
   </component>
@@ -1001,17 +918,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.3333334">
-          <caret line="2" column="19" selection-start-line="2" selection-start-column="19" selection-end-line="2" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.59574467">
+        <state vertical-scroll-proportion="-16.258064">
           <caret line="151" column="106" selection-start-line="151" selection-start-column="106" selection-end-line="151" selection-end-column="106" />
           <folding />
         </state>
@@ -1021,6 +930,14 @@
       </provider>
       <provider editor-type-id="MarkdownPreviewEditor">
         <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.31764707">
+          <caret line="15" column="4" selection-start-line="15" selection-start-column="4" selection-end-line="15" selection-end-column="4" />
+          <folding />
+        </state>
       </provider>
     </entry>
   </component>
