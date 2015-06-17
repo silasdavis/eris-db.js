@@ -27,16 +27,18 @@ There are bindings for all the RPC methods. All functions are on the form `funct
 
 This is the over-all structure of the library. The `unsafe` flag means a private key is either sent or received, so should be used with care (dev only). 
 
+NOTE: There will be links to the proper jsdoc once we get those up on the eris docs page!
+
 ### ErisDB   
 
 | Component Name | Accessor |
 | :------------- | :------- |
-| Accounts | ErisDB.accounts() |
-| Blockchain | ErisDB.blockchain() |
-| Consensus | ErisDB.consensus() |
-| Events | ErisDB.events() |
-| Network | ErisDB.network() |
-| Transactions | ErisDB.txs() |
+| Accounts | [ErisDB.accounts()](https://github.com/eris-ltd/erisdb-js/blob/master/lib/accounts.js) |
+| Blockchain | [ErisDB.blockchain()](https://github.com/eris-ltd/erisdb-js/blob/master/lib/blockchain.js) |
+| Consensus | [ErisDB.consensus()](https://github.com/eris-ltd/erisdb-js/blob/master/lib/consensus.js) |
+| Events | [ErisDB.events()](https://github.com/eris-ltd/erisdb-js/blob/master/lib/events.js) |
+| Network | [ErisDB.network()](https://github.com/eris-ltd/erisdb-js/blob/master/lib/network.js) |
+| Transactions | [ErisDB.txs()](https://github.com/eris-ltd/erisdb-js/blob/master/lib/transactions.js) |
 
 ### Components
 
@@ -46,11 +48,11 @@ The accounts object has methods for getting account and account-storage data.
 
 | Method | RPC method | Notes |
 | :----- | :--------- | :---- | 
-| Accounts.getAccounts | erisdb.getAccounts | | 
-| Accounts.getAccount | erisdb.getAccount | | 
-| Accounts.getStorage | erisdb.getStorage | | 
-| Accounts.getStorageAt | erisdb.getStorageAt | | 
-| Accounts.genPrivAccount | erisdb.genPrivAccount | unsafe |
+| Accounts.getAccounts | [erisdb.getAccounts](https://github.com/eris-ltd/erisdb/blob/master/api.md#getaccounts) | | 
+| Accounts.getAccount | [erisdb.getAccount](https://github.com/eris-ltd/erisdb/blob/master/api.md#getaccount) | | 
+| Accounts.getStorage | [erisdb.getStorage](https://github.com/eris-ltd/erisdb/blob/master/api.md#getstorage) | | 
+| Accounts.getStorageAt | [erisdb.getStorageAt](https://github.com/eris-ltd/erisdb/blob/master/api.md#getstorageat) | | 
+| Accounts.genPrivAccount | [erisdb.genPrivAccount](https://github.com/eris-ltd/erisdb/blob/master/api.md#genprivaccount) | unsafe |
 
 #### BlockChain
 
@@ -58,13 +60,13 @@ The accounts object has methods for getting blockchain-related data, such as a l
 
 | Method | RPC method | Notes |
 | :----- | :--------- | :---- |
-| BlockChain.getInfo | erisdb.getBlockchainInfo | |
-| BlockChain.getChainId | erisdb.getChainId | |
-| BlockChain.getGenesisHash | erisdb.getGenesisHash | |
-| BlockChain.getLatestBlockHeight | erisdb.getLatestBlockHeight | |
-| BlockChain.getLatestBlock | erisdb.getLatestBlock | |
-| BlockChain.getBlocks | erisdb.getBlocks | |
-| BlockChain.getBlock | erisdb.getBlock | |
+| BlockChain.getInfo |  [erisdb.getBlockchainInfo](https://github.com/eris-ltd/erisdb/blob/master/api.md#getblockchaininfo) | |
+| BlockChain.getChainId | [erisdb.getChainId](https://github.com/eris-ltd/erisdb/blob/master/api.md#getchainid) | |
+| BlockChain.getGenesisHash | [erisdb.getGenesisHash](https://github.com/eris-ltd/erisdb/blob/master/api.md#getgenesishash) | |
+| BlockChain.getLatestBlockHeight | [erisdb.getLatestBlockHeight](https://github.com/eris-ltd/erisdb/blob/master/api.md#getlatestblockheight) | |
+| BlockChain.getLatestBlock | [erisdb.getLatestBlock](https://github.com/eris-ltd/erisdb/blob/master/api.md#getlatestblock) | |
+| BlockChain.getBlocks | [erisdb.getBlocks](https://github.com/eris-ltd/erisdb/blob/master/api.md#getblocks) | |
+| BlockChain.getBlock | [erisdb.getBlock](https://github.com/eris-ltd/erisdb/blob/master/api.md#getblock) | |
 
 #### Consensus
 
@@ -72,8 +74,8 @@ The consensus object has methods for getting consensus-related data.
 
 | Method | RPC method | Notes |
 | :----- | :--------- | :---- |
-| Consensus.getState | erisdb.getConsensusState | |
-| Consensus.getValidators | erisdb.getValidators | |
+| Consensus.getState |   [erisdb.getConsensusState](https://github.com/eris-ltd/erisdb/blob/master/api.md#getconsensusstate) | |
+| Consensus.getValidators | [erisdb.getValidators](https://github.com/eris-ltd/erisdb/blob/master/api.md#getvalidators) | |
 
 #### Events
 
@@ -82,9 +84,9 @@ The tendermint client will generate and fire off events when important things ha
 
 | Method | RPC method | Notes |
 | :----- | :--------- | :---- |
-| Events.subscribe | erisdb.eventSubscribe | |
-| Events.unsubscribe | erisdb.eventUnsubscribe | |
-| Events.poll | erisdb.eventPoll | |
+| Events.subscribe | [erisdb.eventSubscribe](https://github.com/eris-ltd/erisdb/blob/master/api.md#eventsubscribe) | |
+| Events.unsubscribe | [erisdb.eventUnsubscribe](https://github.com/eris-ltd/erisdb/blob/master/api.md#eventunubscribe) | |
+| Events.poll | [erisdb.eventPoll](https://github.com/eris-ltd/erisdb/blob/master/api.md#eventpoll) | |
 
 ##### Helpers
 
@@ -96,17 +98,17 @@ The `createCallback` data is an [EventSub]() object, that can be used to do thin
 
 The `eventCallback` data is the event object. This object is different depending on the event type. In the case of `NewBlock` it will be a block, the consensus events is a transaction object, etc. More info can be found in the [api doc]().
 
-| Method |
-| :----- |
-| Events.subAccountInput |
-| Events.subAccountOutput |
-| Events.subAccountReceive |
-| Events.subNewBlocks |
-| Events.subForks |
-| Events.subBonds |
-| Events.subUnbonds |
-| Events.subRebonds |
-| Events.subDupeouts |
+| Method | Arguments |
+| :----- | :-------- |
+| Events.subAccountInput | `account address <string>` |
+| Events.subAccountOutput | `account address <string>` |
+| Events.subAccountReceive | `account address <string>` |
+| Events.subNewBlocks | `-` |
+| Events.subForks | `-` |
+| Events.subBonds | `-` |
+| Events.subUnbonds | `-` |
+| Events.subRebonds | `-` |
+| Events.subDupeouts | `-` |
 
 #### Network
 
@@ -116,14 +118,13 @@ Client Version may be a bit misplaced
 
 | Method | RPC method | Notes |
 | :----- | :--------- | :---- |
-| Network.getInfo | erisdb.getNetworkInfo | GET | |
-| Network.getClientVersion | erisdb.getClientVersion | |
-| Network.getMoniker | erisdb.getMoniker | |
-| Network.getChainId | erisdb.getChainId | |
-| Network.isListening | erisdb.isListening | |
-| Network.getListeners | erisdb.getListeners | |
-| Network.getPeers | erisdb.getPeers | |
-| Network.getPeer | erisdb.getPeer | |
+| Network.getInfo | [erisdb.getNetworkInfo](https://github.com/eris-ltd/erisdb/blob/master/api.md#getnetworkinfo) |  |
+| Network.getClientVersion | [erisdb.getClientVersion](https://github.com/eris-ltd/erisdb/blob/master/api.md#getclientversion) | |
+| Network.getMoniker | [erisdb.getMoniker](https://github.com/eris-ltd/erisdb/blob/master/api.md#getmoniker) | |
+| Network.isListening | [erisdb.isListening](https://github.com/eris-ltd/erisdb/blob/master/api.md#islistening) | |
+| Network.getListeners | [erisdb.getListeners](https://github.com/eris-ltd/erisdb/blob/master/api.md#getlisteners) | |
+| Network.getPeers | [erisdb.getPeers](https://github.com/eris-ltd/erisdb/blob/master/api.md#getpeers) | |
+| Network.getPeer | [erisdb.getPeer](https://github.com/eris-ltd/erisdb/blob/master/api.md#getpeer) | |
 
 #### Transactions
 
@@ -143,12 +144,12 @@ Again - neither of the call functions will affect the state of the database/chai
 
 | Method | RPC method | Notes |
 | :----- | :--------- | :---- |
-| Transactions.broadcastTx | erisdb.broadcastTx | |
-| Transactions.getUnconfirmedTxs | erisdb.getUnconfirmedTxs | |
-| Transactions.call | erisdb.call | |
-| Transactions.callCode | erisdb.callCode | |
-| Transactions.signTx | erisdb.signTx | unsafe |
-| Transactions.transact | erisdb.transact | unsafe |
+| Transactions.broadcastTx | [erisdb.broadcastTx](https://github.com/eris-ltd/erisdb/blob/master/api.md#broadcasttx) | |
+| Transactions.getUnconfirmedTxs | [erisdb.getUnconfirmedTxs](https://github.com/eris-ltd/erisdb/blob/master/api.md#getunconfirmedtxs) | |
+| Transactions.call | [erisdb.call](https://github.com/eris-ltd/erisdb/blob/master/api.md#call) | |
+| Transactions.callCode | [erisdb.callCode](https://github.com/eris-ltd/erisdb/blob/master/api.md#callcode) | |
+| Transactions.signTx | [erisdb.signTx](https://github.com/eris-ltd/erisdb/blob/master/api.md#signtx) | unsafe |
+| Transactions.transact | [erisdb.transact](https://github.com/eris-ltd/erisdb/blob/master/api.md#transact) | unsafe |
 
 ## Tests
 
