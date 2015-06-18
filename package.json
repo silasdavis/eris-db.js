@@ -1,6 +1,6 @@
 {
   "name": "eris-db",
-  "version": "0.9.4",
+  "version": "0.10.0",
   "main" : "./index.js",
   "dependencies": {
     "ws": "~0.7.1",
@@ -16,11 +16,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/eris-ltd/erisdb-js"
+    "url": "https://github.com/eris-ltd/eris-db.js"
   },
-  "homepage": "https://github.com/eris-ltd/erisdb-js",
+  "homepage": "https://github.com/eris-ltd/eris-db.js",
   "bugs": {
-    "url": "https://github.com/eris-ltd/erisdb-js/issues"
+    "url": "https://github.com/eris-ltd/eris-db.js/issues"
   },
   "keywords": [
     "eris",

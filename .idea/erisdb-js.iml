@@ -6,5 +6,6 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="thelonious-js node_modules" level="project" />
     <orderEntry type="library" name="erisdb-js node_modules" level="project" />
+    <orderEntry type="library" name="eris-db.js node_modules" level="project" />
   </component>
 </module>
