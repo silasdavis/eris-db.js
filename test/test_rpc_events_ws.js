@@ -10,7 +10,7 @@ if (typeof(window) === "undefined") {
     edbModule = require("../index");
 } else {
     asrt = assert;
-    edbModule = edbFact;
+    edbModule = edbFactory;
 }
 
 var serverServerURL = "http://localhost:1337/server";
@@ -31,11 +31,11 @@ describe('TheloniousWebSocketEvents', function () {
     before(function (done) {
         this.timeout(4000);
 
-        util.getNewErisServer(serverServerURL, requestData, function(err, URL){
+        util.getNewErisServer(serverServerURL, requestData, function(err, port){
             if(err){
                 throw new Error(err);
             }
-            edb = edbModule.createInstance(URL + '/socketrpc', true);
+            edb = edbModule.createInstance("ws://localhost:" + port + '/socketrpc', true);
             edb.start(function(err){
                 if (err){
                     throw new Error(err);
