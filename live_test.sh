@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-
 # Run live tests locally if erisdbss and erisdb is found.
 # NOTE: These are just temporary, for dev, and will not be
 # extended or improved. Not really meant for public use.
