@@ -5,21 +5,25 @@
  * @module test/client
  */
 
-var client = require('../lib/rpc/client');
+var client = require('../../lib/rpc/client');
 
 /**
- * Constructor for the MockClient class.
- * @type {MockClient}
+ *
+ * @param {Object} handlers - The handler functions.
+ * @returns {MockClient}
  */
-module.exports = MockClient;
+exports.createInstance = function(handlers){
+    return new MockClient(handlers);
+};
 
 /**
  * Create a mock client.
  * @augments module:rpc/client~Client
  * @constructor
  */
-function MockClient(){
-    client.Client.call("");
+function MockClient(handlers){
+    client.Client.call(this, "mock");
+    this._handlers = handlers;
 }
 
 /**
@@ -33,5 +37,10 @@ function MockClient(){
  * @override
  */
 MockClient.prototype.send = function(method, params, callback){
-    // TODO
+    if(!this._handlers.hasOwnProperty(method)){
+        callback(new Error("Method does not exist."));
+        return;
+    }
+    var handler = this._handlers[method];
+    callback(null, handler(params));
 };

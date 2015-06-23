@@ -11,15 +11,18 @@
  * Constructor for the MockServer class.
  * @type {MockServer}
  */
-module.exports = MockServer;
+exports.createInstance = function (port, handlers) {
+    return new MockServer(port, handlers);
+};
 
 /**
  * Start a websocket server.
  *
  * @param {number} [port=1337] - The port
+ * @param {Object.<string, Function>} handlers
  * @constructor
  */
-function MockServer(port){
+function MockServer(port, handlers) {
 
     /**
      * This is where method handlers are stored.
@@ -27,116 +30,83 @@ function MockServer(port){
      * @type {Object.<string, handlerFunction>}
      * @private
      */
-    this._handlers = {};
+    this._handlers = handlers;
 
-    (function(mockServer){
+    (function (mockServer) {
 
         var WebSocketServer = require('ws').Server;
 
         var wss = new WebSocketServer({port: port || 1337});
 
         wss.on('connection', function connection(ws) {
-
+            console.log("New connection.");
             ws.on('message', function incoming(message) {
-                console.log('received: ' + message);
 
-                var req;
+                var resp = {
+                    jsonrpc: "2.0",
+                    id: "",
+                    result: null,
+                    error: null
+                };
+
+                var req, errMsg;
 
                 try {
                     req = JSON.parse(message);
                 } catch (error) {
-                    console.error("Failed to parse message: " + error);
+                    errMsg = "Failed to parse message: " + error;
+                    console.error(errMsg);
+                    resp.error = {
+                        code : -32700,
+                        message : errMsg
+                    };
+                    ws.send(JSON.stringify(resp));
                     return;
                 }
 
-                if (!isRequest(req)){
-                    console.error("Message is not a proper json-rpc 2.0 request: " + message);
+                resp.id = req.id;
+                if (!isRequest(req)) {
+                    errMsg = "Message is not a proper json-rpc 2.0 request: " + message;
+                    console.error(errMsg);
+                    resp.error = {
+                        code : -32600,
+                        message : errMsg
+                    };
+                    ws.send(JSON.stringify(resp));
                     return;
                 }
-
+                if(!mockServer._handlers.hasOwnProperty(req.method)){
+                    errMsg = "Method not found: " + req.method;
+                    console.error(errMsg);
+                    resp.error = {
+                        code : -32601,
+                        message : errMsg
+                    };
+                    ws.send(JSON.stringify(resp));
+                    return;
+                }
                 var method = mockServer._handlers[req.method];
 
-                method(req.params, function(error, result){
-                    var resp = {
-                        jsonrpc: "2.0",
-                        id: req.id,
-                        result: null,
-                        error: null
-                    };
-                    if(error){
-                        resp.error = error;
-                    } else {
-                        resp.result = result;
-                    }
-                    ws.send(JSON.stringify(resp));
-                });
+                resp.result = method(req.params);
+
+                ws.send(JSON.stringify(resp));
 
             });
         });
 
     })(this);
 
+    console.log("Ws server is running.");
+
     /**
      * Check that an object is a valid Request.
      * @param {*} req - The object.
      * @returns {boolean}
      */
-    function isRequest(req){
+    function isRequest(req) {
         // Check params is null or array?
         return req instanceof Object && typeof(req.jsonrpc) === "string" && req.jsonrpc === "2.0" &&
-               typeof(req.method) === "string" && typeof(req.id) === "string";
+            typeof(req.method) === "string" && typeof(req.id) === "string";
     }
 
 }
-
-/**
- * Add a new handler method.
- *
- * @param {string} method - The method name.
- * @param {handlerFunction} hFunc - The handler function.
- */
-MockServer.prototype.addHandler = function(method, hFunc){
-    this._handlers[method] = hFunc;
-};
-
-/**
- * Remove a handler function.
- * @param {string} method - The method name.
- */
-MockServer.prototype.removeHandler = function(method){
-    delete this._handlers[method];
-};
-
-/**
- * A handler function.
- *
- * @callback handlerFunction
- * @param {?Object} params - the params.
- * @param {handlerCallback} callback - The handler callback function.
- */
-
-/**
- * Callback for websocket handlers.
- *
- * @callback handlerCallback
- * @param {error} error - The error.
- * @param {*} result - The result.
- */
-
-/**
- * A thelonious json-rpc request.
- * @typedef {Object} Request
- * @property {string} jsonrpc - The json-rpc version.
- * @property {string} id - The id.
- * @property {string} method - The method.
- * @property {Array} params - The parameters.
- */
-
-/**
- * A thelonious json-rpc response.
- * @typedef {Object} Response
- * @property {string} jsonrpc - The json-rpc version.
- * @property {string} id - The id.
- * @property {*} result - The result.
- * @property {string} error - The error (if any).
- */

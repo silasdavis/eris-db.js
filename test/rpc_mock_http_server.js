@@ -13,9 +13,13 @@ if (typeof(window) === "undefined") {
     edbModule = edbFactory;
 }
 
-var serverServerURL = "http://localhost:1337/server";
-
 var test_data = require('./testdata/testdata.json');
+var template = require('./mock/test_template');
+
+var handlers = template.getHandlers(test_data);
+var port = 13378;
+
+var http = require('http');
 
 var requestData = {
     priv_validator: test_data.chain_data.priv_validator,
@@ -23,34 +27,85 @@ var requestData = {
     max_duration: 10
 };
 
-var edb;
+var server = http.createServer(function (request, response) {
+    var message = '';
 
-describe('TheloniousWebSocket', function () {
-
-    before(function (done) {
-        this.timeout(4000);
-        
-        util.getNewErisServer(serverServerURL, requestData, function(err, port){
-            if(err){
-                throw new Error(err);
-            }
-            edb = edbModule.createInstance("ws://localhost:" + port + '/socketrpc', true);
-            edb.start(function(err){
-                if (err){
-                    throw new Error(err);
-                }
-                console.time("ws");
-                done();
-            });
-
-        })
+    request.on('data', function(chunk) {
+        message += chunk.toString();
     });
 
-    after(function(){
-        console.timeEnd("ws");
+    request.on('end', function() {
+        var resp = {
+            jsonrpc: "2.0",
+            id: "",
+            result: null,
+            error: null
+        };
+
+        var req, errMsg;
+
+        try {
+            req = JSON.parse(message);
+        } catch (error) {
+            errMsg = "Failed to parse message: " + error;
+            console.error(errMsg);
+            resp.error = {
+                code : -32700,
+                message : errMsg
+            };
+            response.writeHead(200, {'Content-Type': 'application/json'});
+            response.end(JSON.stringify(resp));
+            return;
+        }
+
+        resp.id = req.id;
+        if (!isRequest(req)) {
+            errMsg = "Message is not a proper json-rpc 2.0 request: " + message;
+            console.error(errMsg);
+            resp.error = {
+                code : -32600,
+                message : errMsg
+            };
+        } else if(!handlers.hasOwnProperty(req.method)){
+            errMsg = "Method not found: " + req.method;
+            console.error(errMsg);
+            resp.error = {
+                code : -32601,
+                message : errMsg
+            };
+        } else {
+            var method = handlers[req.method];
+            resp.result = method(req.params);
+        }
+        response.writeHead(200, {'Content-Type': 'application/json'});
+        response.end(JSON.stringify(resp));
+    });
+
+    function isRequest(req) {
+        // Check params is null or array?
+        return req instanceof Object && typeof(req.jsonrpc) === "string" && req.jsonrpc === "2.0" &&
+            typeof(req.method) === "string" && typeof(req.id) === "string";
+    }
+
+});
+
+var edb;
+
+describe('TheloniousMockHttp', function () {
+
+    before(function (done) {
+        server.listen(port, function(){
+            console.log("Bound");
+            console.log(server.address());
+
+            edb = edbModule.createInstance("http://127.0.0.1:" + port.toString());
+            edb.start(function () {});
+            done();
+        });
     });
 
     describe('.consensus', function () {
+
         describe('#getState', function () {
             it("should get the consensus state", function (done) {
                 var exp = test_data.output.consensus_state;
@@ -268,7 +323,7 @@ function check(expected, done, fieldModifiers) {
         if (error) {
             console.log(error);
         }
-        if(fieldModifiers && fieldModifiers.length > 0){
+        if (fieldModifiers && fieldModifiers.length > 0) {
             for (var i = 0; i < fieldModifiers.length; i++) {
                 fieldModifiers[i](data);
             }
@@ -279,11 +334,11 @@ function check(expected, done, fieldModifiers) {
     };
 }
 
-function modifyConsensusStartTime(cs){
+function modifyConsensusStartTime(cs) {
     cs["start_time"] = "";
 }
 
-function modifyPrivateAccount(pa){
+function modifyPrivateAccount(pa) {
     pa.address = "";
     pa.pub_key[1] = "";
     pa.priv_key[1] = "";

@@ -130,6 +130,7 @@
       "listeners": []
     },
     "peers": [],
+    "peer": null,
     "tx_create_receipt": {
       "tx_hash": "C1C84BCD4CCA6D6132D1E702FA4A7618DBCDB52F",
       "creates_contract": 1,
@@ -249,6 +250,7 @@
     "latest_block_height": {
       "height": 0
     },
+    "latest_block" : null,
     "block": null,
     "blocks": {
       "min_height": 0,
