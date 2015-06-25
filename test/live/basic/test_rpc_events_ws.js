@@ -1,13 +1,13 @@
 /* This file is for testing an event.
  */
 
-var util = require('../../lib/util');
+var util = require('../../../lib/util');
 var asrt;
 var edbModule;
 
 if (typeof(window) === "undefined") {
     asrt = require('assert');
-    edbModule = require("../../index");
+    edbModule = require("../../../index");
 } else {
     asrt = assert;
     edbModule = edbFactory;
@@ -15,7 +15,7 @@ if (typeof(window) === "undefined") {
 
 var serverServerURL = "http://localhost:1337/server";
 
-var test_data = require('./../testdata/testdata.json');
+var test_data = require('./../../testdata/testdata.json');
 
 var requestData = {
     priv_validator: test_data.chain_data.priv_validator,
@@ -26,7 +26,7 @@ var requestData = {
 var edb;
 var eventSub;
 
-describe('TheloniousHttpEvents', function () {
+describe('TheloniousWebSocketEvents', function () {
 
     before(function (done) {
         this.timeout(4000);
@@ -35,8 +35,14 @@ describe('TheloniousHttpEvents', function () {
             if(err){
                 throw new Error(err);
             }
-            edb = edbModule.createInstance("http://localhost:" + port + '/rpc');
-            done();
+            edb = edbModule.createInstance("ws://localhost:" + port + '/socketrpc', true);
+            edb.start(function(err){
+                if (err){
+                    throw new Error(err);
+                }
+                done();
+            });
+
         })
     });
 

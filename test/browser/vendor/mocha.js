@@ -2018,7 +2018,7 @@
         exports = module.exports = Base;
 
         /**
-         * Enable coloring by default, except in the browser interface.
+         * Enable coloring by basic, except in the browser interface.
          */
 
         exports.useColors = process.env
@@ -2067,7 +2067,7 @@
             dot: '․'
         };
 
-// With node.js on Windows: use symbols available in terminal default fonts
+// With node.js on Windows: use symbols available in terminal basic fonts
         if ('win32' == process.platform) {
             exports.symbols.ok = '\u221A';
             exports.symbols.err = '\u00D7';
@@ -3907,7 +3907,7 @@
                 , max = Math.max
                 , lastN = -1;
 
-            // default chars
+            // basic chars
             options.open = options.open || '[';
             options.complete = options.complete || '▬';
             options.incomplete = options.incomplete || Base.symbols.dot;
@@ -6469,9 +6469,9 @@
     var Mocha = global.Mocha = require('mocha'),
         mocha = global.mocha = new Mocha({ reporter: 'html' });
 
-// The BDD UI is registered by default, but no UI will be functional in the
+// The BDD UI is registered by basic, but no UI will be functional in the
 // browser without an explicit call to the overridden `mocha.ui` (see below).
-// Ensure that this default UI does not expose its methods to the global scope.
+// Ensure that this basic UI does not expose its methods to the global scope.
     mocha.suite.removeAllListeners('pre-require');
 
     var immediateQueue = []

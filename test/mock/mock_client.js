@@ -6,13 +6,18 @@
  */
 
 var client = require('../../lib/rpc/client');
+var template = require('./test_template');
+var testData = require('../testdata/testdata.json');
 
 /**
  *
- * @param {Object} handlers - The handler functions.
+ * @param {Object} [handlers] - The handler functions.
  * @returns {MockClient}
  */
 exports.createInstance = function(handlers){
+    if(typeof(handlers) === "undefined"){
+        handlers = template.getHandlers(testData);
+    }
     return new MockClient(handlers);
 };
 

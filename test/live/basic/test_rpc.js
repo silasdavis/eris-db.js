@@ -1,13 +1,13 @@
 /* This file is for testing RPC methods.
  */
 // TODO break all the standard tests out into one file, then use them in all mock tests + these ones.
-var util = require('../../lib/util');
+var util = require('../../../lib/util');
 var asrt;
 var edbModule;
 
 if (typeof(window) === "undefined") {
     asrt = require('assert');
-    edbModule = require("../../index");
+    edbModule = require("../../../index");
 } else {
     asrt = assert;
     edbModule = edbFactory;
@@ -15,7 +15,7 @@ if (typeof(window) === "undefined") {
 
 var serverServerURL = "http://localhost:1337/server";
 
-var test_data = require('./../testdata/testdata.json');
+var test_data = require('./../../testdata/testdata.json');
 
 var requestData = {
     priv_validator: test_data.chain_data.priv_validator,
