@@ -62,11 +62,10 @@ function runErisdb(){
         echo "Cannot find mocha executable on path"
         return 1
     fi
-    DBS="./test/dbs"
+    DBS="$(pwd -P)/test/dbs"
     TMPDBS="${DBS}/temp/"
-    SRC=${DBS}$1
+    SRC="${DBS}$1/dbfolder"
     DEST=${TMPDBS}$1
-    DEST
     rm -rf "${TMPDBS}/*"
     cp ${SRC} ${DEST}
     (erisdb ${DEST}) & EDBPID=$!
