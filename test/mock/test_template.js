@@ -34,6 +34,9 @@ exports.getHandlers = function(testData){
     };
     handlers[rpc.methodName("getUnconfirmedTxs")] = function(param){return testData.output.unconfirmed_txs};
     handlers[rpc.methodName("callCode")] = function(param){return testData.output.call_code};
+    handlers[rpc.methodName("eventSubscribe")] = function(param){return "1234123412341234123412341234123412341234123412341234123412341234"};
+    handlers[rpc.methodName("eventUnsubscribe")] = function(param){return true};
+    handlers[rpc.methodName("eventPoll")] = function(param){return {}};
 
     return handlers;
 };

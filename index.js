@@ -35,17 +35,19 @@ exports.createInstance = function(URL, websockets){
         client = httpc.createInstance(URL);
     }
     var validator = new validation.SinglePolicyValidator(true);
-    return erisdb.createInstance(client, validator, ws);
+    return erisdb.createInstance(client, validator);
 };
 
 /**
  * ErisDB allows you to do remote calls to a running erisdb-tendermint client.
  *
  * @param {module:rpc/client~Client} client - A client object.
- * @param {boolean} [websockets] - Whether to use websockets. Will use http if not set.
+ * @param {module:validation~CallValidator} [validator] - a validator for determining if unsafe operations can be done.
  * @returns {module:erisdb-ErisDB}
  */
-exports.createInstanceFromClient = function(client, websockets){
-    var validator = new validation.SinglePolicyValidator(true);
-    return erisdb.createInstance(client, validator, websockets);
+exports.createInstanceFromClient = function(client, validator){
+    if(!validator){
+        validator = new validation.SinglePolicyValidator(true);
+    }
+    return erisdb.createInstance(client, validator);
 };

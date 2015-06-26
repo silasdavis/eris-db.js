@@ -60,6 +60,37 @@ describe('TheloniousMockWs', function () {
 
     });
 
+    describe('.events', function () {
+
+        var mockEventId = "test";
+        var mockSubId = "1234123412341234123412341234123412341234123412341234123412341234";
+        var mockEvent = {};
+        var mockUnsubRet = true;
+
+        describe('#eventSubscribe', function () {
+            it("should subscribe to event", function (done) {
+                var exp = mockSubId;
+                edb.events().subscribe(mockEventId, check(exp, done));
+            });
+        });
+
+        describe('#eventPoll', function () {
+            it("should poll event", function (done) {
+                // For now
+                var exp = mockEvent;
+                edb.events().poll(mockSubId, check(exp, done));
+            });
+        });
+
+        describe('#eventUnubscribe', function () {
+            it("should subscribe to event", function (done) {
+                var exp = mockUnsubRet;
+                edb.events().unsubscribe(mockSubId, check(exp, done));
+            });
+        });
+
+    });
+
     describe('.network', function () {
 
         describe('#getInfo', function () {

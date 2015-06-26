@@ -79,9 +79,11 @@ function runErisdb(){
     # Give it some time (if needed).
     sleep 1
     mocha "./test/live/$1/*.js"
+    RESULT=$?
+    echo "${RESULT}"
     kill ${EDBPID} &> /dev/null
     rm -rf "${TMPDBS}/$1"
-    return 0
+    return RESULT
 }
 
 function runErisdbss(){
