@@ -50,9 +50,9 @@ describe('TheloniousMockClient', function () {
     describe('.events', function () {
 
         var mockEventId = "test";
-        var mockSubId = "1234123412341234123412341234123412341234123412341234123412341234";
-        var mockEvent = {};
-        var mockUnsubRet = true;
+        var mockSubId = {sub_id: "1234123412341234123412341234123412341234123412341234123412341234"};
+        var mockEventRet = {events: []};
+        var mockUnsubRet = {result: true};
 
         describe('#eventSubscribe', function () {
             it("should subscribe to event", function (done) {
@@ -64,15 +64,15 @@ describe('TheloniousMockClient', function () {
         describe('#eventPoll', function () {
             it("should poll event", function (done) {
                 // For now
-                var exp = mockEvent;
-                edb.events().poll(mockSubId, check(exp, done));
+                var exp = mockEventRet;
+                edb.events().poll(mockSubId.sub_id, check(exp, done));
             });
         });
 
         describe('#eventUnubscribe', function () {
             it("should subscribe to event", function (done) {
                 var exp = mockUnsubRet;
-                edb.events().unsubscribe(mockSubId, check(exp, done));
+                edb.events().unsubscribe(mockSubId.sub_id, check(exp, done));
             });
         });
 
