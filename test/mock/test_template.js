@@ -36,7 +36,7 @@ exports.getHandlers = function(testData){
     handlers[rpc.methodName("callCode")] = function(param){return testData.output.call_code};
     handlers[rpc.methodName("eventSubscribe")] = function(param){return {sub_id: "1234123412341234123412341234123412341234123412341234123412341234"}};
     handlers[rpc.methodName("eventUnsubscribe")] = function(param){return {result: true}};
-    handlers[rpc.methodName("eventPoll")] = function(param){return {events: []}};
+    handlers[rpc.methodName("eventPoll")] = function(param){return {events: [{}]}};
 
     return handlers;
 };

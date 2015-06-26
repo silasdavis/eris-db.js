@@ -64,7 +64,7 @@ describe('TheloniousMockWs', function () {
 
         var mockEventId = "test";
         var mockSubId = {sub_id: "1234123412341234123412341234123412341234123412341234123412341234"};
-        var mockEventRet = {events: []};
+        var mockEventRet = {events: [{}]};
         var mockUnsubRet = {result: true};
 
         describe('#eventSubscribe', function () {
