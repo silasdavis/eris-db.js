@@ -63,20 +63,16 @@ function runErisdb(){
         return 1
     fi
     DBS="$(pwd -P)/test/dbs"
-    echo "DBS: ${DBS}"
     TMPDBS="${DBS}/temp"
-    echo "TMPDBS: ${TMPDBS}"
     SRC="${DBS}/$1/dbfolder"
-    echo "SRC: ${SRC}"
     DEST="${TMPDBS}/$1"
-    echo "DEST: ${DEST}"
     cp -a "${SRC}/." "${DEST}/"
     (erisdb ${DEST}) & EDBPID=$!
     # Give it some time (if needed).
     sleep 1
     mocha "./test/live/$1/*.js"
     kill ${EDBPID} &> /dev/null
-    #rm -rf "./test/dbs/temp/$1"
+    rm -rf "${TMPDBS}/$1"
     return 0
 }
 
