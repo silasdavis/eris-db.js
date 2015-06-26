@@ -37,3 +37,15 @@ exports.createInstance = function(URL, websockets){
     var validator = new validation.SinglePolicyValidator(true);
     return erisdb.createInstance(client, validator, ws);
 };
+
+/**
+ * ErisDB allows you to do remote calls to a running erisdb-tendermint client.
+ *
+ * @param {module:rpc/client~Client} client - A client object.
+ * @param {boolean} [websockets] - Whether to use websockets. Will use http if not set.
+ * @returns {module:erisdb-ErisDB}
+ */
+exports.createInstanceFromClient = function(client, websockets){
+    var validator = new validation.SinglePolicyValidator(true);
+    return erisdb.createInstance(client, validator, websockets);
+};

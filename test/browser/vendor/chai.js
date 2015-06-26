@@ -197,7 +197,7 @@ function AssertionError (message, _props, ssf) {
 var extend = exclude('name', 'message', 'stack', 'constructor', 'toJSON')
 , props = extend(_props || {});
 
-// default values
+// basic values
    this.message = message || 'Unspecified AssertionError';
 this.showDiff = false;
 
@@ -234,7 +234,7 @@ AssertionError.prototype.constructor = AssertionError;
 /**
  * Allow errors to be converted to JSON for static transfer.
  *
- * @param {Boolean} include stack (default: `true`)
+ * @param {Boolean} include stack (basic: `true`)
  * @return {Object} object that can be `JSON.stringify`
  */
 
@@ -855,7 +855,7 @@ Assertion.overwriteChainableMethod = function (name, fn, chainingBehavior) {
  * @param {String or Function} message or function that returns message to display if fails
  * @param {String or Function} negatedMessage or function that returns negatedMessage to display if negated expression fails
  * @param {Mixed} expected value (remember to check for negation)
- * @param {Mixed} actual (optional) will default to `this.obj`
+ * @param {Mixed} actual (optional) will basic to `this.obj`
  * @api private
  */
 

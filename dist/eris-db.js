@@ -638,7 +638,7 @@ Events.prototype.subForks = function(createCallback, eventCallback){
 };
 
 /**
- * Create a new event subscription with the default polling interval.
+ * Create a new event subscription with the basic polling interval.
  * @param {string} eventId - The event id.
  * @param {module:rpc/rpc~methodCallback} createCallback - Callback for when the subscription has
  * been created. The data returned is a new EventSub object.
@@ -2047,7 +2047,7 @@ exports.XMLHttpRequest = function() {
   // Not part of XHR specs.
   var disableHeaderCheck = false;
 
-  // Set some default headers
+  // Set some basic headers
   var defaultHeaders = {
     "User-Agent": "node-XMLHttpRequest",
     "Accept": "*/*",
@@ -2113,7 +2113,7 @@ exports.XMLHttpRequest = function() {
   // Current state
   this.readyState = this.UNSENT;
 
-  // default ready state change handler in case one is not set or is set late
+  // basic ready state change handler in case one is not set or is set late
   this.onreadystatechange = null;
 
   // Result & response
@@ -2180,7 +2180,7 @@ exports.XMLHttpRequest = function() {
   };
 
   /**
-   * Disables or enables isAllowedHttpHeader() check the request. Enabled by default.
+   * Disables or enables isAllowedHttpHeader() check the request. Enabled by basic.
    * This does not conform to the W3C spec.
    *
    * @param boolean state Enable or disable header checking.
@@ -4313,8 +4313,8 @@ EventEmitter.EventEmitter = EventEmitter;
 EventEmitter.prototype._events = undefined;
 EventEmitter.prototype._maxListeners = undefined;
 
-// By default EventEmitters will print a warning if more than 10 listeners are
-// added to it. This is a useful default which helps finding memory leaks.
+// By basic EventEmitters will print a warning if more than 10 listeners are
+// added to it. This is a useful basic which helps finding memory leaks.
 EventEmitter.defaultMaxListeners = 10;
 
 // Obviously not all Emitters should be limited to 10. This function allows
@@ -6226,7 +6226,7 @@ function ReadableState(options, stream) {
   if (stream instanceof Duplex)
     this.objectMode = this.objectMode || !!options.readableObjectMode;
 
-  // Crypto is kind of old and crusty.  Historically, its default string
+  // Crypto is kind of old and crusty.  Historically, its basic string
   // encoding is 'binary' so we have to make this configurable.
   // Everything else in the universe uses 'utf8', though.
   this.defaultEncoding = options.defaultEncoding || 'utf8';
@@ -7370,7 +7370,7 @@ function WritableState(options, stream) {
   var noDecode = options.decodeStrings === false;
   this.decodeStrings = !noDecode;
 
-  // Crypto is kind of old and crusty.  Historically, its default string
+  // Crypto is kind of old and crusty.  Historically, its basic string
   // encoding is 'binary' so we have to make this configurable.
   // Everything else in the universe uses 'utf8', though.
   this.defaultEncoding = options.defaultEncoding || 'utf8';
@@ -9024,7 +9024,7 @@ exports.format = function(f) {
 
 
 // Mark that a method should not be used.
-// Returns a modified function which warns once by default.
+// Returns a modified function which warns once by basic.
 // If --no-deprecation is set, then it is a no-op.
 exports.deprecate = function(fn, msg) {
   // Allow for deprecating things in the process of starting up.
@@ -9087,7 +9087,7 @@ exports.debuglog = function(set) {
  */
 /* legacy: obj, showHidden, depth, colors*/
 function inspect(obj, opts) {
-  // default options
+  // basic options
   var ctx = {
     seen: [],
     stylize: stylizeNoColor
@@ -9102,7 +9102,7 @@ function inspect(obj, opts) {
     // got an "options" object
     exports._extend(ctx, opts);
   }
-  // set default options
+  // set basic options
   if (isUndefined(ctx.showHidden)) ctx.showHidden = false;
   if (isUndefined(ctx.depth)) ctx.depth = 2;
   if (isUndefined(ctx.colors)) ctx.colors = false;
