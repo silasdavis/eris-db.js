@@ -80,10 +80,9 @@ function runErisdb(){
     sleep 1
     mocha "./test/live/$1/*.js"
     RESULT=$?
-    echo "${RESULT}"
     kill ${EDBPID} &> /dev/null
     rm -rf "${TMPDBS}/$1"
-    return RESULT
+    return ${RESULT}
 }
 
 function runErisdbss(){
@@ -112,8 +111,9 @@ function runErisdbss(){
        echo "Using already running instance of erisdbss"
     fi
     mocha "./test/live/$1/*.js"
+    RESULT=$?
     kill ${SSPID} &> /dev/null
-    return 0
+    return ${RESULT}
 }
 
 function main()
@@ -136,7 +136,8 @@ function main()
         else
             runErisdb $1
         fi
-        exit $?
+        TEST_RESULTS=$?
+        exit ${TEST_RESULTS}
     fi
     exit 0
 }
