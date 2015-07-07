@@ -1,0 +1,5 @@
+=============== Jun 29, 2015 (CEST) ===============
+15:25:00.060179 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+15:25:00.060617 db@open opening
+15:25:00.061263 db@janitor F·2 G·0
+15:25:00.061508 db@open done T·880.126µs

@@ -18,8 +18,8 @@ var template = require('./mock/test_template');
 
 var handlers = template.getHandlers(test_data);
 var port = 12345;
-var testServerFactory = require('./mock/mock_ws_server');
-var server = testServerFactory.createInstance(port, handlers);
+var MockWebsocketServer = require('./mock/mock_ws_server');
+var server = new MockWebsocketServer(port, handlers);
 
 var requestData = {
     priv_validator: test_data.chain_data.priv_validator,

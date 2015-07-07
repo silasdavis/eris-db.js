@@ -9,8 +9,9 @@
 
 var erisdb = require('./lib/erisdb');
 var validation = require('./lib/validation');
-var wsc = require('./lib/rpc/websocket');
-var httpc = require('./lib/rpc/http');
+var WebSocketClient = require('./lib/rpc/websocket');
+var HTTPClient = require('./lib/rpc/http');
+var clients = require('./lib/rpc/clients');
 
 /**
  * ErisDB allows you to do remote calls to a running erisdb-tendermint client.
@@ -27,16 +28,18 @@ exports.createInstance = function(URL, websockets){
         if(typeof(URL) !== "string"){
             URL = 'ws://localhost:1337/socketrpc';
         }
-        client = wsc.createInstance(URL);
+        client = new WebSocketClient(URL);
     } else {
         if(!URL) {
             URL = 'http://localhost:1337/rpc';
         }
-        client = httpc.createInstance(URL);
+        client = new HTTPClient(URL);
     }
     var validator = new validation.SinglePolicyValidator(true);
     return erisdb.createInstance(client, validator);
 };
+
+exports.clients = clients;
 
 /**
  * ErisDB allows you to do remote calls to a running erisdb-tendermint client.

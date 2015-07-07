@@ -1,14 +1,16 @@
 {
   "name": "eris-db",
   "version": "0.10.12",
-  "main" : "./index.js",
+  "main": "./index.js",
   "dependencies": {
     "ws": "~0.7.1",
     "xmlhttprequest": "~1.7.0",
-    "toml-js" : "~0.0.8"
+    "toml-js": "~0.0.8"
   },
-  "devDependencies" : {
+  "devDependencies": {
+    "browserify": "^10.2.4",
     "fs-extra": "~0.18.4",
+    "gulp": "^3.9.0",
     "ink-docstrap": "~0.5.2"
   },
   "scripts": {

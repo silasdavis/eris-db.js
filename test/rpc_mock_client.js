@@ -10,8 +10,8 @@ if (typeof(window) === "undefined") {
 
 var test_data = require('./testdata/testdata.json');
 var template = require('./mock/test_template');
-var clientFactory = require('./mock/mock_client');
-var erisdbFactory = require('../lib/erisdb');
+var MockClient = require('./mock/mock_client');
+var erisdbFactory = require('../index');
 
 var requestData = {
     priv_validator: test_data.chain_data.priv_validator,
@@ -21,12 +21,12 @@ var requestData = {
 
 var edb;
 
-describe('TheloniousMockClient', function () {
+describe('EDBMockClient', function () {
 
     before(function () {
         var handlers = template.getHandlers(test_data);
-        var client = clientFactory.createInstance(handlers);
-        edb = erisdbFactory.createInstance(client, null, false);
+        var client = new MockClient(handlers);
+        edb = erisdbFactory.createInstanceFromClient(client, null);
     });
 
     describe('.consensus', function () {
