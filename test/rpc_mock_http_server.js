@@ -91,7 +91,7 @@ var server = http.createServer(function (request, response) {
 
 var edb;
 
-describe('TheloniousMockHttp', function () {
+describe('EDBMockHttp', function () {
 
     before(function (done) {
         server.listen(port, function(){

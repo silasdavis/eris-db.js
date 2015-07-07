@@ -8,12 +8,10 @@
  */
 
 /**
- * Constructor for the MockServer class.
- * @type {MockServer}
+ *
+ * @constructor
  */
-exports.createInstance = function (port, handlers) {
-    return new MockServer(port, handlers);
-};
+module.exports = MockWebsocketServer;
 
 /**
  * Start a websocket server.
@@ -22,7 +20,7 @@ exports.createInstance = function (port, handlers) {
  * @param {Object.<string, Function>} handlers
  * @constructor
  */
-function MockServer(port, handlers) {
+function MockWebsocketServer(port, handlers) {
 
     /**
      * This is where method handlers are stored.

@@ -3,7 +3,7 @@
 # NOTE: This is a WIP and not really meant for public use.
 
 ssFlags=( "basic" )
-edbFlags=( "calls" )
+edbFlags=( "calls" "sol_event")
 
 function inputInSS(){
     for i in "${ssFlags[@]}"; do

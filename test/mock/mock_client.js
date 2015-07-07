@@ -5,31 +5,30 @@
  * @module test/client
  */
 
-var client = require('../../lib/rpc/client');
+var Client = require('../../lib/rpc/client');
 var template = require('./test_template');
 var testData = require('../testdata/testdata.json');
+var nUtil = require('util');
 
 /**
  *
- * @param {Object} [handlers] - The handler functions.
- * @returns {MockClient}
+ * @constructor
  */
-exports.createInstance = function(handlers){
-    if(typeof(handlers) === "undefined"){
-        handlers = template.getHandlers(testData);
-    }
-    return new MockClient(handlers);
-};
-
+module.exports = MockClient;
 /**
  * Create a mock client.
  * @augments module:rpc/client~Client
  * @constructor
  */
 function MockClient(handlers){
-    client.Client.call(this, "mock");
+    Client.call(this, "mock");
+    if(!handlers){
+        handlers = template.getHandlers(testData);
+    }
     this._handlers = handlers;
 }
+
+nUtil.inherits(MockClient, Client);
 
 /**
  * TODO
