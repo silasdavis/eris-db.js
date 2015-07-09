@@ -12,28 +12,28 @@ var validation = require('./lib/validation');
 var WebSocketClient = require('./lib/rpc/websocket');
 var HTTPClient = require('./lib/rpc/http');
 var clients = require('./lib/rpc/clients');
+var url = require('url');
 
 /**
  * ErisDB allows you to do remote calls to a running erisdb-tendermint client.
  *
  * @param {string} URL The RPC endpoint URL.
- * @param {boolean} [websockets] - Whether to use websockets. Will use http if not set.
+ * @param {boolean} [websockets] - Whether to use websockets. Will use http if not set. (deprecated)
  * @returns {module:erisdb-ErisDB}
  */
-exports.createInstance = function(URL, websockets){
+exports.createInstance = function(URL){
     var client;
-    var ws = false;
-    if (typeof(websockets) === "boolean" && websockets ){
-        ws = true;
-        if(typeof(URL) !== "string"){
-            URL = 'ws://localhost:1337/socketrpc';
-        }
+    if(!URL || typeof(URL) !== "string" || URL === ""){
+        URL = 'http://localhost:1337/rpc';
+    }
+    var parsed = url.parse(URL);
+    parsed.protocol = parsed.protocol.slice(0,-1);
+    if(parsed.protocol === 'ws' || parsed.protocol === 'wss'){
         client = new WebSocketClient(URL);
-    } else {
-        if(!URL) {
-            URL = 'http://localhost:1337/rpc';
-        }
+    } else if (parsed.protocol === 'http' || parsed.protocol === 'https'){
         client = new HTTPClient(URL);
+    } else {
+        throw new Error("Protocol not supported: " + parsed.protocol);
     }
     var validator = new validation.SinglePolicyValidator(true);
     return erisdb.createInstance(client, validator);
