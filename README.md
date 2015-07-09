@@ -13,11 +13,24 @@ var edbFactory = require('eris-db');
 
 var edb = edbFactory.createInstance("http://localhost:1337/rpc");
 
-edb.start(callback);
+edb.start(function(error){
+    if(!error){
+        console.log("Ready to go";
+    }
+});
 
 ```
 
-The parameters for `createInstance` is the server URL as a string, and whether or not to use websockets (false or no value means it will use http).
+The parameters for `createInstance` is the server URL as a string. The client-type is chosen based on the URL scheme. As of now, the supported schemes are: `http(s)` and `ws(s)` (websockets).
+
+If you use `http(s)`, the start command will do nothing, so it can just be called and no callback used.
+
+If you use websockets, the system will not be ready until the start callback fires.
+
+The start callback must be on the following format: `function(error)`. An error is an indication that the websocket connection failed to be established.
+
+If you want to use several `ErisDb` instances at once, that is possible. Just create more instances via `edbFactory.createInstance()`. This is the preferred method if you want multiple websocket connections with the eris-db server.
+
 
 No config file is needed for this library.
 
