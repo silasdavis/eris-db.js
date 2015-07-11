@@ -14,11 +14,13 @@ var HTTPClient = require('./lib/rpc/http');
 var clients = require('./lib/rpc/clients');
 var url = require('url');
 
+
 /**
  * ErisDB allows you to do remote calls to a running erisdb-tendermint client.
  *
+ * NOTE: optional 'websocket' second param is deprecated.
+ *
  * @param {string} URL The RPC endpoint URL.
- * @param {boolean} [websockets] - Whether to use websockets. Will use http if not set. (deprecated)
  * @returns {module:erisdb-ErisDB}
  */
 exports.createInstance = function(URL){

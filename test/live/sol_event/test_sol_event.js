@@ -9,7 +9,7 @@ var eventSub;
 
 var serverServerURL = "http://localhost:1337/server";
 
-describe('TestCall', function () {
+describe('TestSolidityEvent', function () {
 
     before(function (done) {
         edb = edbModule.createInstance("http://localhost:1337/rpc");

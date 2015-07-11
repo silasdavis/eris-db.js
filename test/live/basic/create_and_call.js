@@ -41,7 +41,7 @@ describe('HttpCreateAndCall', function () {
     });
 
     it("should subscribe to new block events", function (done) {
-        call(address, input, function(error, data){
+        call(address, input, function (error, data) {
             if (error) {
                 callback(error);
             }
@@ -49,6 +49,7 @@ describe('HttpCreateAndCall', function () {
             done();
         });
     });
+
 });
 
 function transact(privKey, code, callback) {
@@ -67,6 +68,8 @@ function waitForTx(callback) {
     var eventSub;
     edb.events().subNewBlocks(function (error, data) {
         if (error) {
+            console.log("Newblocks start error");
+            console.log(error);
             callback(error);
         }
         eventSub = data;
@@ -79,9 +82,9 @@ function waitForTx(callback) {
 
     }, function (error, data) {
         if (error) {
+            console.log(error);
             callback(error);
-        }
-        if (data) {
+        } else {
             eventSub.stop(function () {
             });
             callback(null, data);

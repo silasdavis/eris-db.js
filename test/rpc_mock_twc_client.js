@@ -1,25 +1,17 @@
-/* This file is for testing RPC methods.
+/* This file is for testing RPC methods using a mock client.
  */
-
-var util = require('../lib/util');
 var asrt;
-var edbModule;
 
 if (typeof(window) === "undefined") {
     asrt = require('assert');
-    edbModule = require("../index");
 } else {
     asrt = assert;
-    edbModule = edbFactory;
 }
 
 var test_data = require('./testdata/testdata.json');
 var template = require('./mock/test_template');
-
-var handlers = template.getHandlers(test_data);
-var port = 12345;
-var MockWebsocketServer = require('./mock/mock_ws_server');
-var server = new MockWebsocketServer(port, handlers);
+var MockTwcClient = require('./mock/mock_twc_client');
+var erisdbFactory = require('../index');
 
 var requestData = {
     priv_validator: test_data.chain_data.priv_validator,
@@ -29,17 +21,12 @@ var requestData = {
 
 var edb;
 
-describe('TheloniousMockWs', function () {
+describe('EDBMockClient', function () {
 
-    before(function (done) {
-        this.timeout(4000);
-        edb = edbModule.createInstance("ws://localhost:" + port, true);
-        edb.start(function(err){
-            if (err){
-                throw new Error(err);
-            }
-            done();
-        });
+    before(function () {
+        var handlers = template.getHandlers(test_data);
+        var client = new MockTwcClient(handlers);
+        edb = erisdbFactory.createInstanceFromClient(client, null);
     });
 
     describe('.consensus', function () {
@@ -278,6 +265,8 @@ describe('TheloniousMockWs', function () {
          });
          });
          */
+
+
     });
 });
 

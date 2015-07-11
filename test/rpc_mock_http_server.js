@@ -125,13 +125,10 @@ describe('EDBMockHttp', function () {
     describe('.events', function () {
 
         var mockEventId = "test";
-        var mockSubId = {sub_id: "1234123412341234123412341234123412341234123412341234123412341234"};
-        var mockEventRet = {events: [{}]};
-        var mockUnsubRet = {result: true};
 
         describe('#eventSubscribe', function () {
             it("should subscribe to event", function (done) {
-                var exp = mockSubId;
+                var exp = test_data.output.evt_sub;
                 edb.events().subscribe(mockEventId, check(exp, done));
             });
         });
@@ -139,15 +136,15 @@ describe('EDBMockHttp', function () {
         describe('#eventPoll', function () {
             it("should poll event", function (done) {
                 // For now
-                var exp = mockEventRet;
-                edb.events().poll(mockSubId.sub_id, check(exp, done));
+                var exp = test_data.output.evt_poll;
+                edb.events().poll(test_data.output.evt_sub.sub_id, check(exp, done));
             });
         });
 
         describe('#eventUnubscribe', function () {
             it("should subscribe to event", function (done) {
-                var exp = mockUnsubRet;
-                edb.events().unsubscribe(mockSubId.sub_id, check(exp, done));
+                var exp = test_data.output.evt_unsub;
+                edb.events().unsubscribe(test_data.output.evt_sub.sub_id, check(exp, done));
             });
         });
 
