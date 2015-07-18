@@ -102,7 +102,6 @@ function MockWebsocketServer(port, handlers) {
      * @returns {boolean}
      */
     function isRequest(req) {
-        // Check params is null or array?
         return req instanceof Object && typeof(req.jsonrpc) === "string" && req.jsonrpc === "2.0" &&
             typeof(req.method) === "string" && typeof(req.id) === "string";
     }

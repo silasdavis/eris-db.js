@@ -67,17 +67,3 @@ describe('TheloniousHttpEvents', function () {
 
     });
 });
-
-// TODO add this to test data. Start doing more serious event testing.
-/*
- { chain_id: 'my_tests',
- height: 1,
- time: 'Fri Jun 26 20:32:13 +0200 2015',
- fees: 0,
- num_txs: 0,
- last_block_hash: '',
- last_block_parts: { total: 0, hash: '' },
- state_hash: 'DA4F4DC4A54620F1E0AA1213631C4DC2957B7415E3F8C066C30009BC57C4E5FC' },
- validation: { commits: [] },
- data: { txs: [] } }
- */

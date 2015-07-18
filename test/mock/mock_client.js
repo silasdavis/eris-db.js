@@ -7,7 +7,7 @@
 
 var Client = require('../../lib/rpc/client');
 var template = require('./test_template');
-var testData = require('../testdata/testdata.json');
+var testData = require('../testdata/testdata_mock.json');
 var nUtil = require('util');
 
 /**

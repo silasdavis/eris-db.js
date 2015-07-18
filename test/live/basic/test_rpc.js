@@ -15,11 +15,11 @@ if (typeof(window) === "undefined") {
 
 var serverServerURL = "http://localhost:1337/server";
 
-var test_data = require('./../../testdata/testdata.json');
+var testData = require('./../../testdata/testdata.json');
 
 var requestData = {
-    priv_validator: test_data.chain_data.priv_validator,
-    genesis: test_data.chain_data.genesis,
+    priv_validator: testData.chain_data.priv_validator,
+    genesis: testData.chain_data.genesis,
     max_duration: 10
 };
 
@@ -48,14 +48,14 @@ describe('TheloniousHttp', function () {
 
         describe('#getState', function () {
             it("should get the consensus state", function (done) {
-                var exp = test_data.output.consensus_state;
+                var exp = testData.GetConsensusState.output;
                 edb.consensus().getState(check(exp, done, [modifyConsensusStartTime]));
             });
         });
 
         describe('#getValidators', function () {
             it("should get the validators", function (done) {
-                var exp = test_data.output.validators;
+                var exp = testData.GetValidators.output;
                 edb.consensus().getValidators(check(exp, done));
             });
         });
@@ -65,21 +65,21 @@ describe('TheloniousHttp', function () {
     describe('.network', function () {
 
         describe('#getInfo', function () {
-            var exp = test_data.output.network_info;
+            var exp = testData.GetNetworkInfo.output;
             it("should get the network info", function (done) {
                 edb.network().getInfo(check(exp, done));
             });
         });
 
         describe('#getClientVersion', function () {
-            var exp = test_data.output.client_version;
+            var exp = testData.GetClientVersion.output;
             it("should get the network info", function (done) {
                 edb.network().getClientVersion(check(exp, done));
             });
         });
 
         describe('#getMoniker', function () {
-            var exp = test_data.output.moniker;
+            var exp = testData.GetMoniker.output;
             it("should get the moniker", function (done) {
                 edb.network().getMoniker(check(exp, done));
             });
@@ -87,42 +87,34 @@ describe('TheloniousHttp', function () {
 
         describe('#isListening', function () {
             it("should get the listening value", function (done) {
-                var exp = test_data.output.listening;
+                var exp = testData.IsListening.output;
                 edb.network().isListening(check(exp, done));
             });
         });
 
         describe('#getListeners', function () {
             it("should get the listeners", function (done) {
-                var exp = test_data.output.listeners;
+                var exp = testData.GetListeners.output;
                 edb.network().getListeners(check(exp, done));
             });
         });
 
         describe('#getPeers', function () {
             it("should get the peers", function (done) {
-                var exp = test_data.output.peers;
+                var exp = testData.GetPeers.output;
                 edb.network().getPeers(check(exp, done));
             });
         });
 
     });
 
+
     describe('.txs', function () {
-
-        /*
-         describe('#broadcastTx', function () {
-         it("should broadcast a tx", function (done) {
-         edb.txs().broadcastTx(params.tx, ret(checkBroadcastTx, done));
-         });
-         });
-         */
-
 
         describe('#transact contract create', function () {
             it("should send a contract create tx to an address", function (done) {
-                var tx_create = test_data.input.tx_create;
-                var exp = test_data.output.tx_create_receipt;
+                var tx_create = testData.TransactCreate.input;
+                var exp = testData.TransactCreate.output;
                 edb.txs().transact(tx_create.priv_key, tx_create.address, tx_create.data,
                     tx_create.gas_limit, tx_create.fee, null, check(exp, done));
             });
@@ -130,8 +122,8 @@ describe('TheloniousHttp', function () {
 
         describe('#transact', function () {
             it("should transact with the account at the given address", function (done) {
-                var tx = test_data.input.tx;
-                var exp = test_data.output.tx_receipt;
+                var tx = testData.Transact.input;
+                var exp = testData.Transact.output;
                 edb.txs().transact(tx.priv_key, tx.address, tx.data, tx.gas_limit, tx.fee,
                     null, check(exp, done));
             });
@@ -139,23 +131,15 @@ describe('TheloniousHttp', function () {
 
         describe('#getUnconfirmedTxs', function () {
             it("should get the unconfirmed txs", function (done) {
-                var exp = test_data.output.unconfirmed_txs;
+                var exp = testData.GetUnconfirmedTxs.output;
                 edb.txs().getUnconfirmedTxs(check(exp, done));
             });
         });
 
-        /*
-         describe('#call', function () {
-         it("should call the given address using the given data", function (done) {
-         edb.txs().call(results.new_contract_address, params.txData, ret(checkCall, done));
-         });
-         });
-         */
-
         describe('#callCode', function () {
             it("should callCode with the given code and data", function (done) {
-                var call_code = test_data.input.call_code;
-                var exp = test_data.output.call_code;
+                var call_code = testData.CallCode.input;
+                var exp = testData.CallCode.output;
                 edb.txs().callCode(call_code.code, call_code.data, check(exp, done));
             });
 
@@ -168,39 +152,39 @@ describe('TheloniousHttp', function () {
         describe('#genPrivAccount', function () {
             it("should get a new private account", function (done) {
                 // Just make sure the basic data are there and are of the correct type...
-                var exp = test_data.output.gen_priv_account;
+                var exp = testData.GenPrivAccount.output;
                 edb.accounts().genPrivAccount(null, check(exp, done, [modifyPrivateAccount]));
             });
         });
 
         describe('#getAccounts', function () {
             it("should get all accounts", function (done) {
-                var exp = test_data.output.accounts;
+                var exp = testData.GetAccounts.output;
                 edb.accounts().getAccounts(check(exp, done));
             });
         });
 
         describe('#getAccount', function () {
             it("should get the account", function (done) {
-                var addr = test_data.input.account_address;
-                var exp = test_data.output.account;
+                var addr = testData.GetAccount.input.address;
+                var exp = testData.GetAccount.output;
                 edb.accounts().getAccount(addr, check(exp, done));
             });
         });
 
         describe('#getStorage', function () {
             it("should get the storage", function (done) {
-                var addr = test_data.input.account_address;
-                var exp = test_data.output.storage;
+                var addr = testData.GetStorage.input.address;
+                var exp = testData.GetStorage.output;
                 edb.accounts().getStorage(addr, check(exp, done));
             });
         });
 
         describe('#getStorageAt', function () {
             it("should get the storage at the given key", function (done) {
-                var addr = test_data.input.account_address;
-                var sa = test_data.input.storage_address;
-                var exp = test_data.output.storage_at;
+                var addr = testData.GetStorageAt.input.address;
+                var sa = testData.GetStorageAt.input.key;
+                var exp = testData.GetStorageAt.output;
                 edb.accounts().getStorageAt(addr, sa, check(exp, done));
             });
         });
@@ -211,20 +195,20 @@ describe('TheloniousHttp', function () {
 
         describe('#getInfo', function () {
             it("should get the blockchain info", function (done) {
-                var exp = test_data.output.blockchain_info;
+                var exp = testData.GetBlockchainInfo.output;
                 edb.blockchain().getInfo(check(exp, done));
             });
         });
 
         describe('#getChainId', function () {
             it("should get the chain id", function (done) {
-                var exp = test_data.output.chain_id;
+                var exp = testData.GetChainId.output;
                 edb.blockchain().getChainId(check(exp, done));
             });
         });
 
         describe('#getGenesisHash', function () {
-            var exp = test_data.output.genesis_hash;
+            var exp = testData.GetGenesisHash.output;
             it("should get the genesis hash", function (done) {
                 edb.blockchain().getGenesisHash(check(exp, done));
             });
@@ -232,27 +216,20 @@ describe('TheloniousHttp', function () {
 
         describe('#getLatestBlockHeight', function () {
             it("should get the latest block height", function (done) {
-                var exp = test_data.output.latest_block_height;
+                var exp = testData.GetLatestBlockHeight.output;
                 edb.blockchain().getLatestBlockHeight(check(exp, done));
             });
         });
 
         describe('#getBlocks', function () {
             it("should get the blocks between min, and max height", function (done) {
-                var range = test_data.input.block_range;
-                var exp = test_data.output.blocks;
+                var exp = testData.GetBlocks.output;
                 edb.blockchain().getBlocks(check(exp, done));
             });
         });
 
-        /*
-         describe('#getBlock', function () {
-         it("should get the block at the given height", function (done) {
-         edb.blockchain().getBlock(params.height, ret(checkBlock, done));
-         });
-         });
-         */
     });
+
 });
 
 // Expected is the expected data. done is the mocha done-function, modifiers are

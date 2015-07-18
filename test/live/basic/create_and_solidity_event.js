@@ -21,37 +21,51 @@ var requestData = {
 var edb;
 
 var privKey = test_data.chain_data.priv_validator.priv_key[1];
-var compiled = "60606040525b33600060006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908302179055505b60d38061003f6000396000f30060606040523615603a576000357c010000000000000000000000000000000000000000000000000000000090048063a5f3c23b14609757603a565b606b5b6000600060009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1690506068565b90565b604051808273ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b60ac60048035906020018035906020015060c2565b6040518082815260200191505060405180910390f35b6000818301905060cd565b9291505056";
+var compiled = "6060604052608f8060116000396000f30060606040523615600d57600d565b608d5b7f68616861000000000000000000000000000000000000000000000000000000007fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff7f88c4f556fdc50387ec6b6fc4e8250fecc56ff50e873df06dadeeb84c0287ca9060016040518082815260200191505060405180910390a35b565b00";
 var input = "";
 var address;
 
 var serverServerURL = "http://localhost:1337/server";
 
-describe('HttpCreateAndCall', function () {
+describe('HttpCreateAndSolidityEvent', function () {
 
     // Not ideal, we just deploy the contract and go.
     before(function (done) {
+
         util.getNewErisServer(serverServerURL, requestData, function (error, port) {
             edb = edbModule.createInstance("http://localhost:" + port + '/rpc');
             done();
         });
     });
 
-    it("should call a contract", function (done) {
+    it("should subscribe to a solidity event", function (done) {
         this.timeout(5000);
-        transact(privKey, compiled, function (error, data) {
+
+        var expected = {
+            Address: '0000000000000000000000009FC1ECFCAE2A554D4D1A000D0D80F748E66359E3',
+            Topics: ['88C4F556FDC50387EC6B6FC4E8250FECC56FF50E873DF06DADEEB84C0287CA90',
+                'FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF',
+                '6861686100000000000000000000000000000000000000000000000000000000'],
+            Data: '0000000000000000000000000000000000000000000000000000000000000001',
+            Height: 1
+        };
+
+        create(privKey, compiled, function (error, data) {
             asrt.ifError(error);
+            edb.events().subLogEvent(address, function (error, event) {
+
+                asrt.deepEqual(event, expected, "Event data does not match expected.");
+                done();
+            });
             call(address, input, function (error, data) {
                 asrt.ifError(error);
-                asrt.equal(data.return, "00000000000000000000000037236df251ab70022b1da351f08a20fb52443e37");
-                done();
             });
         });
     });
 
 });
 
-function transact(privKey, code, callback) {
+function create(privKey, code, callback) {
     edb.txs().transact(privKey, "", code, 1000000, 0, null, function (error, data) {
             if (error) {
                 callback(error);
@@ -78,7 +92,7 @@ function waitForTx(callback) {
 }
 
 function call(address, input, callback) {
-    edb.txs().call(address, input, function (error, data) {
+    edb.txs().call(address, "", function (error, data) {
         if (error) {
             callback(error);
         }

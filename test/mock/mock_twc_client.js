@@ -7,7 +7,7 @@
 
 var TwcClient = require('../../lib/rpc/twc_client');
 var template = require('./test_template');
-var testData = require('../testdata/testdata.json');
+var testData = require('../testdata/testdata_mock.json');
 var nUtil = require('util');
 
 /**
@@ -58,7 +58,7 @@ MockTwcClient.prototype.addCallback = function (reqId, callback) {
     // We need to add this, but make sure it is run after the start callback,
     // so using a short timeout.
     setTimeout(function () {
-        var event = testData.output.evt_poll.events[0];
+        var event = testData.EventPoll.output.events[0];
         callback(null, event);
     }, 10);
 };

@@ -2,8 +2,9 @@
 # Run live tests locally if erisdbss and erisdb is found.
 # NOTE: This is a WIP and not really meant for public use.
 
+# TODO time to retire...
+
 ssFlags=( "basic" )
-edbFlags=( "calls" "sol_event")
 
 function inputInSS(){
     for i in "${ssFlags[@]}"; do
@@ -14,21 +15,10 @@ function inputInSS(){
     return 1
 }
 
-function inputInEdb(){
-    for i in "${edbFlags[@]}"; do
-        if [[ $1 == ${i} ]]; then
-            return 0
-        fi
-    done
-    return 1
-}
-
 function validInput(){
     inputInSS $1
     VSS=$?
-    inputInEdb $1
-    VEDB=$?
-    return $(( ${VSS} & ${VEDB} ))
+    return ${VSS}
 }
 
 function listFlags(){
@@ -36,21 +26,17 @@ function listFlags(){
     do
         echo ${i}
     done
-    for i in "${edbFlags[@]}"
-    do
-        echo ${i}
-    done
 }
 
 function usage(){
     echo "***************************************************************"
-    echo "                                  _            "
-    echo "                 ___      _ _    (_)     ___   "
-    echo "                / -_)    | '_|   | |    (_-<   "
-    echo "                \___|   _|_|_   _|_|_   /__/_  "
-    echo "              _|'''''|_|'''''|_|'''''|_|'''''| "
-    echo "              *'-0-0-'*'-0-0-'*'-0-0-'*'-0-0-' "
-    echo ""
+    echo "                                  _                            "
+    echo "                 ___      _ _    (_)     ___                   "
+    echo "                / -_)    | '_|   | |    (_-<                   "
+    echo "                \___|   _|_|_   _|_|_   /__/_                  "
+    echo "              _|'''''|_|'''''|_|'''''|_|'''''|                 "
+    echo "              *'-0-0-'*'-0-0-'*'-0-0-'*'-0-0-'                 "
+    echo "                                                               "
     echo "**************************** Usage ****************************"
     echo "Usage: live_test.sh name"
     echo "name can be: "
@@ -104,7 +90,7 @@ function runErisdbss(){
     # Check if already running
     SSOLDPID=$(pidof erisdbss)
     if [[ -z ${SSOLDPID} ]]; then
-        (erisdbss) & SSPID=$!
+        (erisdbss) &> /dev/null & SSPID=$!
         # Give it some time (if needed).
         sleep 1
     else
@@ -130,12 +116,7 @@ function main()
         usage
         exit 2
     else
-        inputInSS $1
-        if [[ $? == 0 ]]; then
-            runErisdbss $1
-        else
-            runErisdb $1
-        fi
+        runErisdbss $1
         TEST_RESULTS=$?
         exit ${TEST_RESULTS}
     fi

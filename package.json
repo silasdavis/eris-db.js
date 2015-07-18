@@ -1,11 +1,10 @@
 {
   "name": "eris-db",
-  "version": "0.10.15",
+  "version": "0.10.17",
   "main": "./index.js",
   "dependencies": {
     "ws": "~0.7.1",
-    "xmlhttprequest": "~1.7.0",
-    "toml-js": "~0.0.8"
+    "xmlhttprequest": "~1.7.0"
   },
   "devDependencies": {
     "browserify": "^10.2.4",

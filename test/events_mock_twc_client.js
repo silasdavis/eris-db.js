@@ -8,37 +8,26 @@ if (typeof(window) === "undefined") {
     asrt = assert;
 }
 
-var test_data = require('./testdata/testdata.json');
+var testData = require('./testdata/testdata_mock.json');
 var template = require('./mock/test_template');
 var MockTwcClient = require('./mock/mock_twc_client');
 var erisdbFactory = require('../index');
 
-var requestData = {
-    priv_validator: test_data.chain_data.priv_validator,
-    genesis: test_data.chain_data.genesis,
-    max_duration: 10
-};
+var handlers = template.getHandlers(testData);
+var client = new MockTwcClient(handlers);
+var edb = erisdbFactory.createInstanceFromClient(client, null);
 
-// Just need an address.
-var testAddress = requestData.priv_validator.address;
-
-var edb;
+var testAddress = "75";
 
 // TODO update to use the appropriate event type for each sub once the test data update is done.
-describe('Events', function () {
-
-    before(function () {
-        var handlers = template.getHandlers(test_data);
-        var client = new MockTwcClient(handlers);
-        edb = erisdbFactory.createInstanceFromClient(client, null);
-    });
+describe('Event tests with mock rpc two-way client', function () {
 
     describe('.subSolidityEvent', function () {
 
         it("should subscribe to solidity event using once", function (done) {
             edb.events().subSolidityEvent(testAddress, function (error, event) {
                 asrt.ifError(error);
-                asrt.deepEqual(test_data.output.evt_poll.events[0], event, "Event did not match.");
+                asrt.deepEqual(testData.EventPoll.output.events[0], event, "Event did not match.");
                 done();
             });
         });
@@ -50,7 +39,7 @@ describe('Events', function () {
                 sub = eventSub;
             }, function (error, event) {
                 asrt.ifError(error);
-                asrt.deepEqual(test_data.output.evt_poll.events[0], event, "Event did not match.");
+                asrt.deepEqual(testData.EventPoll.output.events[0], event, "Event did not match.");
                 sub.stop();
                 done();
             });
@@ -58,14 +47,12 @@ describe('Events', function () {
 
     });
 
-    /*
-
     describe('.subAccountInput', function () {
 
         it("should subscribe to account input using once", function (done) {
             edb.events().subAccountInput(testAddress, function (error, event) {
                 asrt.ifError(error);
-                asrt.deepEqual(test_data.output.evt_poll.events[0], event, "Event did not match.");
+                asrt.deepEqual(testData.EventPoll.output.events[0], event, "Event did not match.");
                 done();
             });
         });
@@ -77,7 +64,7 @@ describe('Events', function () {
                 sub = eventSub;
             }, function (error, event) {
                 asrt.ifError(error);
-                asrt.deepEqual(test_data.output.evt_poll.events[0], event, "Event did not match.");
+                asrt.deepEqual(testData.EventPoll.output.events[0], event, "Event did not match.");
                 sub.stop();
                 done();
             });
@@ -90,7 +77,7 @@ describe('Events', function () {
         it("should subscribe to account output using once", function (done) {
             edb.events().subAccountOutput(testAddress, function (error, event) {
                 asrt.ifError(error);
-                asrt.deepEqual(test_data.output.evt_poll.events[0], event, "Event did not match.");
+                asrt.deepEqual(testData.EventPoll.output.events[0], event, "Event did not match.");
                 done();
             });
         });
@@ -102,7 +89,7 @@ describe('Events', function () {
                 sub = eventSub;
             }, function (error, event) {
                 asrt.ifError(error);
-                asrt.deepEqual(test_data.output.evt_poll.events[0], event, "Event did not match.");
+                asrt.deepEqual(testData.EventPoll.output.events[0], event, "Event did not match.");
                 sub.stop();
                 done();
             });
@@ -115,7 +102,7 @@ describe('Events', function () {
         it("should subscribe to account receive using once", function (done) {
             edb.events().subAccountReceive(testAddress, function (error, event) {
                 asrt.ifError(error);
-                asrt.deepEqual(test_data.output.evt_poll.events[0], event, "Event did not match.");
+                asrt.deepEqual(testData.EventPoll.output.events[0], event, "Event did not match.");
                 done();
             });
         });
@@ -127,7 +114,7 @@ describe('Events', function () {
                 sub = eventSub;
             }, function (error, event) {
                 asrt.ifError(error);
-                asrt.deepEqual(test_data.output.evt_poll.events[0], event, "Event did not match.");
+                asrt.deepEqual(testData.EventPoll.output.events[0], event, "Event did not match.");
                 sub.stop();
                 done();
             });
@@ -140,7 +127,7 @@ describe('Events', function () {
         it("should subscribe to bond events using once", function (done) {
             edb.events().subBonds(function (error, event) {
                 asrt.ifError(error);
-                asrt.deepEqual(test_data.output.evt_poll.events[0], event, "Event did not match.");
+                asrt.deepEqual(testData.EventPoll.output.events[0], event, "Event did not match.");
                 done();
             });
         });
@@ -152,7 +139,7 @@ describe('Events', function () {
                 sub = eventSub;
             }, function (error, event) {
                 asrt.ifError(error);
-                asrt.deepEqual(test_data.output.evt_poll.events[0], event, "Event did not match.");
+                asrt.deepEqual(testData.EventPoll.output.events[0], event, "Event did not match.");
                 sub.stop();
                 done();
             });
@@ -165,7 +152,7 @@ describe('Events', function () {
         it("should subscribe to unbond events using once", function (done) {
             edb.events().subUnbonds(function (error, event) {
                 asrt.ifError(error);
-                asrt.deepEqual(test_data.output.evt_poll.events[0], event, "Event did not match.");
+                asrt.deepEqual(testData.EventPoll.output.events[0], event, "Event did not match.");
                 done();
             });
         });
@@ -177,7 +164,7 @@ describe('Events', function () {
                 sub = eventSub;
             }, function (error, event) {
                 asrt.ifError(error);
-                asrt.deepEqual(test_data.output.evt_poll.events[0], event, "Event did not match.");
+                asrt.deepEqual(testData.EventPoll.output.events[0], event, "Event did not match.");
                 sub.stop();
                 done();
             });
@@ -190,7 +177,7 @@ describe('Events', function () {
         it("should subscribe to rebond events using once", function (done) {
             edb.events().subRebonds(function (error, event) {
                 asrt.ifError(error);
-                asrt.deepEqual(test_data.output.evt_poll.events[0], event, "Event did not match.");
+                asrt.deepEqual(testData.EventPoll.output.events[0], event, "Event did not match.");
                 done();
             });
         });
@@ -202,7 +189,7 @@ describe('Events', function () {
                 sub = eventSub;
             }, function (error, event) {
                 asrt.ifError(error);
-                asrt.deepEqual(test_data.output.evt_poll.events[0], event, "Event did not match.");
+                asrt.deepEqual(testData.EventPoll.output.events[0], event, "Event did not match.");
                 sub.stop();
                 done();
             });
@@ -215,7 +202,7 @@ describe('Events', function () {
         it("should subscribe to dupeout events using once", function (done) {
             edb.events().subDupeouts(function (error, event) {
                 asrt.ifError(error);
-                asrt.deepEqual(test_data.output.evt_poll.events[0], event, "Event did not match.");
+                asrt.deepEqual(testData.EventPoll.output.events[0], event, "Event did not match.");
                 done();
             });
         });
@@ -227,7 +214,7 @@ describe('Events', function () {
                 sub = eventSub;
             }, function (error, event) {
                 asrt.ifError(error);
-                asrt.deepEqual(test_data.output.evt_poll.events[0], event, "Event did not match.");
+                asrt.deepEqual(testData.EventPoll.output.events[0], event, "Event did not match.");
                 sub.stop();
                 done();
             });
@@ -240,7 +227,7 @@ describe('Events', function () {
         it("should subscribe to new block events using once", function (done) {
             edb.events().subNewBlocks(function (error, event) {
                 asrt.ifError(error);
-                asrt.deepEqual(test_data.output.evt_poll.events[0], event, "Event did not match.");
+                asrt.deepEqual(testData.EventPoll.output.events[0], event, "Event did not match.");
                 done();
             });
         });
@@ -252,7 +239,7 @@ describe('Events', function () {
                 sub = eventSub;
             }, function (error, event) {
                 asrt.ifError(error);
-                asrt.deepEqual(test_data.output.evt_poll.events[0], event, "Event did not match.");
+                asrt.deepEqual(testData.EventPoll.output.events[0], event, "Event did not match.");
                 sub.stop();
                 done();
             });
@@ -265,7 +252,7 @@ describe('Events', function () {
         it("should subscribe to fork events using once", function (done) {
             edb.events().subForks(function (error, event) {
                 asrt.ifError(error);
-                asrt.deepEqual(test_data.output.evt_poll.events[0], event, "Event did not match.");
+                asrt.deepEqual(testData.EventPoll.output.events[0], event, "Event did not match.");
                 done();
             });
         });
@@ -277,14 +264,14 @@ describe('Events', function () {
                 sub = eventSub;
             }, function (error, event) {
                 asrt.ifError(error);
-                asrt.deepEqual(test_data.output.evt_poll.events[0], event, "Event did not match.");
+                asrt.deepEqual(testData.EventPoll.output.events[0], event, "Event did not match.");
                 sub.stop();
                 done();
             });
         });
 
     });
-*/
+
 });
 
 

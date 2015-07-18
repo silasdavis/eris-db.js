@@ -15,11 +15,11 @@ if (typeof(window) === "undefined") {
 
 var serverServerURL = "http://localhost:1337/server";
 
-var test_data = require('./../../testdata/testdata_filters.json');
+var testData = require('./../../testdata/testdata_filters.json');
 
 var requestData = {
-    priv_validator: test_data.chain_data.priv_validator,
-    genesis: test_data.chain_data.genesis,
+    priv_validator: testData.chain_data.priv_validator,
+    genesis: testData.chain_data.genesis,
     max_duration: 10
 };
 
@@ -42,20 +42,20 @@ describe('TheloniousHttp', function () {
     describe('#getAccounts', function () {
 
         it("should get the filtered list of accounts", function (done) {
-            var filters = test_data.input.filters0;
-            var exp = test_data.output.accounts0;
+            var filters = testData.GetAccounts0.input;
+            var exp = testData.GetAccounts0.output;
             edb.accounts().getAccounts(filters, check(exp, done));
         });
 
         it("should get the filtered list of accounts", function (done) {
-            var filters = test_data.input.filters1;
-            var exp = test_data.output.accounts1;
+            var filters = testData.GetAccounts1.input;
+            var exp = testData.GetAccounts1.output;
             edb.accounts().getAccounts(filters, check(exp, done));
         });
 
         it("should get the filtered list of accounts", function (done) {
-            var filters = test_data.input.filters2;
-            var exp = test_data.output.accounts2;
+            var filters = testData.GetAccounts2.input;
+            var exp = testData.GetAccounts2.output;
             edb.accounts().getAccounts(filters, check(exp, done));
         });
 
