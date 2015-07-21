@@ -31,7 +31,6 @@ describe('HttpCreateAndSolidityEvent', function () {
 
     // Not ideal, we just deploy the contract and go.
     before(function (done) {
-
         util.getNewErisServer(serverServerURL, requestData, function (error, port) {
             edb = edbModule.createInstance("http://localhost:" + port + '/rpc');
             done();
@@ -53,7 +52,6 @@ describe('HttpCreateAndSolidityEvent', function () {
         create(privKey, compiled, function (error, data) {
             asrt.ifError(error);
             edb.events().subLogEvent(address, function (error, event) {
-
                 asrt.deepEqual(event, expected, "Event data does not match expected.");
                 done();
             });

@@ -63,7 +63,15 @@ exports.getTests = function(edb, testData) {
     tests.push(["TransactCreate", txs.transact.bind(txs), txData.priv_key, txData.address, txData.data, txData.gas_limit, txData.fee, null]);
     txData = testData.Transact.input;
     tests.push(["Transact", txs.transact.bind(txs), txData.priv_key, txData.address, txData.data, txData.gas_limit, txData.fee, null]);
+    var txDataNameReg = testData.TransactNameReg.input;
+    tests.push(["TransactNameReg", txs.transactNameReg.bind(txs), txDataNameReg.priv_key, txDataNameReg.name, txDataNameReg.data,
+        txDataNameReg.amount, txDataNameReg.fee, null]);
     tests.push(["GetUnconfirmedTxs", txs.getUnconfirmedTxs.bind(txs)]);
+
+    // NameReg
+    var nr = edb.namereg();
+    tests.push(["GetNameRegEntries", nr.getEntries.bind(nr)]);
+    tests.push(["GetNameRegEntry", nr.getEntry.bind(nr), testData.GetNameRegEntry.input.name]);
 
     // TODO test locally signed data before that is added to stack.
 
@@ -103,12 +111,15 @@ exports.getHandlers = function(testData){
             return testData.Transact.output;
         }
     };
+    handlers[rpc.methodName("transactNameReg")] = function(param){return testData.TransactNameReg.output};
     handlers[rpc.methodName("getUnconfirmedTxs")] = function(param){return testData.GetUnconfirmedTxs.output};
     handlers[rpc.methodName("call")] = function(param){return testData.Call.output};
     handlers[rpc.methodName("callCode")] = function(param){return testData.CallCode.output};
     handlers[rpc.methodName("eventSubscribe")] = function(param){return testData.EventSubscribe.output};
     handlers[rpc.methodName("eventUnsubscribe")] = function(param){return testData.EventUnsubscribe.output};
     handlers[rpc.methodName("eventPoll")] = function(param){return testData.EventPoll.output};
+    handlers[rpc.methodName("getNameRegEntry")] = function(param){return testData.GetNameRegEntry.output};
+    handlers[rpc.methodName("getNameRegEntries")] = function(param){return testData.GetNameRegEntries.output};
 
     return handlers;
 };
