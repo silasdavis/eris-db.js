@@ -6,7 +6,7 @@
 
 `npm install eris-db`
 
-The main class is `ErisDb`. A standard `ErisDB` instance is created like this:
+The main class is `ErisDB`. A standard `ErisDB` instance is created like this:
 
 ```
 var edbFactory = require('eris-db');
@@ -15,7 +15,7 @@ var edb = edbFactory.createInstance("http://localhost:1337/rpc");
 
 edb.start(function(error){
     if(!error){
-        console.log("Ready to go";
+        console.log("Ready to go");
     }
 });
 
@@ -29,20 +29,20 @@ If you use websockets, the system will not be ready until the start callback fir
 
 The start callback must be on the following format: `function(error)`. An error is an indication that the websocket connection failed to be established.
 
-If you want to use several `ErisDb` instances at once, that is possible. Just create more instances via `edbFactory.createInstance()`. This is the preferred method if you want multiple websocket connections with the eris-db server.
+If you want to use several `ErisDB` instances at once, that is possible. Just create more instances via `edbFactory.createInstance()`. This is the preferred method if you want multiple websocket connections with the eris-db server.
 
 
 No config file is needed for this library.
 
 ## API Reference
 
-There are bindings for all the RPC methods. All functions are on the form `function(param1, param2, ... , callback)`, where the callback is a function on the form `function(error,data)` (it is documented under the name `methodCallback`). The `data` object is the same as you would get by calling the corresponding RPC method directly. 
+There are bindings for all the RPC methods. All functions are on the form `function(param1, param2, ... , callback)`, where the callback is a function on the form `function(error,data)` (it is documented under the name `methodCallback`). The `data` object is the same as you would get by calling the corresponding RPC method directly.
 
 This is the over-all structure of the library. The `unsafe` flag means a private key is either sent or received, so should be used with care (dev only). 
 
-NOTE: There will be links to the proper jsdoc once we get those up on the eris docs page!
+NOTE: There will be links to the proper jsdoc and integration with erisindustries.com. For now, the components point to the actual code files and methods points to the web-API method in question.
 
-### ErisDB   
+### ErisDB
 
 | Component Name | Accessor |
 | :------------- | :------- |
@@ -50,12 +50,13 @@ NOTE: There will be links to the proper jsdoc once we get those up on the eris d
 | Blockchain | [ErisDB.blockchain()](https://github.com/eris-ltd/erisdb-js/blob/master/lib/blockchain.js) |
 | Consensus | [ErisDB.consensus()](https://github.com/eris-ltd/erisdb-js/blob/master/lib/consensus.js) |
 | Events | [ErisDB.events()](https://github.com/eris-ltd/erisdb-js/blob/master/lib/events.js) |
+| NameReg | [ErisDB.namereg()](https://github.com/eris-ltd/erisdb-js/blob/master/lib/namereg.js) |
 | Network | [ErisDB.network()](https://github.com/eris-ltd/erisdb-js/blob/master/lib/network.js) |
 | Transactions | [ErisDB.txs()](https://github.com/eris-ltd/erisdb-js/blob/master/lib/transactions.js) |
 
 ### Components
 
-#### Accounts 
+#### Accounts
 
 The accounts object has methods for getting account and account-storage data.
 
@@ -116,12 +117,25 @@ The `eventCallback` data is the event object. This object is different depending
 | Events.subAccountInput | `account address <string>` |
 | Events.subAccountOutput | `account address <string>` |
 | Events.subAccountReceive | `account address <string>` |
+| Events.subLogEvent | `account address <string>` |
+| Events.subSolidityEvent | `account address <string>` |
 | Events.subNewBlocks | `-` |
 | Events.subForks | `-` |
 | Events.subBonds | `-` |
 | Events.subUnbonds | `-` |
 | Events.subRebonds | `-` |
 | Events.subDupeouts | `-` |
+
+`subSolidityEvent` and `subLogEvent` are two different names for the same type of subscription (log events).
+
+#### NameReg 
+
+The NameReg object has methods for accessing the name registry.
+
+| Method | RPC method | Notes |
+| :----- | :--------- | :---- |
+| NameReg.getEntry | [erisdb.getNameRegEntry](https://github.com/eris-ltd/eris-db/blob/master/api.md#get-namereg-entry) | |
+| NameReg.getEntries | [erisdb.getNameRegEntries](https://github.com/eris-ltd/eris-db/blob/master/api.md#get-namereg-entries) | |
 
 #### Network
 
@@ -149,11 +163,11 @@ To get a private key for testing/developing, you can run `tendermint gen_account
 
 ##### Calls
 
-Calls are used to call code, and can not be used to modify the state of the database. It is essentially a database `read`. It is used mostly to get data out of a contract-accounts storage by using the contracts accessor methods, but can be used to call any method that does not use persistent storage in any way. A trivial example would be a contract function that takes two numbers as input, adds them, and returns the sum. 
+Calls provide read-only access to the smart contracts. It is used mostly to get data out of a contract-accounts storage by using the contracts accessor methods, but can be used to call any method that does not change any data in any account. A trivial example would be a contract function that takes two numbers as input, adds them, and then simply returns the sum. 
 
-There are two types of calls. `Call` takes a data string and an account address and calls the code in that account (if any) using the provided data as input. `CallCode` works the same except you don't provide an account address but the actual compiled code instead. It's basically just exposes the VM functionality of the node. "Code-execution as a service". 
-
-Again - neither of the call functions will affect the state of the database/chain in any way.
+There are two types of calls. `Call` takes a data string and an account address and calls the code in that account (if any) using the provided data as input. This is the standard method for read-only operations.
+ 
+`CallCode` works the same except you don't provide an account address but the actual compiled code instead. It's a dev tool for accessing the VM directly. "Code-execution as a service".
 
 | Method | RPC method | Notes |
 | :----- | :--------- | :---- |
@@ -163,12 +177,13 @@ Again - neither of the call functions will affect the state of the database/chai
 | Transactions.callCode | [erisdb.callCode](https://github.com/eris-ltd/eris-db/blob/master/api.md#callcode) | |
 | Transactions.signTx | [erisdb.signTx](https://github.com/eris-ltd/eris-db/blob/master/api.md#signtx) | unsafe |
 | Transactions.transact | [erisdb.transact](https://github.com/eris-ltd/eris-db/blob/master/api.md#transact) | unsafe |
+| Transactions.transactNameReg | [erisdb.transactNameReg](https://github.com/eris-ltd/eris-db/blob/master/api.md#transactnamereg) | unsafe |
 
 ## Tests
 
-Tests are done using `mocha`. At this point, there is only integration tests. These will be moved into a separate repo and replaced with other tests before 1.0. To run the tests you need to have an erisdb server-server running.
+`mocha` or `npm test`
 
-To run the integration tests, start a [eris-db](https://github.com/eris-ltd/eris-db) server-server (instructions are in the README file), cd into the root of this library and run `$ mocha`. The tests takes about 30 seconds.
+Integration tests requires `erisdb` and `erisdbss` to exist on the path. This is the `eris-db` server and the server deployment utility. More info in the [eris-db](https://github.com/eris-ltd/eris-db) README file.
 
 ## Documentation
 
@@ -176,4 +191,4 @@ Docs can be generated by using the scripts `doc.sh` or `devDoc.sh`; the latter i
 
 ## Browser
 
-This library will be possible to run from a web-browser.
+This library will be possible to run from a web-browser at some point.
