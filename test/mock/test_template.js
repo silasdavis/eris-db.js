@@ -12,6 +12,7 @@ var rpc = require('../../lib/rpc/rpc');
 exports.getTests = function(edb, testData) {
 
     var tests = [];
+
     // Accounts
     var accounts = edb.accounts();
     tests.push(["GenPrivAccount", accounts.genPrivAccount.bind(accounts), null]);
