@@ -1,3 +1,4 @@
+
 // Running this file will create a new private key. It requires a running erisdb server on http://localhost:1337.
 
 var edbModule = require("../index");

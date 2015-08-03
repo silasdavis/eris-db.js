@@ -108,7 +108,6 @@ describe('TheloniousHttp', function () {
 
     });
 
-
     describe('.txs', function () {
 
         describe('#transact contract create', function () {
