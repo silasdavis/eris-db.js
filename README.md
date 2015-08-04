@@ -174,6 +174,7 @@ There are two types of calls. `Call` takes a data string and an account address 
 | Transactions.call | [erisdb.call](https://github.com/eris-ltd/eris-db/blob/master/api.md#call) | |
 | Transactions.callCode | [erisdb.callCode](https://github.com/eris-ltd/eris-db/blob/master/api.md#callcode) | |
 | Transactions.transact | [erisdb.transact](https://github.com/eris-ltd/eris-db/blob/master/api.md#transact) | unsafe |
+| Transactions.transactAndHold | [erisdb.transactAndHold](https://github.com/eris-ltd/eris-db/blob/master/api.md#transact-and-hold) | unsafe |
 | Transactions.transactNameReg | [erisdb.transactNameReg](https://github.com/eris-ltd/eris-db/blob/master/api.md#transactnamereg) | unsafe |
 
 `broadcastTx` is useless until we add a client-side signing solution. 

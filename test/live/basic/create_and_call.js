@@ -39,9 +39,10 @@ describe('HttpCreateAndCall', function () {
 
     it("should call a contract", function (done) {
         this.timeout(5000);
-        transact(privKey, compiled, function (error, data) {
+        edb.txs().transactAndHold(privKey, "", compiled, 1000000, 0, null, function (error, data) {
             asrt.ifError(error);
-            call(address, input, function (error, data) {
+            address = data.call_data.callee;
+            edb.txs().call(address, input, function (error, data) {
                 asrt.ifError(error);
                 asrt.equal(data.return, "00000000000000000000000037236df251ab70022b1da351f08a20fb52443e37");
                 done();
@@ -50,37 +51,3 @@ describe('HttpCreateAndCall', function () {
     });
 
 });
-
-function transact(privKey, code, callback) {
-    edb.txs().transact(privKey, "", code, 1000000, 0, null, function (error, data) {
-            if (error) {
-                callback(error);
-                return;
-            }
-            address = data.contract_addr;
-            waitForTx(callback);
-        }
-    );
-}
-
-// Basically wait for the next block to be committed.
-function waitForTx(callback) {
-
-    edb.events().subAccountCall(address, function (error, data) {
-        if (error) {
-            console.log(error);
-            callback(error);
-        } else {
-            callback(null, data);
-        }
-    });
-}
-
-function call(address, input, callback) {
-    edb.txs().call(address, input, function (error, data) {
-        if (error) {
-            callback(error);
-        }
-        callback(null, data);
-    });
-}

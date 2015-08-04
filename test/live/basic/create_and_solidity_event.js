@@ -38,7 +38,7 @@ describe('HttpCreateAndSolidityEvent', function () {
     });
 
     it("should subscribe to a solidity event", function (done) {
-        this.timeout(5000);
+        this.timeout(8000);
 
         var expected = {
             address: '0000000000000000000000009FC1ECFCAE2A554D4D1A000D0D80F748E66359E3',
@@ -49,50 +49,22 @@ describe('HttpCreateAndSolidityEvent', function () {
             height: 1
         };
 
-        create(privKey, compiled, function (error, data) {
-            asrt.ifError(error);
-            edb.events().subLogEvent(address, function (error, event) {
-                asrt.deepEqual(event, expected, "Event data does not match expected.");
-                done();
-            });
-            call(address, input, function (error, data) {
+        edb.txs().transactAndHold(privKey, "", compiled, 1000000, 0, null, function (error, data) {
                 asrt.ifError(error);
-            });
-        });
+                address = data.call_data.callee;
+
+                edb.events().subLogEvent(address, function (error, event) {
+                    asrt.deepEqual(event, expected, "Event data does not match expected.");
+                    done();
+                });
+
+                edb.txs().call("", address, input, function (error, data) {
+                    asrt.ifError(error);
+                    console.log(data)
+                });
+            }
+        );
+
     });
 
 });
-
-function create(privKey, code, callback) {
-    edb.txs().transact(privKey, "", code, 1000000, 0, null, function (error, data) {
-            if (error) {
-                callback(error);
-                return;
-            }
-            address = data.contract_addr;
-            waitForTx(callback);
-        }
-    );
-}
-
-// Basically wait for the next block to be committed.
-function waitForTx(callback) {
-
-    edb.events().subAccountCall(address, function (error, data) {
-        if (error) {
-            console.log(error);
-            callback(error);
-        } else {
-            callback(null, data);
-        }
-    });
-}
-
-function call(address, input, callback) {
-    edb.txs().call(address, input, function (error, data) {
-        if (error) {
-            callback(error);
-        }
-        callback(null, data);
-    });
-}
