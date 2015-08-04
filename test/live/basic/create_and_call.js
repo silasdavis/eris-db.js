@@ -65,9 +65,8 @@ function transact(privKey, code, callback) {
 
 // Basically wait for the next block to be committed.
 function waitForTx(callback) {
-    var eventSub;
 
-    edb.events().subAccountReceive(address, function (error, data) {
+    edb.events().subAccountCall(address, function (error, data) {
         if (error) {
             console.log(error);
             callback(error);

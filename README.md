@@ -1,4 +1,4 @@
-# erisdb-js
+# erisdb-js (Alpha)
 
 `erisdb-js` is a javascript API for [erisdb-tendermint](https://github.com/eris-ltd/eris-db).
 
@@ -30,7 +30,6 @@ If you use websockets, the system will not be ready until the start callback fir
 The start callback must be on the following format: `function(error)`. An error is an indication that the websocket connection failed to be established.
 
 If you want to use several `ErisDB` instances at once, that is possible. Just create more instances via `edbFactory.createInstance()`. This is the preferred method if you want multiple websocket connections with the eris-db server.
-
 
 No config file is needed for this library.
 
@@ -95,7 +94,6 @@ The consensus object has methods for getting consensus-related data.
 
 The tendermint client will generate and fire off events when important things happen, like when a new block has been committed, or someone is transacting to an account. It is possible to subscribe to these events. These are the methods for subscribing, un-subscribing and polling.
 
-
 | Method | RPC method | Notes |
 | :----- | :--------- | :---- |
 | Events.subscribe | [erisdb.eventSubscribe](https://github.com/eris-ltd/eris-db/blob/master/api.md#eventsubscribe) | |
@@ -155,7 +153,7 @@ Client Version may be a bit misplaced
 
 #### Transactions
 
-A transaction is the equivalence of a database `write` operation. They can be done in two ways. There's the "dev" way, which is to call `transact` and pass along the target address (if any), data, gas, and a private key used for signing. It is very similar to the old Ethereum way of transacting. The other way is to create a transaction object and passing it to the `broadcastTx` method.
+A transaction is the equivalence of a database `write` operation. They can be done in two ways. There's the "dev" way, which is to call `transact` and pass along the target address (if any), data, gas, and a private key used for signing. It is very similar to the old Ethereum way of transacting, except Tendermint does not keep accounts in the client, so a private key needs to be sent along. This means the server **should either run on the same machine as the tendermint client, or in the same, private network**.
 
 Transacting via `broadcastTx` will be the standard way of doing things if you want the key to remain on the users machine. This requires a browser plugin for doing the actual signing, which we will add later. For now, you should stick to the `transact` method. 
 
@@ -166,18 +164,19 @@ To get a private key for testing/developing, you can run `tendermint gen_account
 Calls provide read-only access to the smart contracts. It is used mostly to get data out of a contract-accounts storage by using the contracts accessor methods, but can be used to call any method that does not change any data in any account. A trivial example would be a contract function that takes two numbers as input, adds them, and then simply returns the sum. 
 
 There are two types of calls. `Call` takes a data string and an account address and calls the code in that account (if any) using the provided data as input. This is the standard method for read-only operations.
- 
+
 `CallCode` works the same except you don't provide an account address but the actual compiled code instead. It's a dev tool for accessing the VM directly. "Code-execution as a service".
 
 | Method | RPC method | Notes |
 | :----- | :--------- | :---- |
-| Transactions.broadcastTx | [erisdb.broadcastTx](https://github.com/eris-ltd/eris-db/blob/master/api.md#broadcasttx) | |
+| Transactions.broadcastTx | [erisdb.broadcastTx](https://github.com/eris-ltd/eris-db/blob/master/api.md#broadcasttx) | see below |
 | Transactions.getUnconfirmedTxs | [erisdb.getUnconfirmedTxs](https://github.com/eris-ltd/eris-db/blob/master/api.md#getunconfirmedtxs) | |
 | Transactions.call | [erisdb.call](https://github.com/eris-ltd/eris-db/blob/master/api.md#call) | |
 | Transactions.callCode | [erisdb.callCode](https://github.com/eris-ltd/eris-db/blob/master/api.md#callcode) | |
-| Transactions.signTx | [erisdb.signTx](https://github.com/eris-ltd/eris-db/blob/master/api.md#signtx) | unsafe |
 | Transactions.transact | [erisdb.transact](https://github.com/eris-ltd/eris-db/blob/master/api.md#transact) | unsafe |
 | Transactions.transactNameReg | [erisdb.transactNameReg](https://github.com/eris-ltd/eris-db/blob/master/api.md#transactnamereg) | unsafe |
+
+`broadcastTx` is useless until we add a client-side signing solution. 
 
 ## Tests
 

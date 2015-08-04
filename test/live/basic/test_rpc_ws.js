@@ -25,7 +25,7 @@ var requestData = {
 
 var edb;
 
-describe('TheloniousWebSocket', function () {
+describe('ErisDbWebSocket', function () {
 
     before(function (done) {
         this.timeout(4000);

@@ -50,8 +50,7 @@ describe('TheloniousWebSocketEvents', function () {
 
         describe('#subNewBlock', function () {
             it("should subscribe to new block events", function (done) {
-                this.timeout(25000);
-                console.log("This should take about 15 seconds.");
+                this.timeout(6000);
                 edb.events().subNewBlocks(function (err, data) {
                     asrt.ifError(err, "New block subscription error.");
                     eventSub = data;

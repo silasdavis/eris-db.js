@@ -25,7 +25,7 @@ var requestData = {
 
 var edb;
 
-describe('TheloniousHttp', function () {
+describe('ErisDbHttpFilters', function () {
 
     before(function (done) {
         this.timeout(4000);
