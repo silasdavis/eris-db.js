@@ -60,7 +60,6 @@ describe('HttpCreateAndSolidityEvent', function () {
 
                 edb.txs().call("", address, input, function (error, data) {
                     asrt.ifError(error);
-                    console.log(data)
                 });
             }
         );
