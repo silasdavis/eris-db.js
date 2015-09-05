@@ -40,7 +40,7 @@ edb.start(function(error){
 
 ```
 
-Clients can be found in `edbFactory.clients`. We currently provide two - `WebSocketClient` and `HttpClient` + the base classes (`Client` and `TWCClient`) which is only used to implement other protocols.
+Clients can be found in `edbFactory.clients`. We currently provide two - `WebSocketClient` and `HTTPClient` + the base classes (`Client` and `TWCClient`) which is only used to implement other protocols.
 
 ### HTTP
 
