@@ -21,17 +21,46 @@ edb.start(function(error){
 
 ```
 
-The parameters for `createInstance` is the server URL as a string. The client-type is chosen based on the URL scheme. As of now, the supported schemes are: `http(s)` and `ws(s)` (websockets).
+The parameters for `createInstance` is the server URL as a string. The client-type is chosen based on the URL scheme. As of now, the supported schemes are: `http` and `ws` (websockets). No additional configuration is needed.
+
+If you want to specify what client to use, you do that through the `createInstanceFromClient` method.
+
+```
+var edbFactory = require('eris-db');
+
+var wsClient = new edbFactory.clients.WebSocketClient("ws://localhost:1337/socketrpc")
+
+var edb = edbFactory.createInstance(wsClient);
+
+edb.start(function(error){
+    if(!error){
+        console.log("Ready to go");
+    }
+});
+
+```
+
+Clients can be found in `edbFactory.clients`. We currently provide two - `WebSocketClient` and `HttpClient` + the base classes (`Client` and `TWCClient`) which is only used to implement other protocols.
+
+### HTTP
 
 If you use `http(s)`, the start command will do nothing, so it can just be called and no callback used.
 
-If you use websockets, the system will not be ready until the start callback fires.
+### WebSocket
 
-The start callback must be on the following format: `function(error)`. An error is an indication that the websocket connection failed to be established.
+If you use websocket, the system will not be ready until the start callback fires.
 
-If you want to use several `ErisDB` instances at once, that is possible. Just create more instances via `edbFactory.createInstance()`. This is the preferred method if you want multiple websocket connections with the eris-db server.
+The start callback must be on the following format: `function(error)`.
 
-No config file is needed for this library.
+The websocket-client has a number of additional connection-related methods:
+
+`WebSocketClient.shutDown(callback)` - Technically this method is available in all clients but does not do anything with the http client. If called on an edb instance with a websocket client (or on the client directly), it will invoke the zero-argument callback function when the socket has been terminated.
+
+`WebSocketClient.reconnect(callback)` - Will terminate the current connection (if any), and establish a new one. Same callback as with `start` (`callback(error)`).
+
+`WebSocketClient.setCloseCallback(callback)` - If this zero-argument callback is set, it will be invoked when the active connection is closed. The callback will remain until it is set to `null`. Note that it will also be called when reconnecting if there was an already active connection (since that connection will be closed).
+
+If you want to use several sockets at once (for some reason), you can do that. Just create multiple `ErisDB` instances through `edbFactory.createInstance(...)`.
 
 ## API Reference
 
