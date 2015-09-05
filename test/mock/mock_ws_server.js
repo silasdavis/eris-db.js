@@ -28,7 +28,9 @@ function MockWebsocketServer(port, handlers) {
      * @type {Object.<string, handlerFunction>}
      * @private
      */
-    this._handlers = handlers;
+    if(handlers) {
+        this._handlers = handlers;
+    }
 
     (function (mockServer) {
 
