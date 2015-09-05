@@ -30,7 +30,7 @@ var edbFactory = require('eris-db');
 
 var wsClient = new edbFactory.clients.WebSocketClient("ws://localhost:1337/socketrpc")
 
-var edb = edbFactory.createInstance(wsClient);
+var edb = edbFactory.createInstanceFromClient(wsClient);
 
 edb.start(function(error){
     if(!error){
