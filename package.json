@@ -13,8 +13,8 @@
     "ink-docstrap": "~0.5.2"
   },
   "scripts": {
-    "predoc": "npm install",
-    "doc": "rm -rf ./doc; jsdoc -t ./node_modules/ink-docstrap/template -c ./jsdoc_cfg/jsdoc.conf.json ./index.js ./lib/*.js ./lib/rpc/*.js README.md -d ./doc/",
+    "predoc": "npm install && rm -rf doc",
+    "doc": "jsdoc --configure 'JSDoc configuration.json' --template node_modules/ink-docstrap/template index.js lib/*.js lib/rpc/*.js README.md --destination doc",
     
     "test": "mocha"
   },
