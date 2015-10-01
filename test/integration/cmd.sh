@@ -56,7 +56,7 @@ function runErisdb(){
         echo "Cannot find mocha executable on path"
         return 1
     fi
-    DBS="$(pwd -P)/test/dbs"
+    DBS="$(pwd -P)/dbs"
     TMPDBS="${DBS}/temp"
     SRC="${DBS}/$1/dbfolder"
     DEST="${TMPDBS}/$1"
@@ -64,7 +64,7 @@ function runErisdb(){
     (erisdb ${DEST}) & EDBPID=$!
     # Give it some time (if needed).
     sleep 1
-    mocha "./test/live/$1/*.js"
+    mocha "./$1/*.js"
     RESULT=$?
     kill ${EDBPID} &> /dev/null
     rm -rf "${TMPDBS}/$1"
@@ -96,7 +96,7 @@ function runErisdbss(){
     else
        echo "Using already running instance of erisdbss"
     fi
-    mocha "./test/live/$1/*.js"
+    mocha "./$1/*.js"
     RESULT=$?
     kill ${SSPID} &> /dev/null
     return ${RESULT}

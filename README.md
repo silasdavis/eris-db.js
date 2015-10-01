@@ -210,9 +210,14 @@ There are two types of calls. `Call` takes a data string and an account address 
 
 ## Tests
 
-`mocha` or `npm test`
+For unit tests, run `npm test`.
 
-Integration tests requires `erisdb` and `erisdbss` to exist on the path. This is the `eris-db` server and the server deployment utility. More info in the [eris-db](https://github.com/eris-ltd/eris-db) README file.
+For integration tests:
+
+```shell
+$ cd test/integration
+$ ./test.sh
+```
 
 ## Documentation
 
