@@ -10,7 +10,7 @@ $ npm install eris-db
 
 ## Usage
 
-If you created an ErisDB server using the Eris CLI tool, you can find out its IP address like this:
+If you created an ErisDB server using the [Eris CLI](https://github.com/eris-ltd/eris-cli) tool, you can find out its IP address using the following command:
 
 ```
 $ eris chains inspect <name of ErisDB server> NetworkSettings.IPAddress
