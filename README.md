@@ -1,17 +1,27 @@
 # erisdb-js (Alpha)
 
-`erisdb-js` is a javascript API for [erisdb-tendermint](https://github.com/eris-ltd/eris-db).
+This is a JavaScript API for communicating with a [ErisDB](https://github.com/eris-ltd/eris-db) server.
 
-## Installation and usage
+## Installation
 
-`npm install eris-db`
+```shell
+$ npm install eris-db
+```
+
+## Usage
+
+If you created an ErisDB server using the Eris CLI tool, you can find out its IP address like this:
+
+```
+$ eris chains inspect <name of ErisDB server> NetworkSettings.IPAddress
+```
 
 The main class is `ErisDB`. A standard `ErisDB` instance is created like this:
 
 ```
 var edbFactory = require('eris-db');
 
-var edb = edbFactory.createInstance("http://localhost:1337/rpc");
+var edb = edbFactory.createInstance("http://<IP address>:1337/rpc");
 
 edb.start(function(error){
     if(!error){
@@ -28,7 +38,7 @@ If you want to specify what client to use, you do that through the `createInstan
 ```
 var edbFactory = require('eris-db');
 
-var wsClient = new edbFactory.clients.WebSocketClient("ws://localhost:1337/socketrpc")
+var wsClient = new edbFactory.clients.WebSocketClient("ws://<IP address>:1337/socketrpc")
 
 var edb = edbFactory.createInstanceFromClient(wsClient);
 
