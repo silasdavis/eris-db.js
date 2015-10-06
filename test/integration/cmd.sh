@@ -1,127 +1,29 @@
 #!/usr/bin/env bash
-# Run live tests locally if erisdbss and erisdb is found.
-# NOTE: This is a WIP and not really meant for public use.
 
-# TODO time to retire...
-
-ssFlags=( "basic" )
-
-function inputInSS(){
-    for i in "${ssFlags[@]}"; do
-        if [[ $1 == ${i} ]]; then
-            return 0
-        fi
-    done
-    return 1
-}
-
-function validInput(){
-    inputInSS $1
-    VSS=$?
-    return ${VSS}
-}
-
-function listFlags(){
-    for i in "${ssFlags[@]}"
-    do
-        echo ${i}
-    done
-}
-
-function usage(){
-    echo "***************************************************************"
-    echo "                                  _                            "
-    echo "                 ___      _ _    (_)     ___                   "
-    echo "                / -_)    | '_|   | |    (_-<                   "
-    echo "                \___|   _|_|_   _|_|_   /__/_                  "
-    echo "              _|'''''|_|'''''|_|'''''|_|'''''|                 "
-    echo "              *'-0-0-'*'-0-0-'*'-0-0-'*'-0-0-'                 "
-    echo "                                                               "
-    echo "**************************** Usage ****************************"
-    echo "Usage: live_test.sh name"
-    echo "name can be: "
-    listFlags
-    echo "***************************************************************"
-}
-
-function runErisdb(){
-    # These are for tests that runs erisdb and provide it with the path
-    # to an already existing working directory. These tests can only be
-    # done locally (erisdb running locally).
-    if [[ -z $(command -v erisdb) ]]; then
-        echo "Cannot find erisdb executable on path"
-        return 1
-    fi
-    if [[ -z $(command -v mocha) ]]; then
-        echo "Cannot find mocha executable on path"
-        return 1
-    fi
-    DBS="$(pwd -P)/dbs"
-    TMPDBS="${DBS}/temp"
-    SRC="${DBS}/$1/dbfolder"
-    DEST="${TMPDBS}/$1"
-    cp -a "${SRC}/." "${DEST}/"
-    (erisdb ${DEST}) & EDBPID=$!
+# These are for tests that use erisdbss (server-server) to create a
+# new node with some given settings like priv-validator and genesis.json.
+# Usually those settings are put in the javscript test files themselves.
+if [[ -z $(command -v erisdbss) ]]; then
+    echo "Cannot find erisdbss executable on path"
+    exit 1
+fi
+if [[ -z $(command -v erisdb) ]]; then
+    echo "Cannot find erisdb executable on path"
+    exit 1
+fi
+if [[ -z $(command -v mocha) ]]; then
+    echo "Cannot find mocha executable on path"
+    exit 1
+fi
+# Check if already running
+SSOLDPID=$(pidof erisdbss)
+if [[ -z ${SSOLDPID} ]]; then
+    (erisdbss) &> /dev/null & SSPID=$!
     # Give it some time (if needed).
     sleep 1
-    mocha "./$1/*.js"
-    RESULT=$?
-    kill ${EDBPID} &> /dev/null
-    rm -rf "${TMPDBS}/$1"
-    return ${RESULT}
-}
+else
+   echo "Using already running instance of erisdbss"
+fi
 
-function runErisdbss(){
-    # These are for tests that use erisdbss (server-server) to create a
-    # new node with some given settings like priv-validator and genesis.json.
-    # Usually those settings are put in the javscript test files themselves.
-    if [[ -z $(command -v erisdbss) ]]; then
-        echo "Cannot find erisdbss executable on path"
-        exit 1
-    fi
-    if [[ -z $(command -v erisdb) ]]; then
-        echo "Cannot find erisdb executable on path"
-        exit 1
-    fi
-    if [[ -z $(command -v mocha) ]]; then
-        echo "Cannot find mocha executable on path"
-        exit 1
-    fi
-    # Check if already running
-    SSOLDPID=$(pidof erisdbss)
-    if [[ -z ${SSOLDPID} ]]; then
-        (erisdbss) &> /dev/null & SSPID=$!
-        # Give it some time (if needed).
-        sleep 1
-    else
-       echo "Using already running instance of erisdbss"
-    fi
-    mocha "./$1/*.js"
-    RESULT=$?
-    kill ${SSPID} &> /dev/null
-    return ${RESULT}
-}
-
-function main()
-{
-    if [[ -z "$1" ]]; then
-        echo "Error: No arguments."
-        usage
-        exit 1
-    fi
-    validInput $1
-    VI=$?
-    if [[ ${VI} != 0 ]]; then
-        echo "Error: Illegal argument: $1."
-        usage
-        exit 2
-    else
-        runErisdbss $1
-        TEST_RESULTS=$?
-        exit ${TEST_RESULTS}
-    fi
-    exit 0
-}
-
-# Start
-main $1
+echo "Type 'mocha' to run the tests."
+/bin/bash
