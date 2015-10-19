@@ -10,9 +10,12 @@
     "browserify": "^10.2.4",
     "fs-extra": "~0.18.4",
     "gulp": "^3.9.0",
-    "ink-docstrap": "~0.5.2"
+    "ink-docstrap": "~0.5.2",
+    "mocha": "^2.3.3"
   },
   "scripts": {
+    "predoc": "npm install && rm -rf doc",
+    "doc": "jsdoc --configure 'JSDoc configuration.json' --template node_modules/ink-docstrap/template index.js lib/*.js lib/rpc/*.js README.md --destination doc",
     "test": "mocha"
   },
   "repository": {
@@ -39,5 +42,5 @@
       "url": "http://erisindustries.com"
     }
   ],
-  "license": "LGPL-3.0"
+  "license": "GPL-3.0"
 }
