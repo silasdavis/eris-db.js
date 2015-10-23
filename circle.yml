@@ -1,4 +1,12 @@
 machine:
+  environment:
+    REPO: ${HOME}/${CIRCLE_PROJECT_REPONAME}
+    BUILD_SCRIPT: npm test
+    INTEGRATION_TESTS_BRANCH: staging
+    INTEGRATION_TESTS_PATH: $HOME/integration-tests
+    DOCKER_VERSION: 1.8.2
+    DOCKER_MACHINE_VERSION: 0.4.0
+
   node:
     version: 0.12.0
 
