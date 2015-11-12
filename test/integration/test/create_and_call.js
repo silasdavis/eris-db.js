@@ -41,6 +41,7 @@ describe('HttpCreateAndCall', function () {
         this.timeout(5000);
         edb.txs().transactAndHold(privKey, "", compiled, 1000000, 0, null, function (error, data) {
             asrt.ifError(error);
+            console.log(data);
             address = data.call_data.callee;
             edb.txs().call(address, input, function (error, data) {
                 asrt.ifError(error);

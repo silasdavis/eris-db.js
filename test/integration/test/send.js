@@ -61,7 +61,6 @@ describe('send', function () {
             asrt.ifError(error);
             edb.accounts().getAccount("C94DC0AA09348AEBAF026D8A77C8C2AB544DE038", function(error, data){
                 asrt.ifError(error);
-                console.log(data);
                 asrt.equal(data.balance, 2000000, "Balances do not match.");
                 done();
             });

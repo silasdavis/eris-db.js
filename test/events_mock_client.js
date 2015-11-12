@@ -29,6 +29,7 @@ describe('Event tests with mock rpc client', function () {
         it("should subscribe to solidity event using once", function (done) {
             edb.events().subSolidityEvent(testAddress, function (error, event) {
                 asrt.ifError(error);
+                console.log(event);
                 asrt.deepEqual(testData.EventPoll.output.events[0], event, "Event did not match.");
                 done();
             });
