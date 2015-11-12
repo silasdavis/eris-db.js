@@ -114,23 +114,24 @@ describe('ErisDbWebSocket', function () {
 
     });
 
-
     describe('.txs', function () {
 
         describe('#transact contract create', function () {
+            this.timeout(4000);
             it("should send a contract create tx to an address", function (done) {
                 var tx_create = testData.TransactCreate.input;
                 var exp = testData.TransactCreate.output;
-                edb.txs().transact(tx_create.priv_key, tx_create.address, tx_create.data,
+                edb.txs().transactAndHold(tx_create.priv_key, tx_create.address, tx_create.data,
                     tx_create.gas_limit, tx_create.fee, null, check(exp, done));
             });
         });
 
         describe('#transact', function () {
+            this.timeout(4000);
             it("should transact with the account at the given address", function (done) {
                 var tx = testData.Transact.input;
                 var exp = testData.Transact.output;
-                edb.txs().transact(tx.priv_key, tx.address, tx.data, tx.gas_limit, tx.fee,
+                edb.txs().transactAndHold(tx.priv_key, tx.address, tx.data, tx.gas_limit, tx.fee,
                     null, check(exp, done));
             });
         });
@@ -202,7 +203,7 @@ describe('ErisDbWebSocket', function () {
         describe('#getInfo', function () {
             it("should get the blockchain info", function (done) {
                 var exp = testData.GetBlockchainInfo.output;
-                edb.blockchain().getInfo(check(exp, done));
+                edb.blockchain().getInfo(check(exp, done, [modifyBlockInfo]));
             });
         });
 
@@ -224,13 +225,6 @@ describe('ErisDbWebSocket', function () {
             it("should get the latest block height", function (done) {
                 var exp = testData.GetLatestBlockHeight.output;
                 edb.blockchain().getLatestBlockHeight(check(exp, done));
-            });
-        });
-
-        describe('#getBlocks', function () {
-            it("should get the blocks between min, and max height", function (done) {
-                var exp = testData.GetBlocks.output;
-                edb.blockchain().getBlocks(check(exp, done));
             });
         });
 
@@ -265,4 +259,8 @@ function modifyPrivateAccount(pa){
     pa.address = "";
     pa.pub_key[1] = "";
     pa.priv_key[1] = "";
+}
+
+function modifyBlockInfo(bi){
+    bi.latest_block = null;
 }

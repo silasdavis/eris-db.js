@@ -41,7 +41,7 @@ describe('HttpCreateAndSolidityEvent', function () {
         this.timeout(8000);
 
         var expected = {
-            address: '0000000000000000000000009FC1ECFCAE2A554D4D1A000D0D80F748E66359E3',
+            address: '000000000000000000000000576439CD5C22EB6F3AE1AC1EC5101C5CE1E120D8',
             topics: ['88C4F556FDC50387EC6B6FC4E8250FECC56FF50E873DF06DADEEB84C0287CA90',
                 'FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF',
                 '6861686100000000000000000000000000000000000000000000000000000000'],
@@ -54,6 +54,7 @@ describe('HttpCreateAndSolidityEvent', function () {
                 address = data.call_data.callee;
 
                 edb.events().subLogEvent(address, function (error, event) {
+                    console.log(event);
                     asrt.deepEqual(event, expected, "Event data does not match expected.");
                     done();
                 });

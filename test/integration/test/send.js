@@ -50,6 +50,7 @@ describe('send', function () {
         });
         edb.txs().send(privKey, "C94DC0AA09348AEBAF026D8A77C8C2AB544DE038", 1000000, null, function (error, data) {
             asrt.ifError(error);
+            console.log(data);
         });
     });
 
