@@ -30,7 +30,7 @@ describe('Event tests with mock rpc client', function () {
             edb.events().subSolidityEvent(testAddress, function (error, event) {
                 asrt.ifError(error);
                 console.log(event);
-                asrt.deepEqual(testData.EventPoll.output.events[0], event, "Event did not match.");
+                asrt.deepEqual(testData.EventPoll.output.events[0][1], event, "Event did not match.");
                 done();
             });
         });
@@ -42,7 +42,7 @@ describe('Event tests with mock rpc client', function () {
                 sub = eventSub;
             }, function (error, event) {
                 asrt.ifError(error);
-                asrt.deepEqual(testData.EventPoll.output.events[0], event, "Event did not match.");
+                asrt.deepEqual(testData.EventPoll.output.events[0][1], event, "Event did not match.");
                 sub.stop();
                 done();
             });
@@ -55,7 +55,7 @@ describe('Event tests with mock rpc client', function () {
         it("should subscribe to account input using once", function (done) {
             edb.events().subAccountInput(testAddress, function (error, event) {
                 asrt.ifError(error);
-                asrt.deepEqual(testData.EventPoll.output.events[0], event, "Event did not match.");
+                asrt.deepEqual(testData.EventPoll.output.events[0][1], event, "Event did not match.");
                 done();
             });
         });
@@ -67,7 +67,7 @@ describe('Event tests with mock rpc client', function () {
                 sub = eventSub;
             }, function (error, event) {
                 asrt.ifError(error);
-                asrt.deepEqual(testData.EventPoll.output.events[0], event, "Event did not match.");
+                asrt.deepEqual(testData.EventPoll.output.events[0][1], event, "Event did not match.");
                 sub.stop();
                 done();
             });
@@ -80,7 +80,7 @@ describe('Event tests with mock rpc client', function () {
         it("should subscribe to account output using once", function (done) {
             edb.events().subAccountOutput(testAddress, function (error, event) {
                 asrt.ifError(error);
-                asrt.deepEqual(testData.EventPoll.output.events[0], event, "Event did not match.");
+                asrt.deepEqual(testData.EventPoll.output.events[0][1], event, "Event did not match.");
                 done();
             });
         });
@@ -92,7 +92,7 @@ describe('Event tests with mock rpc client', function () {
                 sub = eventSub;
             }, function (error, event) {
                 asrt.ifError(error);
-                asrt.deepEqual(testData.EventPoll.output.events[0], event, "Event did not match.");
+                asrt.deepEqual(testData.EventPoll.output.events[0][1], event, "Event did not match.");
                 sub.stop();
                 done();
             });
@@ -105,7 +105,7 @@ describe('Event tests with mock rpc client', function () {
         it("should subscribe to account receive using once", function (done) {
             edb.events().subAccountReceive(testAddress, function (error, event) {
                 asrt.ifError(error);
-                asrt.deepEqual(testData.EventPoll.output.events[0], event, "Event did not match.");
+                asrt.deepEqual(testData.EventPoll.output.events[0][1], event, "Event did not match.");
                 done();
             });
         });
@@ -117,7 +117,7 @@ describe('Event tests with mock rpc client', function () {
                 sub = eventSub;
             }, function (error, event) {
                 asrt.ifError(error);
-                asrt.deepEqual(testData.EventPoll.output.events[0], event, "Event did not match.");
+                asrt.deepEqual(testData.EventPoll.output.events[0][1], event, "Event did not match.");
                 sub.stop();
                 done();
             });
@@ -130,7 +130,7 @@ describe('Event tests with mock rpc client', function () {
         it("should subscribe to bond events using once", function (done) {
             edb.events().subBonds(function (error, event) {
                 asrt.ifError(error);
-                asrt.deepEqual(testData.EventPoll.output.events[0], event, "Event did not match.");
+                asrt.deepEqual(testData.EventPoll.output.events[0][1], event, "Event did not match.");
                 done();
             });
         });
@@ -142,7 +142,7 @@ describe('Event tests with mock rpc client', function () {
                 sub = eventSub;
             }, function (error, event) {
                 asrt.ifError(error);
-                asrt.deepEqual(testData.EventPoll.output.events[0], event, "Event did not match.");
+                asrt.deepEqual(testData.EventPoll.output.events[0][1], event, "Event did not match.");
                 sub.stop();
                 done();
             });
@@ -155,7 +155,7 @@ describe('Event tests with mock rpc client', function () {
         it("should subscribe to unbond events using once", function (done) {
             edb.events().subUnbonds(function (error, event) {
                 asrt.ifError(error);
-                asrt.deepEqual(testData.EventPoll.output.events[0], event, "Event did not match.");
+                asrt.deepEqual(testData.EventPoll.output.events[0][1], event, "Event did not match.");
                 done();
             });
         });
@@ -167,7 +167,7 @@ describe('Event tests with mock rpc client', function () {
                 sub = eventSub;
             }, function (error, event) {
                 asrt.ifError(error);
-                asrt.deepEqual(testData.EventPoll.output.events[0], event, "Event did not match.");
+                asrt.deepEqual(testData.EventPoll.output.events[0][1], event, "Event did not match.");
                 sub.stop();
                 done();
             });
@@ -180,7 +180,7 @@ describe('Event tests with mock rpc client', function () {
         it("should subscribe to rebond events using once", function (done) {
             edb.events().subRebonds(function (error, event) {
                 asrt.ifError(error);
-                asrt.deepEqual(testData.EventPoll.output.events[0], event, "Event did not match.");
+                asrt.deepEqual(testData.EventPoll.output.events[0][1], event, "Event did not match.");
                 done();
             });
         });
@@ -192,7 +192,7 @@ describe('Event tests with mock rpc client', function () {
                 sub = eventSub;
             }, function (error, event) {
                 asrt.ifError(error);
-                asrt.deepEqual(testData.EventPoll.output.events[0], event, "Event did not match.");
+                asrt.deepEqual(testData.EventPoll.output.events[0][1], event, "Event did not match.");
                 sub.stop();
                 done();
             });
@@ -205,7 +205,7 @@ describe('Event tests with mock rpc client', function () {
         it("should subscribe to dupeout events using once", function (done) {
             edb.events().subDupeouts(function (error, event) {
                 asrt.ifError(error);
-                asrt.deepEqual(testData.EventPoll.output.events[0], event, "Event did not match.");
+                asrt.deepEqual(testData.EventPoll.output.events[0][1], event, "Event did not match.");
                 done();
             });
         });
@@ -217,7 +217,7 @@ describe('Event tests with mock rpc client', function () {
                 sub = eventSub;
             }, function (error, event) {
                 asrt.ifError(error);
-                asrt.deepEqual(testData.EventPoll.output.events[0], event, "Event did not match.");
+                asrt.deepEqual(testData.EventPoll.output.events[0][1], event, "Event did not match.");
                 sub.stop();
                 done();
             });
@@ -230,7 +230,7 @@ describe('Event tests with mock rpc client', function () {
         it("should subscribe to new block events using once", function (done) {
             edb.events().subNewBlocks(function (error, event) {
                 asrt.ifError(error);
-                asrt.deepEqual(testData.EventPoll.output.events[0], event, "Event did not match.");
+                asrt.deepEqual(testData.EventPoll.output.events[0][1], event, "Event did not match.");
                 done();
             });
         });
@@ -242,7 +242,7 @@ describe('Event tests with mock rpc client', function () {
                 sub = eventSub;
             }, function (error, event) {
                 asrt.ifError(error);
-                asrt.deepEqual(testData.EventPoll.output.events[0], event, "Event did not match.");
+                asrt.deepEqual(testData.EventPoll.output.events[0][1], event, "Event did not match.");
                 sub.stop();
                 done();
             });
@@ -255,7 +255,7 @@ describe('Event tests with mock rpc client', function () {
         it("should subscribe to fork events using once", function (done) {
             edb.events().subForks(function (error, event) {
                 asrt.ifError(error);
-                asrt.deepEqual(testData.EventPoll.output.events[0], event, "Event did not match.");
+                asrt.deepEqual(testData.EventPoll.output.events[0][1], event, "Event did not match.");
                 done();
             });
         });
@@ -267,7 +267,7 @@ describe('Event tests with mock rpc client', function () {
                 sub = eventSub;
             }, function (error, event) {
                 asrt.ifError(error);
-                asrt.deepEqual(testData.EventPoll.output.events[0], event, "Event did not match.");
+                asrt.deepEqual(testData.EventPoll.output.events[0][1], event, "Event did not match.");
                 sub.stop();
                 done();
             });

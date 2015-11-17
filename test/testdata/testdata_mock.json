@@ -38,7 +38,6 @@
               "set": 16383
             },
             "roles": [
-
             ]
           }
         },
@@ -179,7 +178,9 @@
     "output": {}
   },
   "GetBlock": {
-    "input": {"height": 0},
+    "input": {
+      "height": 0
+    },
     "output": null
   },
   "GetBlocks": {
@@ -269,7 +270,9 @@
     "output": []
   },
   "GetPeer": {
-    "input": {"address": "127.0.0.1:30000"},
+    "input": {
+      "address": "127.0.0.1:30000"
+    },
     "output": {
       "is_outbound": false,
       "node_info": null
@@ -361,7 +364,10 @@
     }
   },
   "Call": {
-    "input": {"address": "9FC1ECFCAE2A554D4D1A000D0D80F748E66359E3", "data": ""},
+    "input": {
+      "address": "9FC1ECFCAE2A554D4D1A000D0D80F748E66359E3",
+      "data": ""
+    },
     "output": {
       "return": "6000357c01000000000000000000000000000000000000000000000000000000009004806337f428411461004557806340c10f191461005a578063d0679d341461006e57005b610050600435610244565b8060005260206000f35b610068600435602435610082565b60006000f35b61007c600435602435610123565b60006000f35b600060009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff1614156100dd576100e2565b61011f565b80600160005060008473ffffffffffffffffffffffffffffffffffffffff1681526020019081526020016000206000828282505401925050819055505b5050565b80600160005060003373ffffffffffffffffffffffffffffffffffffffff168152602001908152602001600020600050541061015e57610163565b610240565b80600160005060003373ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060008282825054039250508190555080600160005060008473ffffffffffffffffffffffffffffffffffffffff1681526020019081526020016000206000828282505401925050819055507f93eb3c629eb575edaf0252e4f9fc0c5ccada50496f8c1d32f0f93a65a8257eb560003373ffffffffffffffffffffffffffffffffffffffff1681526020018373ffffffffffffffffffffffffffffffffffffffff1681526020018281526020016000a15b5050565b6000600160005060008373ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060005054905061027d565b91905056",
       "gas_used": 0
@@ -389,17 +395,20 @@
     },
     "output": {
       "events": [
-        {
-          "address": "0000000000000000000000009FC1ECFCAE2A554D4D1A000D0D80F748E66359E3",
-          "topics": [
-            "0FC28FCE5E54AC6458756FC24DC51A931CA7AD21440CFCA44933AE774ED5F70C",
-            "0000000000000000000000000000000000000000000000000000000000000005",
-            "0000000000000000000000000000000000000000000000000000000000000019",
-            "000000000000000000000000000000000000000000000000000000000000001E"
-          ],
-          "data": "41646465642074776F206E756D62657273000000000000000000000000000000",
-          "height": 1
-        }
+        [
+          5,
+          {
+            "address": "0000000000000000000000009FC1ECFCAE2A554D4D1A000D0D80F748E66359E3",
+            "topics": [
+              "0FC28FCE5E54AC6458756FC24DC51A931CA7AD21440CFCA44933AE774ED5F70C",
+              "0000000000000000000000000000000000000000000000000000000000000005",
+              "0000000000000000000000000000000000000000000000000000000000000019",
+              "000000000000000000000000000000000000000000000000000000000000001E"
+            ],
+            "data": "41646465642074776F206E756D62657273000000000000000000000000000000",
+            "height": 1
+          }
+        ]
       ]
     }
   },
@@ -425,7 +434,8 @@
       "name": "testKey",
       "owner": "37236DF251AB70022B1DA351F08A20FB52443E37",
       "data": "testData",
-      "expires": 250 }
+      "expires": 250
+    }
   },
   "GetNameRegEntries": {
     "input": {
@@ -433,12 +443,14 @@
     },
     "output": {
       "block_height": 1,
-      "names":[ {
-        "name": "testKey",
-        "owner": "37236DF251AB70022B1DA351F08A20FB52443E37",
-        "data": "testData",
-        "expires": 250
-      } ]
+      "names": [
+        {
+          "name": "testKey",
+          "owner": "37236DF251AB70022B1DA351F08A20FB52443E37",
+          "data": "testData",
+          "expires": 250
+        }
+      ]
     }
   }
 }
