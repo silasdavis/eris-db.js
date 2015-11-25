@@ -13,15 +13,7 @@ if (typeof(window) === "undefined") {
     edbModule = edbFactory;
 }
 
-var serverServerURL = "http://localhost:1337/server";
-
 var test_data = require('./../../testdata/testdata.json');
-
-var requestData = {
-    priv_validator: test_data.chain_data.priv_validator,
-    genesis: test_data.chain_data.genesis,
-    max_duration: 30
-};
 
 var edb;
 var eventSub;
@@ -29,13 +21,10 @@ var eventSub;
 describe('TheloniousWebSocketEvents', function () {
 
     before(function (done) {
-        this.timeout(4000);
+              this.timeout(30 * 1000);
 
-        util.getNewErisServer(serverServerURL, requestData, function(err, port){
-            if(err){
-                throw new Error(err);
-            }
-            edb = edbModule.createInstance("ws://localhost:" + port + '/socketrpc', true);
+        require('../createDb')().spread(function (ipAddress, privateKey) {
+            edb = edbModule.createInstance("ws://" + ipAddress + ':1337/socketrpc', true);
             edb.start(function(err){
                 if (err){
                     throw new Error(err);

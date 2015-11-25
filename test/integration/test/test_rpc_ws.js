@@ -13,28 +13,17 @@ if (typeof(window) === "undefined") {
     edbModule = edbFactory;
 }
 
-var serverServerURL = "http://localhost:1337/server";
-
 var testData = require('./../../testdata/testdata.json');
-
-var requestData = {
-    priv_validator: testData.chain_data.priv_validator,
-    genesis: testData.chain_data.genesis,
-    max_duration: 10
-};
 
 var edb;
 
 describe('ErisDbWebSocket', function () {
 
     before(function (done) {
-        this.timeout(4000);
-        
-        util.getNewErisServer(serverServerURL, requestData, function(err, port){
-            if(err){
-                throw err;
-            }
-            edb = edbModule.createInstance("ws://localhost:" + port + '/socketrpc', true);
+        this.timeout(30 * 1000);
+
+        require('../createDb')().spread(function (ipAddress, privateKey) {
+            edb = edbModule.createInstance("ws://" + ipAddress + ':1337/socketrpc', true);
             edb.start(function(err){
                 if (err){
                     throw err;

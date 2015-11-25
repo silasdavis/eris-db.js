@@ -2,42 +2,39 @@
  */
 // TODO break all the standard tests out into one file, then use them in all mock tests + these ones.
 var util = require('../../../lib/util');
-var asrt;
-var edbModule;
-
-if (typeof(window) === "undefined") {
-    asrt = require('assert');
-    edbModule = require("../../../index");
-} else {
-    asrt = assert;
-    edbModule = edbFactory;
-}
-
-var serverServerURL = "http://localhost:1337/server";
+var assert = require('assert');
+var edbModule = require("../../../index"),
+    _ = require('lodash');
 
 var testData = require('./../../testdata/testdata.json');
 
-var requestData = {
-    priv_validator: testData.chain_data.priv_validator,
-    genesis: testData.chain_data.genesis,
-    max_duration: 10
-};
-
 var edb;
 
+function hasKeys(object, keys) {
+    return keys.every(_.curry(_.has)(object));
+}
+
+function assertHasKeys(keys, done) {
+    return function (error, response) {
+        assert.ifError(error);
+        assert(hasKeys(response, keys));
+        done();
+    };
+}
+
 describe('ErisDbHttp', function () {
+  var
+    privateKey;
 
     before(function (done) {
-        this.timeout(4000);
+      this.timeout(30 * 1000);
 
-        util.getNewErisServer(serverServerURL, requestData, function(err, port){
-            if(err){
-                throw new Error(err);
-            }
-            edb = edbModule.createInstance("http://localhost:" + port + '/rpc');
-            console.time("http");
-            done();
-        })
+      require('../createDb')().spread(function (ipAddress, key) {
+          edb = edbModule.createInstance("http://" + ipAddress + ":1337/rpc");
+          privateKey = key;
+          console.time("http");
+          done();
+      });
     });
 
     after(function(){
@@ -48,15 +45,16 @@ describe('ErisDbHttp', function () {
 
         describe('#getState', function () {
             it("should get the consensus state", function (done) {
-                var exp = testData.GetConsensusState.output;
-                edb.consensus().getState(check(exp, done, [modifyConsensusStartTime]));
+                edb.consensus().getState(assertHasKeys(['height', 'round',
+                    'step', 'start_time', 'commit_time', 'validators',
+                    'proposal'], done));
             });
         });
 
         describe('#getValidators', function () {
             it("should get the validators", function (done) {
-                var exp = testData.GetValidators.output;
-                edb.consensus().getValidators(check(exp, done));
+                edb.consensus().getValidators(assertHasKeys(['block_height',
+                    'bonded_validators', 'unbonding_validators'], done));
             });
         });
 
@@ -65,9 +63,9 @@ describe('ErisDbHttp', function () {
     describe('.network', function () {
 
         describe('#getInfo', function () {
-            var exp = testData.GetNetworkInfo.output;
             it("should get the network info", function (done) {
-                edb.network().getInfo(check(exp, done));
+                edb.network().getInfo(assertHasKeys(['client_version',
+                    'moniker', 'listening', 'listeners', 'peers'], done));
             });
         });
 
@@ -79,23 +77,28 @@ describe('ErisDbHttp', function () {
         });
 
         describe('#getMoniker', function () {
-            var exp = testData.GetMoniker.output;
             it("should get the moniker", function (done) {
-                edb.network().getMoniker(check(exp, done));
+                edb.network().getMoniker(assertHasKeys(['moniker'], done));
             });
         });
 
         describe('#isListening', function () {
             it("should get the listening value", function (done) {
-                var exp = testData.IsListening.output;
-                edb.network().isListening(check(exp, done));
+                edb.network().isListening(function (error, response) {
+                    assert.ifError(error);
+                    assert(response.listening);
+                    done();
+                });
             });
         });
 
         describe('#getListeners', function () {
             it("should get the listeners", function (done) {
-                var exp = testData.GetListeners.output;
-                edb.network().getListeners(check(exp, done));
+                edb.network().getListeners(function (error, response) {
+                    assert.ifError(error);
+                    assert(response.listeners.length > 0);
+                    done();
+                });
             });
         });
 
@@ -111,21 +114,19 @@ describe('ErisDbHttp', function () {
     describe('.txs', function () {
 
         describe('#transact contract create', function () {
-            this.timeout(4000);
             it("should send a contract create tx to an address", function (done) {
                 var tx_create = testData.TransactCreate.input;
                 var exp = testData.TransactCreate.output;
-                edb.txs().transactAndHold(tx_create.priv_key, tx_create.address, tx_create.data,
+                edb.txs().transact(privateKey, tx_create.address, tx_create.data,
                     tx_create.gas_limit, tx_create.fee, null, check(exp, done));
             });
         });
 
         describe('#transact', function () {
-            this.timeout(4000);
             it("should transact with the account at the given address", function (done) {
                 var tx = testData.Transact.input;
                 var exp = testData.Transact.output;
-                edb.txs().transactAndHold(tx.priv_key, tx.address, tx.data, tx.gas_limit, tx.fee,
+                edb.txs().transact(privateKey, tx.address, tx.data, tx.gas_limit, tx.fee,
                     null, check(exp, done));
             });
         });
@@ -195,9 +196,9 @@ describe('ErisDbHttp', function () {
     describe('.blockchain', function () {
 
         describe('#getInfo', function () {
-            it("should get the blockchain info", function (done) {
+            it("should get the blockchain info", function () {
                 var exp = testData.GetBlockchainInfo.output;
-                edb.blockchain().getInfo(check(exp, done, [modifyBlockInfo]));
+                return edb.blockchain().getInfo(check(exp));
             });
         });
 
@@ -222,6 +223,13 @@ describe('ErisDbHttp', function () {
             });
         });
 
+        describe('#getBlocks', function () {
+            it("should get the blocks between min, and max height", function (done) {
+                var exp = testData.GetBlocks.output;
+                edb.blockchain().getBlocks(check(exp, done));
+            });
+        });
+
     });
 
 });
@@ -234,30 +242,24 @@ function check(expected, done, fieldModifiers) {
         if (error) {
             console.log(error);
         }
-        console.log(JSON.stringify(data), null, '\t');
         if(fieldModifiers && fieldModifiers.length > 0){
             for (var i = 0; i < fieldModifiers.length; i++) {
-                console.log("Modifier found");
-                console.log(data);
                 fieldModifiers[i](data);
             }
         }
-        asrt.ifError(error, "Failed to call rpc method.");
-        asrt.deepEqual(data, expected);
-        done();
+        try {
+          assert.ifError(error, "Failed to call rpc method.");
+          assert.deepEqual(data, expected);
+          done();
+        }
+        catch (exception) {
+          done(exception);
+        }
     };
-}
-
-function modifyConsensusStartTime(cs){
-    cs["start_time"] = "";
 }
 
 function modifyPrivateAccount(pa){
     pa.address = "";
     pa.pub_key[1] = "";
     pa.priv_key[1] = "";
-}
-
-function modifyBlockInfo(bi){
-    bi.latest_block = null;
 }

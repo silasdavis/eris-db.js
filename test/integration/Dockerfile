@@ -28,11 +28,18 @@ RUN curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-
   && rm "node-v$NODE_VERSION-linux-x64.tar.gz" SHASUMS256.txt.asc
 
 
+## Install Docker.
+RUN echo "deb http://http.debian.net/debian jessie-backports main" > /etc/apt/sources.list.d/backports.list
+RUN apt-get update && apt-get upgrade -qy && apt-get install -qy docker.io
+
+
 RUN npm install --global mocha
 
 RUN apt-get update && apt-get upgrade -qy && apt-get install -qy libgmp3-dev
 RUN go get github.com/eris-ltd/eris-db/cmd/erisdbss
 RUN go get github.com/eris-ltd/eris-db/cmd/erisdb
+RUN go get github.com/eris-ltd/eris-cli/cmd/eris
 
+USER eris
 WORKDIR /usr/src/app/test/integration
-CMD ["./cmd.sh", "basic"]
+CMD ["./cmd.sh"]

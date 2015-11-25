@@ -25,5 +25,7 @@ else
    echo "Using already running instance of erisdbss"
 fi
 
+eris init --yes
+
 echo "Type 'mocha' to run the tests."
 /bin/bash

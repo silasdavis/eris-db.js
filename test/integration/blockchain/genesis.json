@@ -1,0 +1,35 @@
+{
+	"genesis_time": "2015-11-07T12:13:05.491Z",
+	"chain_id": "blockchain",
+	"params": null,
+	"accounts": [
+		{
+			"address": "FFF2523A9DC3E55733F30F5C18C89151C8241923",
+			"amount": 2251799813685248,
+			"name": "",
+			"permissions": {
+				"base": {
+					"perms": 2302,
+					"set": 2302
+				},
+				"roles": []
+			}
+		}
+	],
+	"validators": [
+		{
+			"pub_key": [
+				1,
+				"4699A62F32CDDCDB73E1D5834D946498E797C7121E3EAE6C18E15C5B1360489A"
+			],
+			"amount": 1000,
+			"name": "",
+			"unbond_to": [
+				{
+					"address": "FFF2523A9DC3E55733F30F5C18C89151C8241923",
+					"amount": 1000
+				}
+			]
+		}
+	]
+}

@@ -13,33 +13,21 @@ if (typeof(window) === "undefined") {
     edbModule = edbFactory;
 }
 
-var serverServerURL = "http://localhost:1337/server";
-
 var testData = require('./../../testdata/testdata_filters.json');
-
-var requestData = {
-    priv_validator: testData.chain_data.priv_validator,
-    genesis: testData.chain_data.genesis,
-    max_duration: 10
-};
 
 var edb;
 
 describe('ErisDbHttpFilters', function () {
 
-    before(function (done) {
-        this.timeout(4000);
-
-        util.getNewErisServer(serverServerURL, requestData, function (err, port) {
-            if (err) {
-                throw err;
-            }
-            edb = edbModule.createInstance("http://localhost:" + port + '/rpc');
-            done();
-        })
-    });
-
     describe('#getAccounts', function () {
+        this.timeout(30 * 1000);
+
+        before(function (done) {
+          require('../createDb')().spread(function (ipAddress, privateKey) {
+            edb = edbModule.createInstance("http://" + ipAddress + ":1337/rpc");
+            done();
+          });
+        });
 
         it("should get the filtered list of accounts", function (done) {
             var filters = testData.GetAccounts0.input;
@@ -76,8 +64,13 @@ function check(expected, done, fieldModifiers) {
                 fieldModifiers[i](data);
             }
         }
-        asrt.ifError(error, "Failed to call rpc method.");
-        asrt.deepEqual(data, expected);
-        done();
+        try {
+          asrt.ifError(error, "Failed to call rpc method.");
+          asrt.deepEqual(data, expected);
+          done();
+        }
+        catch (exception) {
+          done(exception);
+        }
     };
 }
