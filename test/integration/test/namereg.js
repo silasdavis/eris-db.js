@@ -41,8 +41,11 @@ describe('TestNameReg', function () {
         var output = test_data.SetEntry.output;
         edb.namereg().setEntry(privKey, name, data, numBlocks, function (error, data) {
             asrt.ifError(error);
-            asrt.deepEqual(data, output, "output does not match expected");
-            done();
+
+            edb.namereg().getEntry(name, function (error, entry) {
+                asrt.deepEqual(entry, data, "output does not match expected");
+                done();
+            });
         });
     });
 
