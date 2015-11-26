@@ -161,8 +161,11 @@ describe('ErisDbHttp', function () {
 
         describe('#getAccounts', function () {
             it("should get all accounts", function (done) {
-                var exp = testData.GetAccounts.output;
-                edb.accounts().getAccounts(check(exp, done));
+                edb.accounts().getAccounts(function (error, response) {
+                    assert.ifError(error);
+                    assert.equal(response.accounts.length, 2);
+                    done();
+                });
             });
         });
 
@@ -204,15 +207,18 @@ describe('ErisDbHttp', function () {
 
         describe('#getChainId', function () {
             it("should get the chain id", function (done) {
-                var exp = testData.GetChainId.output;
-                edb.blockchain().getChainId(check(exp, done));
+                edb.blockchain().getChainId(function (error, response) {
+                    assert.ifError(error);
+                    assert.equal(response.chain_id, "blockchain");
+                    done();
+                });
             });
         });
 
         describe('#getGenesisHash', function () {
-            var exp = testData.GetGenesisHash.output;
             it("should get the genesis hash", function (done) {
-                edb.blockchain().getGenesisHash(check(exp, done));
+
+                edb.blockchain().getGenesisHash(assertHasKeys(['hash'], done));
             });
         });
 
