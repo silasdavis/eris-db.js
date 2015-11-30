@@ -189,7 +189,22 @@
             },
             "roles": []
           }
-        }
+        },
+		{
+			"address": "FFF2523A9DC3E55733F30F5C18C89151C8241923",
+			"balance": 2251799813685248,
+			"code": "",
+			"permissions": {
+              "base": {
+                "perms": 2302,
+                "set": 2302
+              },
+              "roles": []
+            },
+            "pub_key": null,
+            "sequence": 0,
+            "storage_root": ""
+		}
       ]
     }
   },
