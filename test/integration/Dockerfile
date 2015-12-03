@@ -29,8 +29,10 @@ RUN curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-
 
 
 ## Install Docker.
-RUN echo "deb http://http.debian.net/debian jessie-backports main" > /etc/apt/sources.list.d/backports.list
-RUN apt-get update && apt-get upgrade -qy && apt-get install -qy docker.io
+RUN apt-get update && apt-get install apt-transport-https
+RUN apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
+RUN echo "deb https://apt.dockerproject.org/repo debian-jessie main" > /etc/apt/sources.list.d/docker.list
+RUN apt-get update && apt-get upgrade -qy && apt-get install -qy docker-engine
 
 
 RUN npm install --global mocha
@@ -38,7 +40,9 @@ RUN npm install --global mocha
 RUN apt-get update && apt-get upgrade -qy && apt-get install -qy libgmp3-dev
 RUN go get github.com/eris-ltd/eris-db/cmd/erisdbss
 RUN go get github.com/eris-ltd/eris-db/cmd/erisdb
-RUN go get github.com/eris-ltd/eris-cli/cmd/eris
+
+RUN wget --directory-prefix=/tmp https://github.com/eris-ltd/eris-cli/releases/download/v0.10.3/eris_0.10.3_amd64.deb
+RUN dpkg --install /tmp/eris_0.10.3_amd64.deb
 
 USER eris
 WORKDIR /usr/src/app/test/integration
