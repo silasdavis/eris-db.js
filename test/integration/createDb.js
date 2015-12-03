@@ -21,7 +21,15 @@ module.exports = function () {
       var
         ipAddress, privateKey;
 
-      ipAddress = /(\d+\.\d+\.\d+\.\d+)\n/.exec(stdout)[1];
+      try {
+        ipAddress = /(\d+\.\d+\.\d+\.\d+)\n/.exec(stdout)[1];
+      } catch (exception) {
+        console.error("Unable to retrieve IP address of test chain.  Perhaps \
+it's stopped; check its logs.");
+
+        process.exit(1);
+      }
+
       console.log("Created ErisDB test server at " + ipAddress + ".");
       privateKey = require('./blockchain/priv_validator.json').priv_key[1];
       return [ipAddress, privateKey];
