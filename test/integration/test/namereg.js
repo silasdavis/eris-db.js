@@ -23,9 +23,9 @@ describe('TestNameReg', function () {
     before(function (done) {
         this.timeout(30 * 1000);
 
-        require('../createDb')().spread(function (ipAddress, privateKey) {
+        require('../createDb')().spread(function (ipAddress, validator) {
             edb = edbModule.createInstance("http://" + ipAddress + ":1337/rpc");
-            privKey = privateKey;
+            privKey = validator.priv_key[1];
             done();
         });
     });

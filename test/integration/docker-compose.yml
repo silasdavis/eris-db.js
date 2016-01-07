@@ -1,0 +1,14 @@
+compiler:
+  image: eris/compilers:latest
+
+test:
+  build: .
+  environment:
+    - DOCKER_HOST
+    - DOCKER_TLS_VERIFY
+    - DOCKER_CERT_PATH=/mnt/machine
+  volumes:
+    - $HOME/.docker/machine/machines/default:/mnt/machine:ro
+    - $PWD/../..:/usr/src/app
+  links:
+    - compiler

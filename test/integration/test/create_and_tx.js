@@ -21,8 +21,12 @@ describe('HttpCreateAndTx', function () {
     it("should create a contract then transact to it", function (done) {
         this.timeout(30 * 1000);
 
-        require('../createDb')().spread(function (ipAddress, privateKey) {
+        require('../createDb')().spread(function (ipAddress, validator) {
+          var
+            privateKey;
+
           var edb = edbModule.createInstance("http://" + ipAddress + ":1337/rpc");
+          privateKey = validator.priv_key[1];
 
           edb.txs().transactAndHold(privateKey, "", compiled, 100000, 0, null, function (error, data) {
             asrt.ifError(error);

@@ -29,9 +29,9 @@ describe('ErisDbHttp', function () {
     before(function (done) {
       this.timeout(30 * 1000);
 
-      require('../createDb')().spread(function (ipAddress, key) {
+      require('../createDb')().spread(function (ipAddress, validator) {
           edb = edbModule.createInstance("http://" + ipAddress + ":1337/rpc");
-          privateKey = key;
+          privateKey = validator.priv_key[1];
           console.time("http");
           done();
       });

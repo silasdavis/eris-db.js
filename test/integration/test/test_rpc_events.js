@@ -24,7 +24,7 @@ describe('TheloniousHttpEvents', function () {
             it("should subscribe to new block events", function (done) {
               this.timeout(30 * 1000);
 
-              require('../createDb')().spread(function (ipAddress, privateKey) {
+              require('../createDb')().spread(function (ipAddress) {
                 var edb = edbModule.createInstance("http://" + ipAddress + ":1337/rpc");
                 edb.events().subNewBlocks(function (err, data) {
                   asrt.ifError(err, "New block subscription error.");

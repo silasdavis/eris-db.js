@@ -23,7 +23,7 @@ describe('TheloniousWebSocketEvents', function () {
     before(function (done) {
               this.timeout(30 * 1000);
 
-        require('../createDb')().spread(function (ipAddress, privateKey) {
+        require('../createDb')().spread(function (ipAddress) {
             edb = edbModule.createInstance("ws://" + ipAddress + ':1337/socketrpc', true);
             edb.start(function(err){
                 if (err){

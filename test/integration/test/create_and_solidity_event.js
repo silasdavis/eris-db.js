@@ -21,7 +21,10 @@ describe('HttpCreateAndSolidityEvent', function () {
     it("should subscribe to a solidity event", function (done) {
         this.timeout(30 * 1000);
 
-        require('../createDb')().spread(function (ipAddress, privateKey) {
+        require('../createDb')().spread(function (ipAddress, validator) {
+          var
+            privateKey;
+            
           var edb = edbModule.createInstance("http://" + ipAddress + ":1337/rpc");
 
           var expected = {
@@ -32,6 +35,8 @@ describe('HttpCreateAndSolidityEvent', function () {
             data: '0000000000000000000000000000000000000000000000000000000000000001',
             height: 1
           };
+
+          privateKey = validator.priv_key[1];
 
           edb.txs().transactAndHold(privateKey, "", compiled, 1000000, 0, null, function (error, data) {
               asrt.ifError(error);
