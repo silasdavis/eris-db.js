@@ -29,7 +29,7 @@ RUN curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-
 
 
 ## Install Docker.
-RUN apt-get update && apt-get install apt-transport-https
+RUN apt-get --quiet update && apt-get --quiet --yes install apt-transport-https
 RUN apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
 RUN echo "deb https://apt.dockerproject.org/repo debian-jessie main" > /etc/apt/sources.list.d/docker.list
 RUN apt-get update && apt-get upgrade -qy && apt-get install -qy docker-engine
@@ -37,7 +37,7 @@ RUN apt-get update && apt-get upgrade -qy && apt-get install -qy docker-engine
 
 RUN npm install --global mocha
 
-RUN apt-get update && apt-get upgrade -qy && apt-get install -qy libgmp3-dev
+RUN apt-get upgrade -qy && apt-get install -qy libgmp3-dev
 RUN go get github.com/eris-ltd/eris-db/cmd/erisdbss
 RUN go get github.com/eris-ltd/eris-db/cmd/erisdb
 
