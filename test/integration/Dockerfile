@@ -43,7 +43,7 @@ RUN go get github.com/eris-ltd/eris-db/cmd/erisdb
 
 RUN wget --directory-prefix=/tmp https://github.com/eris-ltd/eris-cli/releases/download/v0.10.3/eris_0.10.3_amd64.deb
 RUN dpkg --install /tmp/eris_0.10.3_amd64.deb
-
+ENV ERIS_PULL_APPROVE true
 USER eris
 WORKDIR /usr/src/app/test/integration
 CMD ["./cmd.sh"]

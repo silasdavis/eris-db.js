@@ -12,7 +12,7 @@ module.exports = function () {
   return child_process.execAsync('\
     eris chains stop blockchain; \
     eris chains rm --data blockchain; \
-    yes | eris chains new --genesis=blockchain/genesis.json \
+    eris chains new --genesis=blockchain/genesis.json \
       --priv=blockchain/priv_validator.json --api --publish blockchain \
     && eris chains start blockchain \
     && sleep 3 \
