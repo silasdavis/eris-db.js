@@ -1,3 +1,7 @@
+'use strict';
+
+var
+  createDb = require('../createDb');
 var util = require('../../../lib/util');
 var asrt;
 var edbModule;
@@ -19,11 +23,12 @@ describe('HttpCreateAndSolidityEvent', function () {
     it("should subscribe to a solidity event", function (done) {
         this.timeout(30 * 1000);
 
-        require('../createDb')().spread(function (ipAddress, validator) {
+        createDb().spread(function (hostname, port, validator) {
           var
             privateKey;
 
-          var edb = edbModule.createInstance("http://" + ipAddress + ":1337/rpc");
+          var edb = edbModule.createInstance("http://" + hostname + ":" + port
+            + "/rpc");
 
           privateKey = validator.priv_key[1];
 

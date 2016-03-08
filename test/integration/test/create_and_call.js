@@ -1,8 +1,9 @@
 'use strict';
 
 var
+  createDb = require('../createDb'),
   fs = require('fs'),
-  request = require('request-promise'),
+  Solidity = require('solc'),
   util = require('../../../lib/util');
 
 var asrt;
@@ -20,38 +21,20 @@ var compiled;
 var input = "";
 var address;
 
-// Compile a Solidity contract and return the bytecode as a buffer.
-function compile(contract) {
-  return request({
-    method: 'POST',
-    uri: 'http://compiler:9099/compile',
-    body: {
-      name: "mycontract",
-      language: 'sol',
-      script: Buffer(contract).toString('base64')
-    },
-    json: true
-  }).then(function (response) {
-    return Buffer(response.bytecode, 'base64');
-  });
-}
-
 describe('HttpCreateAndCall', function () {
-  before(function () {
-    return compile(fs.readFileSync('test/testtx.sol')).
-      then(function (bytecode) {
-        compiled = Buffer(bytecode).toString('hex');
-      });
-  });
-
   it("should call a contract", function (done) {
     this.timeout(30 * 1000);
 
-    require('../createDb')().spread(function (ipAddress, validator) {
+    compiled = Solidity.compile(fs.readFileSync('test/testtx.sol', 'utf8'))
+      .contracts.testtx.bytecode;
+
+    createDb().spread(function (hostname, port, validator) {
       var
         edb, privateKey;
 
-      edb = edbModule.createInstance("http://" + ipAddress + ":1337/rpc")
+      edb = edbModule.createInstance("http://" + hostname + ":" + port
+        + "/rpc");
+
       privateKey = validator.priv_key[1];
 
       edb.txs().transactAndHold(privateKey, "", compiled, 1000000, 0, null,

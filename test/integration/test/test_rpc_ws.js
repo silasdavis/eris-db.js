@@ -1,6 +1,11 @@
 /* This file is for testing RPC methods.
  */
 
+'use strict';
+
+var
+  createDb = require('../createDb');
+
 var util = require('../../../lib/util'),
   assert = require('assert'),
   _ = require('lodash');
@@ -27,8 +32,10 @@ describe('ErisDbWebSocket', function () {
     before(function (done) {
         this.timeout(30 * 1000);
 
-        require('../createDb')().spread(function (ipAddress) {
-            edb = edbModule.createInstance("ws://" + ipAddress + ':1337/socketrpc', true);
+        createDb().spread(function (hostname, port) {
+            edb = edbModule.createInstance("ws://" + hostname + ':' + port
+              + '/socketrpc', true);
+              
             edb.start(function(err){
                 if (err){
                     throw err;

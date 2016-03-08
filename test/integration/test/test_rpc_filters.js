@@ -1,6 +1,11 @@
 /* This file is for testing RPC methods.
  */
 
+'use strict';
+
+var
+  createDb = require('../createDb');
+
 var util = require('../../../lib/util');
 var asrt;
 var edbModule;
@@ -23,8 +28,10 @@ describe('ErisDbHttpFilters', function () {
         this.timeout(30 * 1000);
 
         before(function (done) {
-          require('../createDb')().spread(function (ipAddress) {
-            edb = edbModule.createInstance("http://" + ipAddress + ":1337/rpc");
+          createDb().spread(function (hostname, port) {
+            edb = edbModule.createInstance("http://" + hostname + ":" + port
+              + "/rpc");
+              
             done();
           });
         });

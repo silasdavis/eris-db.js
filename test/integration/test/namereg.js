@@ -1,3 +1,8 @@
+'use strict';
+
+var
+  createDb = require('../createDb');
+
 var util = require('../../../lib/util');
 var asrt;
 var edbModule;
@@ -23,8 +28,10 @@ describe('TestNameReg', function () {
     before(function (done) {
         this.timeout(30 * 1000);
 
-        require('../createDb')().spread(function (ipAddress, validator) {
-            edb = edbModule.createInstance("http://" + ipAddress + ":1337/rpc");
+        createDb().spread(function (hostname, port, validator) {
+            edb = edbModule.createInstance("http://" + hostname + ":" + port
+              + "/rpc");
+
             privKey = validator.priv_key[1];
             done();
         });
@@ -50,4 +57,3 @@ describe('TestNameReg', function () {
     });
 
 });
-

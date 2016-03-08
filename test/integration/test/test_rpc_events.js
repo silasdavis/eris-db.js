@@ -1,6 +1,11 @@
 /* This file is for testing an event.
  */
 
+'use strict';
+
+var
+  createDb = require('../createDb');
+
 var util = require('../../../lib/util');
 var asrt;
 var edbModule;
@@ -24,8 +29,10 @@ describe('TheloniousHttpEvents', function () {
             it("should subscribe to new block events", function (done) {
               this.timeout(30 * 1000);
 
-              require('../createDb')().spread(function (ipAddress) {
-                var edb = edbModule.createInstance("http://" + ipAddress + ":1337/rpc");
+              createDb().spread(function (hostname, port) {
+                var edb = edbModule.createInstance("http://" + hostname + ":"
+                  + port + "/rpc");
+                  
                 edb.events().subNewBlocks(function (err, data) {
                   asrt.ifError(err, "New block subscription error.");
                   eventSub = data;

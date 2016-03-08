@@ -7,17 +7,19 @@
     "xmlhttprequest": "~1.7.0"
   },
   "devDependencies": {
+    "bluebird": "^3.3.4",
     "browserify": "^10.2.4",
     "bundle-dependencies": "^1.0.2",
     "fs-extra": "~0.18.4",
     "gulp": "^3.9.0",
     "ink-docstrap": "~0.5.2",
-    "jsdoc": "^3.4.0",
+    "lodash": "^4.6.1",
     "mocha": "^2.3.3",
-    "publish": "^0.5.0"
+    "solc": "^0.2.2-2",
+    "untildify": "^2.1.0"
   },
   "scripts": {
-    "predoc": "npm install && rm -rf doc",
+    "predoc": "rm -rf doc",
     "doc": "jsdoc --configure 'JSDoc configuration.json' --template node_modules/ink-docstrap/template index.js lib/*.js lib/rpc/*.js README.md --destination doc",
     "publish": "bundle-dependencies update && publish",
     "test": "mocha"

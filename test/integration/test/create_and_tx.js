@@ -1,3 +1,8 @@
+'use strict';
+
+var
+  createDb = require('../createDb');
+
 var util = require('../../../lib/util');
 var asrt;
 var edbModule;
@@ -19,11 +24,13 @@ describe('HttpCreateAndTx', function () {
     it("should create a contract then transact to it", function (done) {
         this.timeout(30 * 1000);
 
-        require('../createDb')().spread(function (ipAddress, validator) {
+        createDb().spread(function (hostname, port, validator) {
           var
             privateKey;
 
-          var edb = edbModule.createInstance("http://" + ipAddress + ":1337/rpc");
+          var edb = edbModule.createInstance("http://" + hostname + ":" + port
+            + "/rpc");
+            
           privateKey = validator.priv_key[1];
 
           edb.txs().transactAndHold(privateKey, "", compiled, 100000, 0, null, function (error, data) {

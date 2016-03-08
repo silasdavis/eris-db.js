@@ -1,6 +1,11 @@
 /* This file is for testing an event.
  */
 
+'use strict';
+
+var
+  createDb = require('../createDb');
+
 var util = require('../../../lib/util');
 var asrt;
 var edbModule;
@@ -23,8 +28,10 @@ describe('TheloniousWebSocketEvents', function () {
     before(function (done) {
               this.timeout(30 * 1000);
 
-        require('../createDb')().spread(function (ipAddress) {
-            edb = edbModule.createInstance("ws://" + ipAddress + ':1337/socketrpc', true);
+        createDb().spread(function (hostname, port) {
+            edb = edbModule.createInstance("ws://" + hostname + ":" + port
+              + '/socketrpc', true);
+
             edb.start(function(err){
                 if (err){
                     throw new Error(err);

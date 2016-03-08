@@ -1,6 +1,12 @@
 /* This file is for testing RPC methods.
  */
 // TODO break all the standard tests out into one file, then use them in all mock tests + these ones.
+
+'use strict';
+
+var
+  createDb = require('../createDb');
+
 var util = require('../../../lib/util');
 var assert = require('assert');
 var edbModule = require("../../../index"),
@@ -29,8 +35,10 @@ describe('ErisDbHttp', function () {
     before(function (done) {
       this.timeout(30 * 1000);
 
-      require('../createDb')().spread(function (ipAddress, validator) {
-          edb = edbModule.createInstance("http://" + ipAddress + ":1337/rpc");
+      createDb().spread(function (hostname, port, validator) {
+          edb = edbModule.createInstance("http://" + hostname + ":" + port
+            + "/rpc");
+            
           privateKey = validator.priv_key[1];
           console.time("http");
           done();
