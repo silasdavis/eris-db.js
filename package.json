@@ -8,6 +8,7 @@
   },
   "devDependencies": {
     "browserify": "^10.2.4",
+    "bundle-dependencies": "^1.0.2",
     "fs-extra": "~0.18.4",
     "gulp": "^3.9.0",
     "ink-docstrap": "~0.5.2",
@@ -18,7 +19,7 @@
   "scripts": {
     "predoc": "npm install && rm -rf doc",
     "doc": "jsdoc --configure 'JSDoc configuration.json' --template node_modules/ink-docstrap/template index.js lib/*.js lib/rpc/*.js README.md --destination doc",
-    "publish": "publish",
+    "publish": "bundle-dependencies update && publish",
     "test": "mocha"
   },
   "repository": {
