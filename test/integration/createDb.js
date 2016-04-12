@@ -33,7 +33,6 @@ module.exports = function () {
         && eris chains make blockchain --chain-type=simplechain) \
       \
       && eris chains new --dir=blockchain --api --publish blockchain \
-      && eris chains start blockchain \
       && sleep 3 \
       && eris chains inspect blockchain NetworkSettings.Ports'),
 
