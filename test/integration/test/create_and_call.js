@@ -25,7 +25,7 @@ describe('HttpCreateAndCall', function () {
   it("should call a contract", function (done) {
     this.timeout(30 * 1000);
 
-    compiled = Solidity.compile(fs.readFileSync('test/testtx.sol', 'utf8'))
+    compiled = Solidity.compile(fs.readFileSync(__dirname + '/testtx.sol', 'utf8'))
       .contracts.testtx.bytecode;
 
     createDb().spread(function (hostname, port, validator) {
