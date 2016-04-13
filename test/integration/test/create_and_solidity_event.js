@@ -1,7 +1,9 @@
 'use strict';
 
 var
-  createDb = require('../createDb');
+  createDb = require('../createDb'),
+  fs = require('fs'),
+  Solidity = require('solc');
 var util = require('../../../lib/util');
 var asrt;
 var edbModule;
@@ -14,7 +16,7 @@ if (typeof(window) === "undefined") {
     edbModule = edbFactory;
 }
 
-var compiled = "6060604052608f8060116000396000f30060606040523615600d57600d565b608d5b7f68616861000000000000000000000000000000000000000000000000000000007fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff7f88c4f556fdc50387ec6b6fc4e8250fecc56ff50e873df06dadeeb84c0287ca9060016040518082815260200191505060405180910390a35b565b00";
+var compiled;
 var input = "";
 var address;
 
@@ -22,6 +24,9 @@ describe('HttpCreateAndSolidityEvent', function () {
 
     it("should subscribe to a solidity event", function (done) {
         this.timeout(30 * 1000);
+
+        compiled = Solidity.compile(fs.readFileSync(__dirname + '/testevent.sol', 'utf8'))
+          .contracts.testevent.bytecode;
 
         createDb().spread(function (hostname, port, validator) {
           var
