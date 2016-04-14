@@ -12,10 +12,6 @@
       "chain_id": "my_tests",
       "accounts": [
         {
-          "address": "1000000000000000000000000000000000000000",
-          "amount": 0
-        },
-        {
           "address": "0000000000000000000000000000000000000001",
           "amount": 1
         },
@@ -95,16 +91,16 @@
       {
         "field": "balance",
         "op": "==",
-        "value": "0"
+        "value": "1"
       }
     ],
     "output": {
       "accounts": [
         {
-          "address": "1000000000000000000000000000000000000000",
+          "address": "0000000000000000000000000000000000000001",
           "pub_key": null,
           "sequence": 0,
-          "balance": 0,
+          "balance": 1,
           "code": "",
           "storage_root": "",
           "permissions": {
@@ -189,22 +185,7 @@
             },
             "roles": []
           }
-        },
-		{
-			"address": "FFF2523A9DC3E55733F30F5C18C89151C8241923",
-			"balance": 2251799813685248,
-			"code": "",
-			"permissions": {
-              "base": {
-                "perms": 2302,
-                "set": 2302
-              },
-              "roles": []
-            },
-            "pub_key": null,
-            "sequence": 0,
-            "storage_root": ""
-		}
+        }
       ]
     }
   },
