@@ -4,7 +4,8 @@
 'use strict';
 
 var
-  createDb = require('../createDb');
+  createDb = require('../createDb'),
+  Promise = require('bluebird');
 
 var util = require('../../../lib/util'),
   assert = require('assert'),
@@ -28,14 +29,18 @@ function assertHasKeys(keys, done) {
 }
 
 describe('ErisDbWebSocket', function () {
+  var
+    validator;
 
     before(function (done) {
         this.timeout(30 * 1000);
 
-        createDb().spread(function (hostname, port) {
+        createDb().spread(function (hostname, port, dbValidator) {
             edb = edbModule.createInstance("ws://" + hostname + ':' + port
               + '/socketrpc', true);
-              
+
+            validator = dbValidator;
+
             edb.start(function(err){
                 if (err){
                     throw err;
@@ -80,9 +85,9 @@ describe('ErisDbWebSocket', function () {
         });
 
         describe('#getClientVersion', function () {
-            var exp = testData.GetClientVersion.output;
             it("should get the network info", function (done) {
-                edb.network().getClientVersion(check(exp, done));
+                edb.network().getClientVersion(assertHasKeys(['client_version'],
+                  done));
             });
         });
 
@@ -123,26 +128,6 @@ describe('ErisDbWebSocket', function () {
 
     describe('.txs', function () {
 
-        describe('#transact contract create', function () {
-            this.timeout(4000);
-            it("should send a contract create tx to an address", function (done) {
-                var tx_create = testData.TransactCreate.input;
-                var exp = testData.TransactCreate.output;
-                edb.txs().transactAndHold(tx_create.priv_key, tx_create.address, tx_create.data,
-                    tx_create.gas_limit, tx_create.fee, null, check(exp, done));
-            });
-        });
-
-        describe('#transact', function () {
-            this.timeout(4000);
-            it("should transact with the account at the given address", function (done) {
-                var tx = testData.Transact.input;
-                var exp = testData.Transact.output;
-                edb.txs().transactAndHold(tx.priv_key, tx.address, tx.data, tx.gas_limit, tx.fee,
-                    null, check(exp, done));
-            });
-        });
-
         describe('#getUnconfirmedTxs', function () {
             it("should get the unconfirmed txs", function (done) {
                 var exp = testData.GetUnconfirmedTxs.output;
@@ -173,8 +158,26 @@ describe('ErisDbWebSocket', function () {
 
         describe('#getAccounts', function () {
             it("should get all accounts", function (done) {
-                var exp = testData.GetAccounts.output;
-                edb.accounts().getAccounts(check(exp, done));
+              var
+                txs;
+
+              txs = edb.txs();
+              Promise.promisifyAll(txs);
+
+              Promise.all(testData.GetAccounts.output.accounts.map(
+                function (account) {
+                  if (account.address
+                    !== "0000000000000000000000000000000000000000")
+                  return txs.sendAndHoldAsync(validator.priv_key[1],
+                    account.address, account.balance, null);
+                })).then(function () {
+                  var exp = testData.GetAccounts.output;
+
+                  edb.accounts().getAccounts(function (error, data) {
+                    check(exp, done)(error,
+                      {accounts: data.accounts.slice(0, -1)});
+                  });
+                });
             });
         });
 
@@ -209,8 +212,10 @@ describe('ErisDbWebSocket', function () {
 
         describe('#getInfo', function () {
             it("should get the blockchain info", function (done) {
-                var exp = testData.GetBlockchainInfo.output;
-                edb.blockchain().getInfo(check(exp, done, [modifyBlockInfo]));
+                edb.blockchain().getInfo(function (error, info) {
+                  assert.deepEqual(info.chain_id, "blockchain");
+                  done();
+                });
             });
         });
 
@@ -222,16 +227,15 @@ describe('ErisDbWebSocket', function () {
         });
 
         describe('#getGenesisHash', function () {
-            var exp = testData.GetGenesisHash.output;
             it("should get the genesis hash", function (done) {
-                edb.blockchain().getGenesisHash(check(exp, done));
+                edb.blockchain().getGenesisHash(assertHasKeys(['hash'], done));
             });
         });
 
         describe('#getLatestBlockHeight', function () {
             it("should get the latest block height", function (done) {
-                var exp = testData.GetLatestBlockHeight.output;
-                edb.blockchain().getLatestBlockHeight(check(exp, done));
+                edb.blockchain().getLatestBlockHeight(assertHasKeys(['height'],
+                  done));
             });
         });
 
@@ -271,8 +275,4 @@ function modifyPrivateAccount(pa){
     pa.address = "";
     pa.pub_key[1] = "";
     pa.priv_key[1] = "";
-}
-
-function modifyBlockInfo(bi){
-    bi.latest_block = null;
 }
