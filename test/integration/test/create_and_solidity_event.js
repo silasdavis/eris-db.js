@@ -1,18 +1,17 @@
 'use strict';
 
 var
+  assert = require('assert'),
   createDb = require('../createDb'),
   fs = require('fs'),
   Solidity = require('solc');
 var util = require('../../../lib/util');
-var asrt;
+var assert;
 var edbModule;
 
 if (typeof(window) === "undefined") {
-    asrt = require('assert');
     edbModule = require("../../../index");
 } else {
-    asrt = assert;
     edbModule = edbFactory;
 }
 
@@ -41,7 +40,7 @@ describe('HttpCreateAndSolidityEvent', function () {
               var
                 expected;
 
-              asrt.ifError(error);
+              assert.ifError(error);
               address = data.call_data.callee;
 
               expected = {
@@ -54,12 +53,13 @@ describe('HttpCreateAndSolidityEvent', function () {
               };
 
               edb.events().subLogEvent(address, function (error, event) {
-                  asrt.deepEqual(event, expected, "Event data does not match expected.");
+                  // assert.deepEqual(event, expected, "Event data does not match expected.");
+                  assert.equal(error.message, "This functionality is believed to be broken in Eris DB.  See https://github.com/eris-ltd/eris-db/issues/96.");
                   done();
               });
 
               edb.txs().call("", address, input, function (error, data) {
-                  asrt.ifError(error);
+                  assert.ifError(error);
               });
             }
           );
