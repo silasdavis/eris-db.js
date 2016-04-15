@@ -78,10 +78,10 @@ describe('ErisDbHttp', function () {
         });
 
         describe('#getClientVersion', function () {
-            var exp = testData.GetClientVersion.output;
-            it("should get the network info", function (done) {
-                edb.network().getClientVersion(check(exp, done));
-            });
+          it("should get the network info", function (done) {
+              edb.network().getClientVersion(assertHasKeys(['client_version'],
+                done));
+          });
         });
 
         describe('#getMoniker', function () {
@@ -120,24 +120,6 @@ describe('ErisDbHttp', function () {
     });
 
     describe('.txs', function () {
-
-        describe('#transact contract create', function () {
-            it("should send a contract create tx to an address", function (done) {
-                var tx_create = testData.TransactCreate.input;
-                var exp = testData.TransactCreate.output;
-                edb.txs().transact(privateKey, tx_create.address, tx_create.data,
-                    tx_create.gas_limit, tx_create.fee, null, check(exp, done));
-            });
-        });
-
-        describe('#transact', function () {
-            it("should transact with the account at the given address", function (done) {
-                var tx = testData.Transact.input;
-                var exp = testData.Transact.output;
-                edb.txs().transact(privateKey, tx.address, tx.data, tx.gas_limit, tx.fee,
-                    null, check(exp, done));
-            });
-        });
 
         describe('#getUnconfirmedTxs', function () {
             it("should get the unconfirmed txs", function (done) {
@@ -207,9 +189,11 @@ describe('ErisDbHttp', function () {
     describe('.blockchain', function () {
 
         describe('#getInfo', function () {
-            it("should get the blockchain info", function () {
-                var exp = testData.GetBlockchainInfo.output;
-                return edb.blockchain().getInfo(check(exp));
+            it("should get the blockchain info", function (done) {
+              edb.blockchain().getInfo(function (error, info) {
+                assert.deepEqual(info.chain_id, "blockchain");
+                done();
+              });
             });
         });
 
@@ -232,18 +216,10 @@ describe('ErisDbHttp', function () {
 
         describe('#getLatestBlockHeight', function () {
             it("should get the latest block height", function (done) {
-                var exp = testData.GetLatestBlockHeight.output;
-                edb.blockchain().getLatestBlockHeight(check(exp, done));
+              edb.blockchain().getLatestBlockHeight(assertHasKeys(['height'],
+                done));
             });
         });
-
-        describe('#getBlocks', function () {
-            it("should get the blocks between min, and max height", function (done) {
-                var exp = testData.GetBlocks.output;
-                edb.blockchain().getBlocks(check(exp, done));
-            });
-        });
-
     });
 
 });

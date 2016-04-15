@@ -220,16 +220,6 @@
     },
     "output": null
   },
-  "GetBlocks": {
-    "input": {
-      "filters": []
-    },
-    "output": {
-      "min_height": 0,
-      "max_height": 0,
-      "block_metas": []
-    }
-  },
   "GetConsensusState": {
     "output": {
       "height": 1,
