@@ -13,16 +13,22 @@
     "fs-extra": "~0.18.4",
     "gulp": "^3.9.0",
     "ink-docstrap": "~0.5.2",
+    "istanbul": "^0.4.3",
     "lodash": "^4.6.1",
     "mocha": "^2.3.3",
+    "npm-check": "^5.2.1",
+    "publish": "^0.6.0",
     "solc": "^0.2.2-2",
     "untildify": "^2.1.0"
   },
   "scripts": {
     "predoc": "rm -rf doc",
     "doc": "jsdoc --configure 'JSDoc configuration.json' --template node_modules/ink-docstrap/template index.js lib/*.js lib/rpc/*.js README.md --destination doc",
-    "publish": "bundle-dependencies update && publish",
-    "test": "mocha"
+    "test": "npm run unit && npm run integration",
+    "unit": "istanbul cover _mocha",
+    "integration": "cd test/integration; istanbul cover _mocha",
+    "posttest": "istanbul check-coverage",
+    "publish": "bundle-dependencies update && publish"
   },
   "repository": {
     "type": "git",

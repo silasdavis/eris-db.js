@@ -50,12 +50,6 @@ describe('TheloniousWebSocketEvents', function () {
                 edb.events().subNewBlocks(function (err, data) {
                     asrt.ifError(err, "New block subscription error.");
                     eventSub = data;
-                    setTimeout(function () {
-                        data.stop(function () {
-                            throw new Error("No data came in.");
-                        })
-                    }, 20000);
-
                 }, function(err, data){
                     if(data){
                         eventSub.stop(function(){});
