@@ -1,6 +1,6 @@
 {
   "name": "eris-db",
-  "version": "0.14.2",
+  "version": "0.15.0",
   "main": "./index.js",
   "dependencies": {
     "ws": "^1.1.0",
