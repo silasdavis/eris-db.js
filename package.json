@@ -7,11 +7,12 @@
     "xmlhttprequest": "^1.8.0"
   },
   "devDependencies": {
-    "bundle-dependencies": "^1.0.2",
     "bluebird": "^3.3.5",
+    "bundle-dependencies": "^1.0.2",
     "istanbul": "^0.4.3",
     "lodash": "^4.11.1",
     "mocha": "^2.4.5",
+    "mocha-circleci-reporter": "0.0.1",
     "publish": "^0.6.0",
     "solc": "^0.2.2-2",
     "untildify": "^2.1.0"
@@ -20,8 +21,8 @@
     "predoc": "rm -rf doc",
     "doc": "jsdoc --configure 'JSDoc configuration.json' --template node_modules/ink-docstrap/template index.js lib/*.js lib/rpc/*.js README.md --destination doc",
     "test": "npm run unit && npm run integration",
-    "unit": "istanbul cover _mocha",
-    "integration": "cd test/integration; istanbul cover _mocha",
+    "unit": "istanbul cover _mocha -- --reporter mocha-circleci-reporter",
+    "integration": "ERIS_PULL_APPROVE=true eris services start keys && ([ -d ~/.eris/chains/blockchain ] || eris chains make blockchain --chain-type=simplechain) && istanbul cover _mocha -- --reporter mocha-circleci-reporter test/integration/test",
     "posttest": "istanbul check-coverage",
     "publish": "bundle-dependencies update && publish"
   },

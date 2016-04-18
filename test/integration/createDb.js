@@ -28,11 +28,7 @@ module.exports = function () {
 
     exec('\
       eris chains rm --data --force blockchain; \
-      \
-      [ -d ~/.eris/chains/blockchain ] || (eris services start keys \
-        && eris chains make blockchain --chain-type=simplechain) \
-      \
-      && eris chains new --dir=blockchain --api --publish blockchain \
+      eris chains new --dir=blockchain --api --publish blockchain \
       && sleep 3 \
       && eris chains inspect blockchain NetworkSettings.Ports'),
 
