@@ -175,7 +175,9 @@ describe('ErisDbWebSocket', function () {
 
                   edb.accounts().getAccounts(function (error, data) {
                     check(exp, done)(error,
-                      {accounts: data.accounts.slice(0, -1)});
+                      {accounts: data.accounts.filter(function (account) {
+                        return account.pub_key === null;
+                      })});
                   });
                 });
             });
