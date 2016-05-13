@@ -10,87 +10,63 @@ $ npm install eris-db
 
 ## Usage
 
-If you created an ErisDB server using the [Eris CLI](https://github.com/eris-ltd/eris-cli) tool, you can find out its IP address using the following command:
+The library assumes you have the [Eris CLI](https://github.com/eris-ltd/eris-cli) installed locally.
 
 ```
-$ eris chains inspect <name of ErisDB server> NetworkSettings.IPAddress
+var assert = require('assert')
+var erisDb = require('eris-db')
+
+db.open('blockchain', {user: 'CA8B5C96DF6305046DF8E1F998467577D7012A52'})
+  .then(function (db) {
+    db.blockchain().getChainId(function (error, response) {
+      assert.ifError(error)
+      assert.equal(response.chain_id, 'blockchain')
+    })
+
+    // Close the connection when finished.
+    db.close()
+  })
 ```
 
-The main class is `ErisDB`. A standard `ErisDB` instance is created like this:
+The first argument is the name of the chain (Eris DB server) you want to interact with.  The name of an existing chain can be seen via the command `eris chains ls`.
 
-```
-var edbFactory = require('eris-db');
-
-var edb = edbFactory.createInstance("http://<IP address>:1337/rpc");
-
-edb.start(function(error){
-    if(!error){
-        console.log("Ready to go");
-    }
-});
-
-```
-
-The parameters for `createInstance` is the server URL as a string. The client-type is chosen based on the URL scheme. As of now, the supported schemes are: `http` and `ws` (websockets). No additional configuration is needed.
-
-If you want to specify what client to use, you do that through the `createInstanceFromClient` method.
-
-```
-var edbFactory = require('eris-db');
-
-var wsClient = new edbFactory.clients.WebSocketClient("ws://<IP address>:1337/socketrpc")
-
-var edb = edbFactory.createInstanceFromClient(wsClient);
-
-edb.start(function(error){
-    if(!error){
-        console.log("Ready to go");
-    }
-});
-
-```
-
-Clients can be found in `edbFactory.clients`. We currently provide two - `WebSocketClient` and `HTTPClient` + the base classes (`Client` and `TWCClient`) which is only used to implement other protocols.
-
-### HTTP
-
-If you use `http(s)`, the start command will do nothing, so it can just be called and no callback used.
-
-### WebSocket
-
-If you use websocket, the system will not be ready until the start callback fires.
-
-The start callback must be on the following format: `function(error)`.
-
-The websocket-client has a number of additional connection-related methods:
-
-`WebSocketClient.shutDown(callback)` - Technically this method is available in all clients but does not do anything with the http client. If called on an edb instance with a websocket client (or on the client directly), it will invoke the zero-argument callback function when the socket has been terminated.
-
-`WebSocketClient.reconnect(callback)` - Will terminate the current connection (if any), and establish a new one. Same callback as with `start` (`callback(error)`).
-
-`WebSocketClient.setCloseCallback(callback)` - If this zero-argument callback is set, it will be invoked when the active connection is closed. The callback will remain until it is set to `null`. Note that it will also be called when reconnecting if there was an already active connection (since that connection will be closed).
-
-If you want to use several sockets at once (for some reason), you can do that. Just create multiple `ErisDB` instances through `edbFactory.createInstance(...)`.
+The second (optional) argument is a user account address for signing transactions.  You must provide this argument if you want to perform write operations on the chain.
 
 ## API Reference
 
+### erisDB
+
+#### erisDb.open (chainName[, options])
+
+* `chainName` &lt;String> the name of the Eris DB server to connect to
+* `options`: &lt;Object>
+  * `user`: &lt;String> the address of the account with which to sign transactions
+
+Opens a connection to the Eris DB server.  Returns a promise for a [`db`](#Connection) object.
+
+### <a name="Connection">db</a>
+
+#### db.close (callback)
+
+It will invoke the zero-argument callback function when the socket has been terminated.
+
+#### RPC methods
+
 There are bindings for all the RPC methods. All functions are on the form `function(param1, param2, ... , callback)`, where the callback is a function on the form `function(error,data)` (it is documented under the name `methodCallback`). The `data` object is the same as you would get by calling the corresponding RPC method directly.
 
-This is the over-all structure of the library. The `unsafe` flag means a private key is either sent or received, so should be used with care (dev only). 
+This is the over-all structure of the library. The `unsafe` flag means a private key is either sent or received, so should be used with care (dev only).
 
 NOTE: There will be links to the proper jsdoc and integration with erisindustries.com. For now, the components point to the actual code files and methods points to the web-API method in question.
 
-### ErisDB
-
 | Component Name | Accessor |
 | :------------- | :------- |
-| Accounts | [ErisDB.accounts()](https://github.com/eris-ltd/erisdb-js/blob/master/lib/accounts.js) |
-| Blockchain | [ErisDB.blockchain()](https://github.com/eris-ltd/erisdb-js/blob/master/lib/blockchain.js) |
-| Consensus | [ErisDB.consensus()](https://github.com/eris-ltd/erisdb-js/blob/master/lib/consensus.js) |
-| Events | [ErisDB.events()](https://github.com/eris-ltd/erisdb-js/blob/master/lib/events.js) |
-| NameReg | [ErisDB.namereg()](https://github.com/eris-ltd/erisdb-js/blob/master/lib/namereg.js) |
-| Network | [ErisDB.network()](https://github.com/eris-ltd/erisdb-js/blob/master/lib/network.js) |
-| Transactions | [ErisDB.txs()](https://github.com/eris-ltd/erisdb-js/blob/master/lib/transactions.js) |
+| Accounts | [db.accounts()](https://github.com/eris-ltd/erisdb-js/blob/master/lib/accounts.js) |
+| Blockchain | [db.blockchain()](https://github.com/eris-ltd/erisdb-js/blob/master/lib/blockchain.js) |
+| Consensus | [db.consensus()](https://github.com/eris-ltd/erisdb-js/blob/master/lib/consensus.js) |
+| Events | [db.events()](https://github.com/eris-ltd/erisdb-js/blob/master/lib/events.js) |
+| NameReg | [db.namereg()](https://github.com/eris-ltd/erisdb-js/blob/master/lib/namereg.js) |
+| Network | [db.network()](https://github.com/eris-ltd/erisdb-js/blob/master/lib/network.js) |
+| Transactions | [db.txs()](https://github.com/eris-ltd/erisdb-js/blob/master/lib/transactions.js) |
 
 ### Components
 
@@ -98,13 +74,39 @@ NOTE: There will be links to the proper jsdoc and integration with erisindustrie
 
 The accounts object has methods for getting account and account-storage data.
 
+##### Accounts.getAccount (address, callback)
+
+* `address` &lt;String> the account address
+* `callback` &lt;Function>
+
+Returns an `Account` object with the following method and properties:
+
+##### Account.setPermission (type, value)
+
+* `type` &lt;String> must be `'call'`
+* `value` &lt;Boolean>
+
+Sets a permission on the account.
+
+##### Account properties
+
+```
+{
+    address:      <string>
+    pub_key:      <PubKey>
+    sequence:     <number>
+    balance:      <number>
+    code:         <string>
+    storage_root: <string>
+}
+```
+
 | Method | RPC method | Notes |
-| :----- | :--------- | :---- | 
-| Accounts.getAccounts | [erisdb.getAccounts](https://github.com/eris-ltd/eris-db/blob/master/api.md#getaccounts) | | 
-| Accounts.getAccount | [erisdb.getAccount](https://github.com/eris-ltd/eris-db/blob/master/api.md#getaccount) | | 
-| Accounts.getStorage | [erisdb.getStorage](https://github.com/eris-ltd/eris-db/blob/master/api.md#getstorage) | | 
-| Accounts.getStorageAt | [erisdb.getStorageAt](https://github.com/eris-ltd/eris-db/blob/master/api.md#getstorageat) | | 
-| Accounts.genPrivAccount | [erisdb.genPrivAccount](https://github.com/eris-ltd/eris-db/blob/master/api.md#genprivaccount) | unsafe |
+| :----- | :--------- | :---- |
+| Accounts.getAccounts | [db.getAccounts](https://github.com/eris-ltd/eris-db/blob/master/api.md#getaccounts) | |
+| Accounts.getStorage | [db.getStorage](https://github.com/eris-ltd/eris-db/blob/master/api.md#getstorage) | |
+| Accounts.getStorageAt | [db.getStorageAt](https://github.com/eris-ltd/eris-db/blob/master/api.md#getstorageat) | |
+| Accounts.genPrivAccount | [db.genPrivAccount](https://github.com/eris-ltd/eris-db/blob/master/api.md#genprivaccount) | unsafe |
 
 #### BlockChain
 
@@ -112,13 +114,13 @@ The accounts object has methods for getting blockchain-related data, such as a l
 
 | Method | RPC method | Notes |
 | :----- | :--------- | :---- |
-| BlockChain.getInfo |  [erisdb.getBlockchainInfo](https://github.com/eris-ltd/eris-db/blob/master/api.md#getblockchaininfo) | |
-| BlockChain.getChainId | [erisdb.getChainId](https://github.com/eris-ltd/eris-db/blob/master/api.md#getchainid) | |
-| BlockChain.getGenesisHash | [erisdb.getGenesisHash](https://github.com/eris-ltd/eris-db/blob/master/api.md#getgenesishash) | |
-| BlockChain.getLatestBlockHeight | [erisdb.getLatestBlockHeight](https://github.com/eris-ltd/eris-db/blob/master/api.md#getlatestblockheight) | |
-| BlockChain.getLatestBlock | [erisdb.getLatestBlock](https://github.com/eris-ltd/eris-db/blob/master/api.md#getlatestblock) | |
-| BlockChain.getBlocks | [erisdb.getBlocks](https://github.com/eris-ltd/eris-db/blob/master/api.md#getblocks) | |
-| BlockChain.getBlock | [erisdb.getBlock](https://github.com/eris-ltd/eris-db/blob/master/api.md#getblock) | |
+| BlockChain.getInfo |  [db.getBlockchainInfo](https://github.com/eris-ltd/eris-db/blob/master/api.md#getblockchaininfo) | |
+| BlockChain.getChainId | [db.getChainId](https://github.com/eris-ltd/eris-db/blob/master/api.md#getchainid) | |
+| BlockChain.getGenesisHash | [db.getGenesisHash](https://github.com/eris-ltd/eris-db/blob/master/api.md#getgenesishash) | |
+| BlockChain.getLatestBlockHeight | [db.getLatestBlockHeight](https://github.com/eris-ltd/eris-db/blob/master/api.md#getlatestblockheight) | |
+| BlockChain.getLatestBlock | [db.getLatestBlock](https://github.com/eris-ltd/eris-db/blob/master/api.md#getlatestblock) | |
+| BlockChain.getBlocks | [db.getBlocks](https://github.com/eris-ltd/eris-db/blob/master/api.md#getblocks) | |
+| BlockChain.getBlock | [db.getBlock](https://github.com/eris-ltd/eris-db/blob/master/api.md#getblock) | |
 
 #### Consensus
 
@@ -126,8 +128,8 @@ The consensus object has methods for getting consensus-related data.
 
 | Method | RPC method | Notes |
 | :----- | :--------- | :---- |
-| Consensus.getState |   [erisdb.getConsensusState](https://github.com/eris-ltd/eris-db/blob/master/api.md#getconsensusstate) | |
-| Consensus.getValidators | [erisdb.getValidators](https://github.com/eris-ltd/eris-db/blob/master/api.md#getvalidators) | |
+| Consensus.getState |   [db.getConsensusState](https://github.com/eris-ltd/eris-db/blob/master/api.md#getconsensusstate) | |
+| Consensus.getValidators | [db.getValidators](https://github.com/eris-ltd/eris-db/blob/master/api.md#getvalidators) | |
 
 #### Events
 
@@ -135,17 +137,17 @@ The tendermint client will generate and fire off events when important things ha
 
 | Method | RPC method | Notes |
 | :----- | :--------- | :---- |
-| Events.subscribe | [erisdb.eventSubscribe](https://github.com/eris-ltd/eris-db/blob/master/api.md#eventsubscribe) | |
-| Events.unsubscribe | [erisdb.eventUnsubscribe](https://github.com/eris-ltd/eris-db/blob/master/api.md#eventunubscribe) | |
-| Events.poll | [erisdb.eventPoll](https://github.com/eris-ltd/eris-db/blob/master/api.md#eventpoll) | |
+| Events.subscribe | [db.eventSubscribe](https://github.com/eris-ltd/eris-db/blob/master/api.md#eventsubscribe) | |
+| Events.unsubscribe | [db.eventUnsubscribe](https://github.com/eris-ltd/eris-db/blob/master/api.md#eventunubscribe) | |
+| Events.poll | [db.eventPoll](https://github.com/eris-ltd/eris-db/blob/master/api.md#eventpoll) | |
 
 ##### Helpers
 
 The helper functions makes it easier to manage subscriptions. Normally you'd be using these functions rather then managing the subscriptions yourself.
 
-Helper functions always contain two callback functions - a `createCallback(error, data)` and an `eventCallback(error, data)`. 
+Helper functions always contain two callback functions - a `createCallback(error, data)` and an `eventCallback(error, data)`.
 
-The `createCallback` data is an [EventSub]() object, that can be used to do things like getting the event ID, the subscriber ID, and to stop the subscription. 
+The `createCallback` data is an [EventSub]() object, that can be used to do things like getting the event ID, the subscriber ID, and to stop the subscription.
 
 The `eventCallback` data is the event object. This object is different depending on the event type. In the case of `NewBlock` it will be a block, the consensus events is a transaction object, etc. More info can be found in the [api doc]().
 
@@ -165,14 +167,14 @@ The `eventCallback` data is the event object. This object is different depending
 
 `subSolidityEvent` and `subLogEvent` are two different names for the same type of subscription (log events).
 
-#### NameReg 
+#### NameReg
 
 The NameReg object has methods for accessing the name registry.
 
 | Method | RPC method | Notes |
 | :----- | :--------- | :---- |
-| NameReg.getEntry | [erisdb.getNameRegEntry](https://github.com/eris-ltd/eris-db/blob/master/api.md#get-namereg-entry) | |
-| NameReg.getEntries | [erisdb.getNameRegEntries](https://github.com/eris-ltd/eris-db/blob/master/api.md#get-namereg-entries) | |
+| NameReg.getEntry | [db.getNameRegEntry](https://github.com/eris-ltd/eris-db/blob/master/api.md#get-namereg-entry) | |
+| NameReg.getEntries | [db.getNameRegEntries](https://github.com/eris-ltd/eris-db/blob/master/api.md#get-namereg-entries) | |
 
 #### Network
 
@@ -182,25 +184,25 @@ Client Version may be a bit misplaced
 
 | Method | RPC method | Notes |
 | :----- | :--------- | :---- |
-| Network.getInfo | [erisdb.getNetworkInfo](https://github.com/eris-ltd/eris-db/blob/master/api.md#getnetworkinfo) |  |
-| Network.getClientVersion | [erisdb.getClientVersion](https://github.com/eris-ltd/eris-db/blob/master/api.md#getclientversion) | |
-| Network.getMoniker | [erisdb.getMoniker](https://github.com/eris-ltd/eris-db/blob/master/api.md#getmoniker) | |
-| Network.isListening | [erisdb.isListening](https://github.com/eris-ltd/eris-db/blob/master/api.md#islistening) | |
-| Network.getListeners | [erisdb.getListeners](https://github.com/eris-ltd/eris-db/blob/master/api.md#getlisteners) | |
-| Network.getPeers | [erisdb.getPeers](https://github.com/eris-ltd/eris-db/blob/master/api.md#getpeers) | |
-| Network.getPeer | [erisdb.getPeer](https://github.com/eris-ltd/eris-db/blob/master/api.md#getpeer) | |
+| Network.getInfo | [db.getNetworkInfo](https://github.com/eris-ltd/eris-db/blob/master/api.md#getnetworkinfo) |  |
+| Network.getClientVersion | [db.getClientVersion](https://github.com/eris-ltd/eris-db/blob/master/api.md#getclientversion) | |
+| Network.getMoniker | [db.getMoniker](https://github.com/eris-ltd/eris-db/blob/master/api.md#getmoniker) | |
+| Network.isListening | [db.isListening](https://github.com/eris-ltd/eris-db/blob/master/api.md#islistening) | |
+| Network.getListeners | [db.getListeners](https://github.com/eris-ltd/eris-db/blob/master/api.md#getlisteners) | |
+| Network.getPeers | [db.getPeers](https://github.com/eris-ltd/eris-db/blob/master/api.md#getpeers) | |
+| Network.getPeer | [db.getPeer](https://github.com/eris-ltd/eris-db/blob/master/api.md#getpeer) | |
 
 #### Transactions
 
 A transaction is the equivalence of a database `write` operation. They can be done in two ways. There's the "dev" way, which is to call `transact` and pass along the target address (if any), data, gas, and a private key used for signing. It is very similar to the old Ethereum way of transacting, except Tendermint does not keep accounts in the client, so a private key needs to be sent along. This means the server **should either run on the same machine as the tendermint client, or in the same, private network**.
 
-Transacting via `broadcastTx` will be the standard way of doing things if you want the key to remain on the users machine. This requires a browser plugin for doing the actual signing, which we will add later. For now, you should stick to the `transact` method. 
+Transacting via `broadcastTx` will be the standard way of doing things if you want the key to remain on the users machine. This requires a browser plugin for doing the actual signing, which we will add later. For now, you should stick to the `transact` method.
 
 To get a private key for testing/developing, you can run `tendermint gen_account` if you have it installed. You can also run `tools/pa_generator.js` if you have a local node running. It will take the url as command line argument at some point...
 
 ##### Calls
 
-Calls provide read-only access to the smart contracts. It is used mostly to get data out of a contract-accounts storage by using the contracts accessor methods, but can be used to call any method that does not change any data in any account. A trivial example would be a contract function that takes two numbers as input, adds them, and then simply returns the sum. 
+Calls provide read-only access to the smart contracts. It is used mostly to get data out of a contract-accounts storage by using the contracts accessor methods, but can be used to call any method that does not change any data in any account. A trivial example would be a contract function that takes two numbers as input, adds them, and then simply returns the sum.
 
 There are two types of calls. `Call` takes a data string and an account address and calls the code in that account (if any) using the provided data as input. This is the standard method for read-only operations.
 
@@ -208,20 +210,15 @@ There are two types of calls. `Call` takes a data string and an account address 
 
 | Method | RPC method | Notes |
 | :----- | :--------- | :---- |
-| Transactions.broadcastTx | [erisdb.broadcastTx](https://github.com/eris-ltd/eris-db/blob/master/api.md#broadcasttx) | see below |
-| Transactions.getUnconfirmedTxs | [erisdb.getUnconfirmedTxs](https://github.com/eris-ltd/eris-db/blob/master/api.md#getunconfirmedtxs) | |
-| Transactions.call | [erisdb.call](https://github.com/eris-ltd/eris-db/blob/master/api.md#call) | |
-| Transactions.callCode | [erisdb.callCode](https://github.com/eris-ltd/eris-db/blob/master/api.md#callcode) | |
-| Transactions.transact | [erisdb.transact](https://github.com/eris-ltd/eris-db/blob/master/api.md#transact) | unsafe |
-| Transactions.transactAndHold | [erisdb.transactAndHold](https://github.com/eris-ltd/eris-db/blob/master/api.md#transact-and-hold) | unsafe |
-| Transactions.transactNameReg | [erisdb.transactNameReg](https://github.com/eris-ltd/eris-db/blob/master/api.md#transactnamereg) | unsafe |
+| Transactions.broadcastTx | [db.broadcastTx](https://github.com/eris-ltd/eris-db/blob/master/api.md#broadcasttx) | see below |
+| Transactions.getUnconfirmedTxs | [db.getUnconfirmedTxs](https://github.com/eris-ltd/eris-db/blob/master/api.md#getunconfirmedtxs) | |
+| Transactions.call | [db.call](https://github.com/eris-ltd/eris-db/blob/master/api.md#call) | |
+| Transactions.callCode | [db.callCode](https://github.com/eris-ltd/eris-db/blob/master/api.md#callcode) | |
+| Transactions.transact | [db.transact](https://github.com/eris-ltd/eris-db/blob/master/api.md#transact) | unsafe |
+| Transactions.transactAndHold | [db.transactAndHold](https://github.com/eris-ltd/eris-db/blob/master/api.md#transact-and-hold) | unsafe |
+| Transactions.transactNameReg | [db.transactNameReg](https://github.com/eris-ltd/eris-db/blob/master/api.md#transactnamereg) | unsafe |
 
-`broadcastTx` is useless until we add a client-side signing solution. 
-
-## Tests
-
-For unit tests, run `npm test`.
-For integration tests, run `npm run integration`.
+`broadcastTx` is useless until we add a client-side signing solution.
 
 ## Documentation
 
