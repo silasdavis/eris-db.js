@@ -88,6 +88,13 @@ Returns an `Account` object with the following method and properties:
 
 Sets a permission on the account.
 
+Example:
+
+```
+// Allow account to call contracts.
+account.setPermission('call', true)
+```
+
 ##### Account properties
 
 ```
