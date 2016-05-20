@@ -10,7 +10,7 @@ version=$(cat package.json | jq --raw-output .version)
 # Build
 
 ## Publish documentation for the most recent published version.
-git checkout tags/v$version
+git checkout --force tags/v$version
 
 npm run doc
 
