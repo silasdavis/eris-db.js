@@ -17,6 +17,7 @@
     "bundle-dependencies": "^1.0.2",
     "ed25519-supercop": "^1.0.2",
     "istanbul": "^0.4.3",
+    "jsdoc": "^3.4.0",
     "mocha": "^2.4.5",
     "mocha-circleci-reporter": "0.0.1",
     "nock": "^8.0.0",
