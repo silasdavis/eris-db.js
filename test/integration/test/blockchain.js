@@ -7,7 +7,7 @@ describe('getting blockchain-related data', function () {
   var db
 
   before(function () {
-    this.timeout(10 * 1000)
+    this.timeout(30 * 1000)
 
     return createDb().spread(function (url) {
       return erisDb.open('blockchain').then(function (connection) {
