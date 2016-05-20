@@ -5,9 +5,12 @@
 name=$(basename $PWD)
 docs_site=docs.erisindustries.com
 repo=$PWD
-release_min=$(cat package.json | jq --raw-output .version)
+version=$(cat package.json | jq --raw-output .version)
 
 # Build
+
+## Publish documentation for the most recent published version.
+git checkout tags/v$version
 
 npm run doc
 
@@ -16,8 +19,8 @@ git clone git@github.com:eris-ltd/$docs_site.git
 cd $docs_site/documentation
 mkdir --parents $name
 cd $name
-mv $repo/doc $release_min
-ln --symbolic $release_min latest
+mv $repo/doc $version
+ln --symbolic $version latest
 
 # Commit and push if there are changes.
 
