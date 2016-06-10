@@ -29,6 +29,7 @@ test:
     - docker-machine create --driver digitalocean default
     - eval $(docker-machine env default); ERIS_PULL_APPROVE=true eris init
   override:
+    - "git verify-commit HEAD 2>&1 | grep 'gpg: Signature made'"
     - eval $(docker-machine env default); npm test
   post:
     - docker-machine rm -y default
