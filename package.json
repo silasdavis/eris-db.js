@@ -15,6 +15,7 @@
     "bluebird": "^3.3.5",
     "bundle-dependencies": "^1.0.2",
     "ed25519-supercop": "^1.0.2",
+    "ink-docstrap": "^1.2.1",
     "istanbul": "^0.4.3",
     "jsdoc": "^3.4.0",
     "mocha": "^2.4.5",
