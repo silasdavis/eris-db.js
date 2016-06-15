@@ -26,6 +26,7 @@
     "rewire": "^2.5.1",
     "seed-random": "^2.2.0",
     "solc": "^0.2.2-2",
+    "sync-modules": "^0.1.0",
     "testdouble": "^1.4.2",
     "untildify": "^2.1.0"
   },
