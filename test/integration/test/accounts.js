@@ -17,7 +17,7 @@ describe('permissions', function () {
     return createDb().spread(function (url, privateValidator) {
       validator = privateValidator
 
-      return erisDb.open('blockchain', {user: validator.address})
+      return erisDb.open('blockchain')
         .then(function (connection) {
           db = connection
         })
@@ -62,12 +62,12 @@ describe('permissions', function () {
         db.accounts().getAccount(validator.address, function (error, account) {
           assert.ifError(error)
 
-          account.setPermission('call', false).then(function () {
+          account.setPermission('call', false, {user: validator.address}).then(function () {
             db.txs().transactAndHold(validator.priv_key[1], address, '',
               100000, 0, null, function (error) {
                 assert(error)
 
-                account.setPermission('call', true).then(function () {
+                account.setPermission('call', true, {user: validator.address}).then(function () {
                   db.txs().transactAndHold(validator.priv_key[1], address, '',
                     100000, 0, null, function (error, data) {
                       assert.ifError(error)
