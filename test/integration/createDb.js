@@ -1,31 +1,31 @@
-/*eslint-disable no-multi-str */
-
 'use strict'
 
-var child_process = require('child_process')
-var erisDb = require('../../')
+var childProcess = require('child_process')
+var fs = require('fs')
+var Promise = require('bluebird')
+var R = require('ramda')
 var untildify = require('untildify')
-var url = require('url')
-var _ = require('lodash')
+
+Promise.promisifyAll(childProcess)
+Promise.promisifyAll(fs)
 
 // Create a fresh chain for each integration test.  Return its URL and
 // validator.
-module.exports = function (protocol) {
-  child_process.execSync('eris chains rm --data --force blockchain; \
-    eris chains new --dir=blockchain --api --publish blockchain; \
-    sleep 3', {
-      encoding: 'utf8',
-      env: _.assign({}, process.env, {ERIS_PULL_APPROVE: true})
-    })
+module.exports = function () {
+  var blockchainName
+  var name = 'blockchain'
+  var privateValidator
 
-  return erisDb.serviceUrl('chains', 'blockchain', 1337)
-    .then(function (locator) {
-      if (protocol === 'WebSocket') {
-        locator.protocol = 'ws:'
-      }
+  blockchainName = childProcess.execAsync(`
+    eris chains rm --data --force ${name}
+    eris chains new --dir=blockchain --api --publish ${name}
+  `, {
+    encoding: 'utf8',
+    env: R.assoc('ERIS_PULL_APPROVE', true, process.env)
+  }).delay(3 * 1000).return(name)
 
-      return [url.format(locator) +
-        (protocol === 'WebSocket' ? '/socketrpc' : '/rpc'),
-        require(untildify('~/.eris/chains/blockchain/priv_validator.json'))]
-    })
+  privateValidator = fs.readFileAsync(
+    untildify(`~/.eris/chains/${name}/priv_validator.json`)).then(JSON.parse)
+
+  return Promise.all([blockchainName, privateValidator])
 }
