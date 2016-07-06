@@ -12,7 +12,7 @@ var _ = require('lodash')
 // validator.
 module.exports = function (protocol) {
   child_process.execSync('eris chains rm --data --force blockchain; \
-    eris chains new --dir=blockchain --api --publish blockchain; \
+    eris chains new --dir=blockchain --publish blockchain; \
     sleep 3', {
       encoding: 'utf8',
       env: _.assign({}, process.env, {ERIS_PULL_APPROVE: true})
