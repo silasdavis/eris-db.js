@@ -6,7 +6,6 @@
     "ws": "^1.1.0",
     "xmlhttprequest": "^1.8.0",
     "canonical-json": "0.0.4",
-    "jayson": "^2.0.0",
     "lodash": "^4.11.1",
     "pegjs": "^0.9.0",
     "ramda": "^0.21.0",
@@ -25,7 +24,6 @@
     "rewire": "^2.5.1",
     "seed-random": "^2.2.0",
     "solc": "^0.2.2-2",
-    "testdouble": "^1.4.2",
     "untildify": "^2.1.0"
   },
   "scripts": {
