@@ -1,0 +1,5 @@
+#!/bin/sh
+ERIS_PULL_APPROVE=true eris services start keys --publish
+eris chains rm --data --dir --file --force blockchain
+eris chains make blockchain --chain-type=simplechain
+mocha --reporter mocha-circleci-reporter test/integration/test

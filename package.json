@@ -31,7 +31,7 @@
     "doc": "jsdoc --configure JSDoc/conf.json --destination doc lib/*.js lib/rpc/*.js README.md",
     "test": "npm run unit && npm run integration",
     "unit": "istanbul cover _mocha -- --delay --reporter mocha-circleci-reporter test/unit",
-    "integration": "ERIS_PULL_APPROVE=true eris services start keys --publish && eris chains make blockchain --chain-type=simplechain && mocha --reporter mocha-circleci-reporter test/integration/test",
+    "integration": "scripts/integration",
     "publish": "bundle-dependencies update && publish"
   },
   "repository": {
