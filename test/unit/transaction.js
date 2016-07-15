@@ -4,35 +4,44 @@ var assert = require('assert')
 var transactions = require('../../lib/transactions')
 
 describe('functions to create transactions', () => {
-  it('creates an input object with a public key', () =>
-    assert.deepEqual(
-      transactions.input('user', 0, 'publicKey'),
-      {
-        address: 'user',
-        amount: 1,
-        pub_key: 'publicKey',
-        sequence: 1
-      }
+  describe('Input object', () => {
+    it('creates an input object with a public key', () =>
+      assert.deepEqual(
+        transactions.Input('address', 1, 1, 'publicKey'),
+        {
+          address: 'ADDRESS',
+          amount: 1,
+          pub_key: [1, 'publicKey'],
+          sequence: 1
+        }
+      )
     )
-  )
 
-  it('creates an input object without a public key', () =>
-    assert.deepEqual(
-      transactions.input('user', 10, 'publicKey'),
-      {
-        address: 'user',
-        amount: 1,
-        sequence: 11
-      }
+    it('creates an input object without a public key', () =>
+      assert.deepEqual(
+        transactions.Input('address', 1, 10, 'publicKey'),
+        {
+          address: 'ADDRESS',
+          amount: 1,
+          sequence: 10
+        }
+      )
     )
-  )
 
-  describe('Permissions transaction construction', () => {
+    it('serializes the object', () => {
+      assert.equal(
+        String(transactions.Input('address', 1, 1, 'publicKey')),
+        '{"address":"ADDRESS","amount":1,"sequence":1}'
+      )
+    })
+  })
+
+  describe('Permissions transaction', () => {
     it('create an args object', () =>
       assert.deepEqual(
-        transactions.Permissions.args('account', 4, 'value'),
+        transactions.Args('address', 4, 'value').toJson(),
         [2, {
-          address: 'account',
+          address: 'ADDRESS',
           permission: 4,
           value: 'value'
         }]
@@ -41,34 +50,32 @@ describe('functions to create transactions', () => {
 
     it('serializes parts of the transaction for signing', () => {
       assert.equal(
-        transactions.Permissions.signBytes(
+        String(transactions.Permissions(
           'chainId',
-          transactions.input('user', 0, 'publicKey'),
-          transactions.Permissions.args('account', 4, 'value')
-        ),
-        '{"chain_id":"chainId","tx":[32,{"args":"[2,{"address":"account",' +
-        '"permission":4,"value":"value"}]","input":{"address":"user",' +
-        '"amount":1,"pub_key":"publicKey","sequence":1}}]}'
+          transactions.Input('address', 1, 1, 'publicKey'),
+          transactions.Args('address', 4, 'value')
+        )),
+        '{"chain_id":"chainId","tx":[32,{"args":[2,{"address":"ADDRESS",' +
+        '"permission":4,"value":"value"}],"input":{"address":"ADDRESS",' +
+        '"amount":1,"sequence":1}}]}'
       )
     })
 
     it('creates a transaction', () => {
       assert.deepEqual(
-        transactions.Permissions.transaction(
-          transactions.input('user', 0, 'publicKey'),
-          transactions.Permissions.args('account', 4, 'value'),
-          'signature'
-        ),
+        transactions.Permissions('chainId',
+          transactions.Input('address', 1, 1, 'publicKey'),
+          transactions.Args('address', 4, 'value')
+        ).toJson(),
         [32, {
           input: {
-            address: 'user',
+            address: 'ADDRESS',
             amount: 1,
-            pub_key: 'publicKey',
-            sequence: 1,
-            signature: [1, 'signature']
+            pub_key: [1, 'publicKey'],
+            sequence: 1
           },
           args: [2, {
-            address: 'account',
+            address: 'ADDRESS',
             permission: 4,
             value: 'value'
           }]
@@ -76,41 +83,44 @@ describe('functions to create transactions', () => {
       )
     })
 
-    describe('Call transaction construction', () => {
+    describe('Call transaction', () => {
       it('serializes parts of the transaction for signing', () => {
         assert.equal(
-          transactions.Call.signBytes(
+          String(transactions.Call(
             'chainId',
-            transactions.input('user', 0, 'publicKey'),
             'address',
-            'data'
-          ),
-          '{"chain_id":"chainId","tx":[2,{"address":"address","data":"data",' +
-          '"fee":null,"gas_limit":null,"input":{"address":"user","amount":1,' +
-          '"pub_key":"publicKey","sequence":1}}]}'
+            'data',
+            0,
+            1,
+            transactions.Input('address', 1, 1, 'publicKey')
+          )),
+          '{"chain_id":"chainId","tx":[2,{"address":"ADDRESS","data":"DATA",' +
+          '"fee":1,"gas_limit":0,"input":{"address":"ADDRESS",' +
+          '"amount":1,"sequence":1}}]}'
         )
       })
 
       it('creates a transaction', () => {
         assert.deepEqual(
-          transactions.Call.transaction(
-            transactions.input('user', 0, 'publicKey'),
+          transactions.Call(
+            'chainId',
             'address',
             'data',
-            'signature'
-          ),
+            'gasLimit',
+            'fee',
+            transactions.Input('address', 1, 1, 'publicKey')
+          ).toJson(),
           [2, {
             input: {
-              address: 'user',
+              address: 'ADDRESS',
               amount: 1,
-              pub_key: 'publicKey',
-              sequence: 1,
-              signature: [1, 'signature']
+              pub_key: [1, 'publicKey'],
+              sequence: 1
             },
-            address: 'address',
-            gas_limit: null,
-            fee: null,
-            data: 'data'
+            address: 'ADDRESS',
+            gas_limit: 'gasLimit',
+            fee: 'fee',
+            data: 'DATA'
           }]
         )
       })

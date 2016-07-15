@@ -13,14 +13,14 @@ describe('HttpCreateAndTx', function () {
 
     createDb().spread(function (url, validator) {
       return edbModule.open('blockchain').then(function (edb) {
-        var privateKey
+        var user
 
-        privateKey = validator.priv_key[1]
+        user = validator.address
 
-        edb.txs().transactAndHold(privateKey, '', compiled, 100000, 0, null, function (error, data) {
+        edb.txs().transactAndHold(user, '', compiled, 100000, 0, null, function (error, data) {
           assert.ifError(error)
           address = data.call_data.callee
-          edb.txs().transactAndHold(privateKey, address, '', 100000, 0, null, function (error, data) {
+          edb.txs().transactAndHold(user, address, '', 100000, 0, null, function (error, data) {
             assert.ifError(error)
             assert.equal(data.return, '000000000000000000000000' + validator.address)
             done()
