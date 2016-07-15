@@ -32,7 +32,7 @@
     "predoc": "rm -rf doc",
     "doc": "jsdoc --configure JSDoc/conf.json --destination doc lib/*.js lib/rpc/*.js README.md",
     "test": "npm run unit && npm run integration",
-    "unit": "istanbul cover _mocha -- --delay --reporter mocha-circleci-reporter test/unit",
+    "unit": "istanbul cover _mocha -- --reporter mocha-circleci-reporter test/unit",
     "integration": "scripts/integration",
     "publish": "bundle-dependencies update && publish"
   },
