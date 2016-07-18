@@ -1,7 +1,7 @@
 'use strict'
 
 var assert = require('assert')
-var transactions = require('../../lib/transactions')
+var transactions = require('../../lib/pure/transaction')
 
 describe('functions to create transactions', () => {
   describe('Input object', () => {
