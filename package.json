@@ -19,10 +19,6 @@
   "scripts": {
     "predoc": "rm -rf doc",
     "doc": "jsdoc --configure 'JSDoc configuration.json' --template node_modules/ink-docstrap/template index.js lib/*.js lib/rpc/*.js README.md --destination doc",
-    "test": "npm run unit && npm run integration",
-    "unit": "istanbul cover _mocha",
-    "integration": "cd test/integration; istanbul cover _mocha",
-    "posttest": "istanbul check-coverage",
     "publish": "bundle-dependencies update && publish"
   },
   "repository": {
