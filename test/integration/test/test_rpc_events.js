@@ -1,37 +1,57 @@
 /* This file is for testing an event.
  */
 
-'use strict'
+'use strict';
 
-var assert = require('assert')
-var createDb = require('../createDb')
-var edbModule = require('../../../lib/')
+var
+  createDb = require('../createDb');
 
-var eventSub
+var util = require('../../../lib/util');
+var asrt;
+var edbModule;
+
+if (typeof(window) === "undefined") {
+    asrt = require('assert');
+    edbModule = require("../../../index");
+} else {
+    asrt = assert;
+    edbModule = edbFactory;
+}
+
+var test_data = require('./../../testdata/testdata.json');
+
+var eventSub;
 
 describe('TheloniousHttpEvents', function () {
-  describe('.events', function () {
-    describe('#subNewBlock', function () {
-      it('should subscribe to new block events', function (done) {
-        this.timeout(20 * 1000)
+    describe('.events', function () {
 
-        createDb().spread(function (url) {
-          edbModule.open('blockchain').then(function (edb) {
-            edb.events().subNewBlocks(function (err, data) {
-              assert.ifError(err, 'New block subscription error.')
-              eventSub = data
-            }, function (err, data) {
-              assert.ifError(err)
+        describe('#subNewBlock', function () {
+            it("should subscribe to new block events", function (done) {
+              this.timeout(30 * 1000);
 
-              if (data) {
-                eventSub.stop(function () {
-                  done()
-                })
-              }
-            })
-          })
-        })
-      })
-    })
-  })
-})
+              createDb().spread(function (hostname, port) {
+                var edb = edbModule.createInstance("http://" + hostname + ":"
+                  + port + "/rpc");
+                  
+                edb.events().subNewBlocks(function (err, data) {
+                  asrt.ifError(err, "New block subscription error.");
+                  eventSub = data;
+                  setTimeout(function () {
+                      data.stop(function () {
+                          throw new Error("No data came in.");
+                      })
+                  }, 20000);
+
+                }, function(err, data){
+                    if(data){
+                        eventSub.stop(function(){
+                            done();
+                        });
+                    }
+                });
+              });
+            });
+        });
+
+    });
+});

@@ -1,39 +1,28 @@
 {
   "name": "eris-db",
   "version": "0.15.0",
-  "main": "lib/index.js",
+  "main": "./index.js",
   "dependencies": {
     "ws": "^1.1.0",
-    "xmlhttprequest": "^1.8.0",
-    "canonical-json": "0.0.4",
-    "jayson": "^2.0.0",
-    "lodash": "^4.11.1",
-    "pegjs": "^0.9.0",
-    "ramda": "^0.21.0",
-    "request-promise": "^3.0.0"
+    "xmlhttprequest": "^1.8.0"
   },
   "devDependencies": {
-    "bluebird": "^3.3.5",
     "bundle-dependencies": "^1.0.2",
-    "ed25519-supercop": "^1.0.2",
+    "bluebird": "^3.3.5",
     "istanbul": "^0.4.3",
-    "jsdoc": "^3.4.0",
+    "lodash": "^4.11.1",
     "mocha": "^2.4.5",
-    "mocha-circleci-reporter": "0.0.1",
-    "nock": "^8.0.0",
     "publish": "^0.6.0",
-    "rewire": "^2.5.1",
-    "seed-random": "^2.2.0",
     "solc": "^0.2.2-2",
-    "testdouble": "^1.4.2",
     "untildify": "^2.1.0"
   },
   "scripts": {
     "predoc": "rm -rf doc",
-    "doc": "jsdoc --configure JSDoc/conf.json --destination doc lib/*.js lib/rpc/*.js README.md",
+    "doc": "jsdoc --configure 'JSDoc configuration.json' --template node_modules/ink-docstrap/template index.js lib/*.js lib/rpc/*.js README.md --destination doc",
     "test": "npm run unit && npm run integration",
-    "unit": "istanbul cover _mocha -- --delay --reporter mocha-circleci-reporter test/unit",
-    "integration": "ERIS_PULL_APPROVE=true eris services start keys --publish && ([ -d ~/.eris/chains/blockchain ] || eris chains make blockchain --chain-type=simplechain) && mocha --reporter mocha-circleci-reporter test/integration/test",
+    "unit": "istanbul cover _mocha",
+    "integration": "cd test/integration; istanbul cover _mocha",
+    "posttest": "istanbul check-coverage",
     "publish": "bundle-dependencies update && publish"
   },
   "repository": {
@@ -60,16 +49,5 @@
       "url": "http://erisindustries.com"
     }
   ],
-  "license": "GPL-3.0",
-  "standard": {
-    "globals": [
-      "after",
-      "afterEach",
-      "before",
-      "beforeEach",
-      "describe",
-      "it",
-      "run"
-    ]
-  }
+  "license": "GPL-3.0"
 }

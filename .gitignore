@@ -1,5 +1,3 @@
 coverage/
-doc/
 node_modules/
-npm-debug.log
-test-results.xml
+doc/
