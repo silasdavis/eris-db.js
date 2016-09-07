@@ -3,13 +3,16 @@
   "version": "0.15.0",
   "main": "./index.js",
   "dependencies": {
+    "ramda": "^0.22.1",
     "ws": "^1.1.0",
     "xmlhttprequest": "^1.8.0"
   },
   "devDependencies": {
-    "bundle-dependencies": "^1.0.2",
     "bluebird": "^3.3.5",
+    "bundle-dependencies": "^1.0.2",
+    "fairmont": "^1.1.6",
     "istanbul": "^0.4.3",
+    "iteray": "^0.1.0",
     "lodash": "^4.11.1",
     "mocha": "^2.4.5",
     "publish": "^0.6.0",
@@ -45,5 +48,16 @@
       "url": "http://erisindustries.com"
     }
   ],
-  "license": "GPL-3.0"
+  "license": "GPL-3.0",
+  "standard": {
+    "globals": [
+      "after",
+      "afterEach",
+      "before",
+      "beforeEach",
+      "describe",
+      "it",
+      "run"
+    ]
+  }
 }
