@@ -23,7 +23,7 @@ describe('a client of the JSON-RPC 2.0 protocol', function () {
     ]).then((values) => {
       assert.deepEqual(values, [19, 19])
 
-      return F.collect(I.takeNFromReactor(2, client.requests))
+      return F.collect(I.slice(0, 2, client.requests))
         .then((requests) => {
           assert.deepEqual(requests, [
             {
