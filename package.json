@@ -4,6 +4,7 @@
   "main": "./index.js",
   "dependencies": {
     "@nodeguy/json-rpc": "^0.1.0",
+    "iteray": "^0.1.0",
     "ramda": "^0.22.1",
     "request": "^2.74.0",
     "request-promise": "^4.1.1",
@@ -11,16 +12,10 @@
     "xmlhttprequest": "^1.8.0"
   },
   "devDependencies": {
-    "bluebird": "^3.3.5",
     "bundle-dependencies": "^1.0.2",
-    "fairmont": "^1.1.6",
     "istanbul": "^0.4.3",
-    "iteray": "^0.1.0",
-    "lodash": "^4.11.1",
     "mocha": "^2.4.5",
-    "publish": "^0.6.0",
-    "solc": "^0.2.2-2",
-    "untildify": "^2.1.0"
+    "publish": "^0.6.0"
   },
   "scripts": {
     "predoc": "rm -rf doc",
