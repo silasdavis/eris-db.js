@@ -8,8 +8,7 @@
     "ramda": "^0.22.1",
     "request": "^2.74.0",
     "request-promise": "^4.1.1",
-    "ws": "^1.1.0",
-    "xmlhttprequest": "^1.8.0"
+    "websocket-stream": "^3.3.0"
   },
   "devDependencies": {
     "bundle-dependencies": "^1.0.2",
