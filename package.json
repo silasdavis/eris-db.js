@@ -14,12 +14,14 @@
     "bundle-dependencies": "^1.0.2",
     "istanbul": "^0.4.3",
     "mocha": "^2.4.5",
+    "mz": "^2.4.0",
     "publish": "^0.6.0"
   },
   "scripts": {
     "predoc": "rm -rf doc",
     "doc": "jsdoc --configure 'JSDoc configuration.json' --template node_modules/ink-docstrap/template index.js lib/*.js lib/rpc/*.js README.md --destination doc",
-    "publish": "bundle-dependencies update && publish"
+    "publish": "bundle-dependencies update && publish",
+    "test": "mocha test/integration"
   },
   "repository": {
     "type": "git",
