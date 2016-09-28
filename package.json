@@ -3,8 +3,8 @@
   "version": "0.15.0",
   "main": "./index.js",
   "dependencies": {
-    "@nodeguy/json-rpc": "^0.1.2",
-    "iteray": "^0.4.1",
+    "@nodeguy/json-rpc": "nodeguy/json-rpc#beta",
+    "iteray": "nodeguy/iteray#beta",
     "ramda": "^0.22.1",
     "request": "^2.74.0",
     "request-promise": "^4.1.1",
