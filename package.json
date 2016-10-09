@@ -23,6 +23,7 @@
     "predoc": "rm -rf doc",
     "doc": "jsdoc --configure 'JSDoc configuration.json' --template node_modules/ink-docstrap/template index.js lib/*.js lib/rpc/*.js README.md --destination doc",
     "publish": "bundle-dependencies update && publish",
+    "pretest": "eris chains make blockchain",
     "test": "mocha test/integration"
   },
   "repository": {
