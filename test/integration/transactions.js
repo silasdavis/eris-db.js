@@ -8,9 +8,11 @@ const test = require('../../lib/test')
 it('sends ether from one account to another', function () {
   this.timeout(60 * 1000)
 
+  const name = 'blockchain'
+
   return Promise.all([
-    test.newBlockchain('blockchain'),
-    test.privateValidator()
+    test.newBlockchain(name),
+    test.privateValidator(name)
   ]).spread((url, validator) => {
     const erisDb = ErisDb.createInstance(url)
     const privateKey = validator.priv_key[1]
