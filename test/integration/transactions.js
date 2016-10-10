@@ -1,7 +1,6 @@
 'use strict'
 
 const assert = require('assert')
-const ErisDb = require('../..')
 const Promise = require('bluebird')
 const test = require('../../lib/test')
 
@@ -11,10 +10,9 @@ it('sends ether from one account to another', function () {
   const name = 'blockchain'
 
   return Promise.all([
-    test.newBlockchain(name),
+    test.newInstance(name),
     test.privateValidator(name)
-  ]).spread((url, validator) => {
-    const erisDb = ErisDb.createInstance(url)
+  ]).spread((erisDb, validator) => {
     const privateKey = validator.priv_key[1]
     const destination = '0000000000000000000000000000000000000010'
     const amount = 42

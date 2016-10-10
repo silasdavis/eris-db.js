@@ -19,11 +19,11 @@ var url = require('url');
  * @param {string} URL The RPC endpoint URL.
  * @returns {module:erisdb-ErisDB}
  */
-exports.createInstance = function(URL){
+exports.createInstance = function(URL, options){
     var client;
     if(!URL || typeof(URL) !== "string" || URL === ""){
         URL = 'http://localhost:1337/rpc';
     }
     var validator = new validation.SinglePolicyValidator(true);
-    return erisdb.createInstance(server(URL), validator);
+    return erisdb.createInstance(server(URL, options), validator);
 };
