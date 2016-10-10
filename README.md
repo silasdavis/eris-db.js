@@ -2,6 +2,11 @@
 
 This is a JavaScript API for communicating with a [ErisDB](https://github.com/eris-ltd/eris-db) server.
 
+## Requirements
+
+* [Node.js](https://nodejs.org/) version 6 or higher
+* [Monax Eris](https://monax.io/) version 0.12
+
 ## Installation
 
 ```shell
